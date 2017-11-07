@@ -7,6 +7,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
     <orderEntry type="library" exported="" name="mayflower" level="project" />
+=======
+    <orderEntry type="library" name="mayflower2.1" level="project" />
+>>>>>>> origin/Trevor
   </component>
 </module>

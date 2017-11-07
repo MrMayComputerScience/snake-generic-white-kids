@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.stage.Stage;
+import mayflower.Actor;
 import mayflower.World;
 
 public class PeachStage extends World{
@@ -23,13 +24,27 @@ public class PeachStage extends World{
             }
         }
         SnakeActor snek = new SnakeActor();
-        Peach pech = new Peach();
         addObject(snek, 20, 20);
-        addObject(pech, 40,40);
+        addRandomPeach();
     }
 
     @Override
     public void act() {
 
     }
+    public StageObject[][] getGrid() {
+        return grid;
+    }
+    public boolean addRandomPeach(){
+        for(Actor a : getObjects()){
+            if(a instanceof Peach){
+                return false;
+            }
+        }
+        GridPoint point = Peach.getEmptyRandomSpace(this);
+        //IF WE EVER USE A METHOD THAT UPDATES BASED ON GRID then this needs to change
+        addObject(new Peach(), point.getC()*20, point.getR()*20); //grid[point.getR()][point.getC()] = StageObject.PEACH; //This is the code to change it to
+        return true;
+    }
+    
 }

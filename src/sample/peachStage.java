@@ -22,8 +22,7 @@ public class PeachStage extends World{
                 }
             }
         }
-        SnakeActor snek = new SnakeActor();
-        addObject(snek, 20, 20);
+        grid[1][1] = StageObject.SNAKE;
     }
 
     @Override

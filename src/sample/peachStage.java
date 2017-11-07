@@ -4,7 +4,6 @@ import mayflower.World;
 
 public class PeachStage extends World{
     enum StageObject{
-        EMPTY,
         WALL,
         SNAKE,
         PEACH
@@ -12,7 +11,9 @@ public class PeachStage extends World{
     public PeachStage()
     {
         SnakeActor snek = new SnakeActor();
+        Peach pech = new Peach();
         addObject(snek, 20, 20);
+        addObject(pech, 40,40);
     }
 
     @Override

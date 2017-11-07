@@ -9,7 +9,7 @@ public class Main{
         Mayflower m = new Mayflower("Test", 800, 600) {
             @Override
             public void init() {
-
+                setWorld(new PeachStage());
             }
         };
         m.init();

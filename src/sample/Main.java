@@ -2,33 +2,16 @@ package sample;
 import mayflower.*;
 import mayflower.test.TestWorld;
 import mayflower.test.astar.MyWorld;
+import org.newdawn.slick.GameContainer;
 
 public class Main{
     public static void main(String[] args){
+        Mayflower m = new Mayflower("Test", 800, 600) {
+            @Override
+            public void init() {
 
-    }
-
-<<<<<<< HEAD
-=======
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
->>>>>>> parent of a284853... Re-init
-
-public class Main extends Application {
-
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
-    }
-
-
-    public static void main(String[] args) {
-        launch(args);
+            }
+        };
+        m.init();
     }
 }

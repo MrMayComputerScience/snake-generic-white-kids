@@ -1,10 +1,19 @@
 package sample;
 
-import mayflower.Actor;
+import mayflower.*;
+
+
+
 
 public class SnakeActor extends Actor {
+    public SnakeActor(){
+
+    }
+
 
     public void act(){
 
+        
     }
+
 }

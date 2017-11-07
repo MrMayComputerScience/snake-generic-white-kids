@@ -3,6 +3,12 @@ package sample;
 import mayflower.World;
 
 public class PeachStage extends World{
+    enum StageObject{
+        EMPTY,
+        WALL,
+        SNAKE,
+        PEACH
+    }
     public PeachStage()
     {
         SnakeActor snek = new SnakeActor();

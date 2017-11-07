@@ -2,8 +2,8 @@ package sample;
 
 import mayflower.World;
 
-public class peachStage extends World{
-    public peachStage()
+public class PeachStage extends World{
+    public PeachStage()
     {
         SnakeActor snek = new SnakeActor();
         addObject(snek, 20, 20);

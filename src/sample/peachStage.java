@@ -2,6 +2,8 @@ package sample;
 
 import javafx.stage.Stage;
 import mayflower.Actor;
+import javafx.stage.Stage;
+import mayflower.Actor;
 import mayflower.World;
 
 public class PeachStage extends World{
@@ -10,6 +12,7 @@ public class PeachStage extends World{
         SNAKE,
         PEACH
     }
+    public SnakeActor snek = new SnakeActor();
     public StageObject[][] peachGrid = new StageObject[40][30];
     final int mulitplier = 20;
     public PeachStage()
@@ -27,6 +30,12 @@ public class PeachStage extends World{
         }
         peachGrid[1][1] = StageObject.SNAKE;
         addObject(new SnakeActor(), mulitplier, mulitplier);
+        SnakeActor snek = new SnakeActor();
+        addObject(snek, 20, 20);
+        addRandomPeach();
+        peachGrid[1][1] = StageObject.SNAKE;
+        addObject(snek, 2*mulitplier, 2*mulitplier);
+=======
         SnakeActor snek = new SnakeActor();
         addObject(snek, 20, 20);
         addRandomPeach();

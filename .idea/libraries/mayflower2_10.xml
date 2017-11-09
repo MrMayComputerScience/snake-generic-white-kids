@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="mayflower">
+  <library name="mayflower2.10">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/mayflower2.1.jar!/" />
+      <root url="jar://H:/Tech Apps/mayflower2.10.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

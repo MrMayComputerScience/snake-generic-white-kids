@@ -8,15 +8,15 @@ public class PeachStage extends World{
         SNAKE,
         PEACH
     }
-    public StageObject[][] peachGrid = new StageObject[30][40];
+    public StageObject[][] peachGrid = new StageObject[40][30];
     final int mulitplier = 20;
     public PeachStage()
     {
-        for(int r = 0; r < 30; r++)
+        for(int r = 0; r < 40; r++)
         {
-            for(int c = 0; c < 40; c++)
+            for(int c = 0; c < 30; c++)
             {
-                if(r == 0 || r == 29 || c == 0 || c == 39)
+                if(r == 0 || r == 39 || c == 0 || c == 29)
                 {
                     peachGrid[r][c] = StageObject.WALL;
                     addObject(new wall(), r*mulitplier, c*mulitplier);

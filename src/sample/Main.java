@@ -1,7 +1,6 @@
 package sample;
 import mayflower.*;
 import mayflower.test.TestWorld;
-import mayflower.test.astar.MyWorld;
 import org.newdawn.slick.GameContainer;
 
 public class Main{

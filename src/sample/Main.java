@@ -1,5 +1,7 @@
 package sample;
 import mayflower.*;
+import mayflower.test.TestWorld;
+import org.newdawn.slick.GameContainer;
 
 public class Main{
     public static void main(String[] args){

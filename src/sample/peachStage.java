@@ -10,16 +10,19 @@ public class PeachStage extends World{
         SNAKE,
         PEACH
     }
-    public StageObject[][] grid = new StageObject[30][40];
+    public SnakeActor snek = new SnakeActor();
+    public StageObject[][] peachGrid = new StageObject[40][30];
+    final int mulitplier = 20;
     public PeachStage()
     {
-        for(int r = 0; r < 30; r++)
+        for(int r = 0; r < 40; r++)
         {
-            for(int c = 0; c < 40; c++)
+            for(int c = 0; c < 30; c++)
             {
-                if(r == 0 || r == 29 || c == 0 || c == 39)
+                if(r == 0 || r == 39 || c == 0 || c == 29)
                 {
-                    grid[r][c] = StageObject.WALL;
+                    peachGrid[r][c] = StageObject.WALL;
+                    addObject(new wall(), r*mulitplier, c*mulitplier);
                 }
             }
         }
@@ -28,12 +31,18 @@ public class PeachStage extends World{
         addRandomPeach();
     }
 
+    public void updateStage()
+    {
+
+    }
+
+
     @Override
     public void act() {
 
     }
     public StageObject[][] getGrid() {
-        return grid;
+        return peachGrid;
     }
     public boolean addRandomPeach(){
         for(Actor a : getObjects()){
@@ -43,7 +52,12 @@ public class PeachStage extends World{
         }
         GridPoint point = Peach.getEmptyRandomSpace(this);
         //IF WE EVER USE A METHOD THAT UPDATES BASED ON GRID then this needs to change
-        addObject(new Peach(), point.getC()*20, point.getR()*20); //grid[point.getR()][point.getC()] = StageObject.PEACH; //This is the code to change it to
+        Peach newPeach = new Peach();
+        addObject(newPeach, point.getC()*20, point.getR()*20);//grid[point.getR()][point.getC()] = StageObject.PEACH; //This is the code to change it to
+        if(newPeach.isTouching()){
+            removeObject(newPeach);
+            addRandomPeach();
+        }
         return true;
     }
 

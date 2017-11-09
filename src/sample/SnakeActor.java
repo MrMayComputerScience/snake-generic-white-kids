@@ -15,9 +15,15 @@ public class SnakeActor extends Actor implements Direction{
 
     public void act(){
 
+        if(isTouching(wall.class) || isTouching(getClass()))
+        {
+            System.out.println("hitting wall");
+            Mayflower.setWorld(new gameOverScreen());
+        }
         if(t.isDone()){
             //System.out.println(t.toString());
             t.reset();
+
             if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
                 setRotation(Direction.NORTH);
             }
@@ -33,10 +39,8 @@ public class SnakeActor extends Actor implements Direction{
             move(20);
         }
 
-        if(getIntersectingObjects(this.getClass()).contains(new wall()))
-        {
-            Mayflower.setWorld(new gameOverScreen());
-        }
+
+
     }
 
 }

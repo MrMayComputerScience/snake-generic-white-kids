@@ -8,7 +8,7 @@ public class SinglePlayerButton extends Button{
     }
     public void OnClick(){
 
-        Mayflower.setWorld(new peachStage());
+        Mayflower.setWorld(new PeachStage());
 
 
     }

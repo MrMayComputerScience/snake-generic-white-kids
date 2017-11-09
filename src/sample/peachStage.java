@@ -8,6 +8,7 @@ public class PeachStage extends World{
         SNAKE,
         PEACH
     }
+    public SnakeActor snek = new SnakeActor();
     public StageObject[][] peachGrid = new StageObject[40][30];
     final int mulitplier = 20;
     public PeachStage()
@@ -24,7 +25,7 @@ public class PeachStage extends World{
             }
         }
         peachGrid[1][1] = StageObject.SNAKE;
-        addObject(new SnakeActor(), mulitplier, mulitplier);
+        addObject(snek, 2*mulitplier, 2*mulitplier);
     }
 
     public void updateStage()

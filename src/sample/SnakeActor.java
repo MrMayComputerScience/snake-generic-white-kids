@@ -19,46 +19,40 @@ public class SnakeActor extends Actor{
         t = new Timer(75);
     }
 
-    public void act(){
-        if(isTouching(wall.class) || isTouching(getClass()))
-        {
+    public void act() {
+        if (isTouching(wall.class) || isTouching(getClass())) {
             System.out.println("hitting wall");
             Mayflower.setWorld(new gameOverScreen());
-        if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
-            setRotation(Direction.NORTH);
-        }
-        else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
-            setRotation(Direction.SOUTH);
-        }
-        else if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) || Mayflower.isKeyDown(Keyboard.KEY_A)) {
-            setRotation(Direction.WEST);
-        }
-        else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
-            setRotation(Direction.EAST);
-        }
-        if(t.isDone()){
-            int headX = getX();
-            int headY = getY();
-            bigify();
-            t.reset();
-
             if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
                 setRotation(Direction.NORTH);
-            }
-            else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
+            } else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
                 setRotation(Direction.SOUTH);
-            }
-            else if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) || Mayflower.isKeyDown(Keyboard.KEY_A)) {
+            } else if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) || Mayflower.isKeyDown(Keyboard.KEY_A)) {
                 setRotation(Direction.WEST);
-            }
-            else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
+            } else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
                 setRotation(Direction.EAST);
             }
-            //System.out.println(t.toString());
+            if (t.isDone()) {
+                int headX = getX();
+                int headY = getY();
+                bigify();
+                t.reset();
 
-            move(20);
-            handleTail(headX, headY);
-            eatPeach(detectPeach());
+                if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
+                    setRotation(Direction.NORTH);
+                } else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
+                    setRotation(Direction.SOUTH);
+                } else if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) || Mayflower.isKeyDown(Keyboard.KEY_A)) {
+                    setRotation(Direction.WEST);
+                } else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
+                    setRotation(Direction.EAST);
+                }
+                //System.out.println(t.toString());
+
+                move(20);
+                handleTail(headX, headY);
+                eatPeach(detectPeach());
+            }
         }
     }
     public void handleTail(int headX, int headY){
@@ -81,7 +75,7 @@ public class SnakeActor extends Actor{
 
 
 
-=======
+
     }
     public Peach detectPeach(){
         if(getIntersectingObjects(Peach.class).size() > 0){

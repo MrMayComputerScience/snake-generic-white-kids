@@ -35,8 +35,8 @@ public class PeachStage extends World{
         addRandomPeach();
         peachGrid[1][1] = StageObject.SNAKE;
         addObject(snek, 2*mulitplier, 2*mulitplier);
-=======
-        SnakeActor snek = new SnakeActor();
+
+
         addObject(snek, 20, 20);
         addRandomPeach();
     }

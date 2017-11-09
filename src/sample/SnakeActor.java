@@ -33,12 +33,10 @@ public class SnakeActor extends Actor implements Direction{
             move(20);
         }
 
-
-
-
-
-
-
+        if(getIntersectingObjects(this.getClass()).contains(new wall()))
+        {
+            Mayflower.setWorld(new gameOverScreen());
+        }
     }
 
 }

@@ -24,6 +24,9 @@ public class Peach extends Actor{
         int index = (int)(Math.random()*empty.size());
         return empty.get(index);
     }
+    public static void addRandomPeach(PeachStage world){
+        world.addRandomPeach();
+    }
     @Override
     public void act(){
 

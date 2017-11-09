@@ -43,7 +43,7 @@ public class PeachStage extends World{
 
     }
     public StageObject[][] getGrid() {
-        return grid;
+        return peachGrid;
     }
     public boolean addRandomPeach(){
         for(Actor a : getObjects()){

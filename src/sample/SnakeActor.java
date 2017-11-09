@@ -54,14 +54,13 @@ public class SnakeActor extends Actor{
             prevX = tempX;
             prevY = tempY;
         }
-<<<<<<< HEAD
+
 
         if(getIntersectingObjects(this.getClass()).contains(new wall()))
         {
             Mayflower.setWorld(new gameOverScreen());
         }
-=======
->>>>>>> mason
+
     }
     public Peach detectPeach(){
         if(getIntersectingObjects(Peach.class).size() > 0){

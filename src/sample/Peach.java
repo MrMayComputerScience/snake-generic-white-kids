@@ -12,7 +12,7 @@ public class Peach extends Actor{
     public Peach(){
         setImage("peach.png");
     }
-    public static GridPoint getEmptyRandomSpace(PeachStage stage){
+    public static GridPoint getEmptyRandomSpace(peachStage stage){
         List<GridPoint> empty = new LinkedList<>();
         for(int r = 0; r < stage.getGrid().length; r++){
             for(int c = 0; c < stage.getGrid()[r].length; c++){
@@ -24,7 +24,7 @@ public class Peach extends Actor{
         int index = (int)(Math.random()*empty.size());
         return empty.get(index);
     }
-    public static void addRandomPeach(PeachStage world){
+    public static void addRandomPeach(peachStage world){
         world.addRandomPeach();
     }
     @Override

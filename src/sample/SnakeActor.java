@@ -20,13 +20,12 @@ public class SnakeActor extends Actor{
     }
 
     public void act(){
-<<<<<<< HEAD
 
         if(isTouching(wall.class) || isTouching(getClass()))
         {
             System.out.println("hitting wall");
             Mayflower.setWorld(new gameOverScreen());
-=======
+        }
         if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
             setRotation(Direction.NORTH);
         }
@@ -38,14 +37,12 @@ public class SnakeActor extends Actor{
         }
         else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
             setRotation(Direction.EAST);
->>>>>>> origin/mason
         }
         if(t.isDone()){
             int headX = getX();
             int headY = getY();
             bigify();
             t.reset();
-<<<<<<< HEAD
 
             if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
                 setRotation(Direction.NORTH);
@@ -59,10 +56,7 @@ public class SnakeActor extends Actor{
             else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
                 setRotation(Direction.EAST);
             }
-=======
             //System.out.println(t.toString());
-
->>>>>>> origin/mason
             move(20);
             handleTail(headX, headY);
             eatPeach(detectPeach());
@@ -78,12 +72,7 @@ public class SnakeActor extends Actor{
             prevX = tempX;
             prevY = tempY;
         }
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> origin/mason
     }
     public Peach detectPeach(){
         if(getIntersectingObjects(Peach.class).size() > 0){
@@ -98,7 +87,7 @@ public class SnakeActor extends Actor{
         }
         getWorld().removeObject(peach);
         tailLength++;
-        Peach.addRandomPeach((PeachStage)getWorld()); //Should never throw invalid cast errors
+        Peach.addRandomPeach((peachStage)getWorld()); //Should never throw invalid cast errors
     }
     public void bigify(){
         if(tailLength > tail.size()){

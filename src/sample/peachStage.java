@@ -1,13 +1,10 @@
 package sample;
 
-<<<<<<< HEAD
-=======
 import javafx.stage.Stage;
 import mayflower.Actor;
->>>>>>> origin/mason
 import mayflower.World;
 
-public class PeachStage extends World{
+public class peachStage extends World{
     enum StageObject{
         WALL,
         SNAKE,
@@ -16,7 +13,7 @@ public class PeachStage extends World{
     public SnakeActor snek = new SnakeActor();
     public StageObject[][] peachGrid = new StageObject[40][30];
     final int mulitplier = 20;
-    public PeachStage()
+    public peachStage()
     {
         for(int r = 0; r < 40; r++)
         {
@@ -29,14 +26,10 @@ public class PeachStage extends World{
                 }
             }
         }
-<<<<<<< HEAD
         peachGrid[1][1] = StageObject.SNAKE;
-        addObject(snek, 2*mulitplier, 2*mulitplier);
-=======
         SnakeActor snek = new SnakeActor();
         addObject(snek, 20, 20);
         addRandomPeach();
->>>>>>> origin/mason
     }
 
     public void updateStage()
@@ -50,7 +43,7 @@ public class PeachStage extends World{
 
     }
     public StageObject[][] getGrid() {
-        return grid;
+        return peachGrid;
     }
     public boolean addRandomPeach(){
         for(Actor a : getObjects()){

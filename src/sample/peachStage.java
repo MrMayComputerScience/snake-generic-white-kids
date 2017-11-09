@@ -46,5 +46,5 @@ public class PeachStage extends World{
         addObject(new Peach(), point.getC()*20, point.getR()*20); //grid[point.getR()][point.getC()] = StageObject.PEACH; //This is the code to change it to
         return true;
     }
-    
+
 }

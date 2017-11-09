@@ -12,4 +12,11 @@ public class SnakeActor extends Actor {
     public void act(){
 
     }
+    class SnakeTail extends Actor{
+        
+        @Override
+        public void act(){
+
+        }
+    }
 }

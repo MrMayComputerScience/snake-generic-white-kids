@@ -10,6 +10,7 @@ public class Runner extends Mayflower{
     public void init(){
         Mayflower.setFullScreen(false);
         World startingWorld = new PeachStage();
+        World startingWorld = new titleStage();
         Mayflower.setWorld(startingWorld);
        // Mayflower.showFPS(true);
     }

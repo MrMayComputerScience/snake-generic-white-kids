@@ -21,11 +21,7 @@ public class SnakeActor extends Actor{
 
     public void act(){
 
-        if(isTouching(wall.class) || isTouching(getClass()))
-        {
-            System.out.println("hitting wall");
-            Mayflower.setWorld(new gameOverScreen());
-        }
+
         if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
             setRotation(Direction.NORTH);
         }
@@ -44,22 +40,28 @@ public class SnakeActor extends Actor{
             bigify();
             t.reset();
 
-            if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
-                setRotation(Direction.NORTH);
-            }
-            else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
-                setRotation(Direction.SOUTH);
-            }
-            else if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) || Mayflower.isKeyDown(Keyboard.KEY_A)) {
-                setRotation(Direction.WEST);
-            }
-            else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
-                setRotation(Direction.EAST);
-            }
+
             //System.out.println(t.toString());
             move(20);
             handleTail(headX, headY);
             eatPeach(detectPeach());
+        }
+        if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
+            setRotation(Direction.NORTH);
+        }
+        else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
+            setRotation(Direction.SOUTH);
+        }
+        else if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) || Mayflower.isKeyDown(Keyboard.KEY_A)) {
+            setRotation(Direction.WEST);
+        }
+        else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
+            setRotation(Direction.EAST);
+        }
+        if(isTouching(wall.class) || isTouching(getClass()))
+        {
+            System.out.println("hitting wall");
+            Mayflower.setWorld(new gameOverScreen());
         }
     }
     public void handleTail(int headX, int headY){

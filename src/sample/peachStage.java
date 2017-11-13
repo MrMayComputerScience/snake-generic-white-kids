@@ -26,7 +26,6 @@ public class peachStage extends World{
                 }
             }
         }
-        peachGrid[1][1] = StageObject.SNAKE;
         SnakeActor snek = new SnakeActor();
         addObject(snek, 20, 20);
         addRandomPeach();
@@ -53,7 +52,12 @@ public class peachStage extends World{
         }
         GridPoint point = Peach.getEmptyRandomSpace(this);
         //IF WE EVER USE A METHOD THAT UPDATES BASED ON GRID then this needs to change
-        addObject(new Peach(), point.getC()*20, point.getR()*20); //grid[point.getR()][point.getC()] = StageObject.PEACH; //This is the code to change it to
+        Peach newPeach = new Peach();
+        addObject(newPeach, point.getC()*20, point.getR()*20);//grid[point.getR()][point.getC()] = StageObject.PEACH; //This is the code to change it to
+        if(newPeach.isTouching()){
+            removeObject(newPeach);
+            addRandomPeach();
+        }
         return true;
     }
 

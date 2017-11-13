@@ -2,7 +2,7 @@ package sample;
 
 import mayflower.*;
 public class Runner extends Mayflower{
-    
+
     public Runner() {
         super("Snake", 800, 600);
         // TODO Auto-generated constructor stub

@@ -4,6 +4,7 @@ import javafx.stage.Stage;
 import mayflower.Actor;
 import javafx.stage.Stage;
 import mayflower.Actor;
+import mayflower.Timer;
 import mayflower.World;
 
 public class PeachStage extends World{
@@ -14,6 +15,7 @@ public class PeachStage extends World{
     }
     public SnakeActor snek = new SnakeActor();
     public StageObject[][] peachGrid = new StageObject[40][30];
+    public Timer t;
     final int mulitplier = 20;
     public PeachStage()
     {
@@ -28,7 +30,7 @@ public class PeachStage extends World{
                 }
             }
         }
-
+        t = new Timer(75);
         peachGrid[1][1] = StageObject.SNAKE;
         addObject(snek, 2*mulitplier, 2*mulitplier);
 
@@ -42,6 +44,8 @@ public class PeachStage extends World{
     {
 
     }
+
+
 
 
     @Override

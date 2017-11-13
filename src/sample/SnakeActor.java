@@ -10,10 +10,12 @@ import java.util.List;
 public class SnakeActor extends Actor{
     private Timer t = new Timer();
     private int tailLength;
+    private double time;
     private List<SnakeTail> tail;
     public SnakeActor()
     {
         tail = new ArrayList<>();
+        time = 0.0;
         tailLength = 0;
         setImage("eggplantsnake.jpg");
         t = new Timer(75);
@@ -54,13 +56,22 @@ public class SnakeActor extends Actor{
             } else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
                 setRotation(Direction.EAST);
             }
-
+            time++;
             //System.out.println(t.toString());
             move(20);
             handleTail(headX, headY);
             eatPeach(detectPeach());
         }
     }
+    public int getTailLength(){
+        return tailLength;
+    }
+
+    public double getTime(){
+        time = (time*75)/1000;
+        return time;
+    }
+
     public void handleTail(int headX, int headY){
         int prevX = headX;
         int prevY = headY;

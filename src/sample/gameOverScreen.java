@@ -8,6 +8,7 @@ public class gameOverScreen extends World{
     public gameOverScreen()
     {
         showText("you suck", 400, 300);
+
         addObject(paButton, 200, 450);
         addObject(mainButton, 400, 450);
     }

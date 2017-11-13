@@ -28,7 +28,7 @@ public class PeachStage extends World{
                 }
             }
         }
-       
+
         peachGrid[1][1] = StageObject.SNAKE;
         addObject(snek, 2*mulitplier, 2*mulitplier);
 

@@ -79,13 +79,15 @@ public class SnakeActor extends Actor{
             getWorld().addObject(t,getX(),getY());
         }
     }
+    public int getTailLength(){
+        return tailLength;
+    }
     class SnakeTail extends Actor{
         public SnakeTail(){
             setImage("eggplantsnake.jpg");
         }
         @Override
         public void act(){
-
         }
     }
 }

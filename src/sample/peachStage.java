@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import mayflower.Actor;
 import mayflower.World;
 
-public class PeachStage extends World{
+public class peachStage extends World{
     enum StageObject{
         WALL,
         SNAKE,
@@ -15,7 +15,7 @@ public class PeachStage extends World{
     public SnakeActor snek = new SnakeActor();
     public StageObject[][] peachGrid = new StageObject[40][30];
     final int mulitplier = 20;
-    public PeachStage()
+    public peachStage()
     {
         for(int r = 0; r < 40; r++)
         {
@@ -37,6 +37,9 @@ public class PeachStage extends World{
         addObject(snek, 2*mulitplier, 2*mulitplier);
 
 
+        addObject(snek, 20, 20);
+        addRandomPeach();
+        SnakeActor snek = new SnakeActor();
         addObject(snek, 20, 20);
         addRandomPeach();
     }

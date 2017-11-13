@@ -23,6 +23,31 @@ public class SnakeActor extends Actor{
         if (isTouching(wall.class) || isTouching(getClass())) {
             System.out.println("hitting wall");
             Mayflower.setWorld(new gameOverScreen());
+    public void act(){
+
+        if(isTouching(wall.class) || isTouching(getClass()))
+        {
+            System.out.println("hitting wall");
+            Mayflower.setWorld(new gameOverScreen());
+        }
+        if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
+            setRotation(Direction.NORTH);
+        }
+        else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
+            setRotation(Direction.SOUTH);
+        }
+        else if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) || Mayflower.isKeyDown(Keyboard.KEY_A)) {
+            setRotation(Direction.WEST);
+        }
+        else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
+            setRotation(Direction.EAST);
+        }
+        if(t.isDone()){
+            int headX = getX();
+            int headY = getY();
+            bigify();
+            t.reset();
+
             if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
                 setRotation(Direction.NORTH);
             } else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
@@ -53,6 +78,10 @@ public class SnakeActor extends Actor{
                 handleTail(headX, headY);
                 eatPeach(detectPeach());
             }
+            //System.out.println(t.toString());
+            move(20);
+            handleTail(headX, headY);
+            eatPeach(detectPeach());
         }
     }
     public void handleTail(int headX, int headY){
@@ -90,7 +119,7 @@ public class SnakeActor extends Actor{
         }
         getWorld().removeObject(peach);
         tailLength++;
-        Peach.addRandomPeach((PeachStage)getWorld()); //Should never throw invalid cast errors
+        Peach.addRandomPeach((peachStage)getWorld()); //Should never throw invalid cast errors
     }
     public void bigify(){
         if(tailLength > tail.size()){

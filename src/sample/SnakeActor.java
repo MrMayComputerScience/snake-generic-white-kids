@@ -21,10 +21,6 @@ public class SnakeActor extends Actor{
 
     public void act(){
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/mason
         if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
             setRotation(Direction.NORTH);
         }
@@ -42,36 +38,12 @@ public class SnakeActor extends Actor{
             int headY = getY();
             bigify();
             t.reset();
-<<<<<<< HEAD
-
-
-            //System.out.println(t.toString());
-=======
->>>>>>> origin/mason
             move(20);
             handleTail(headX, headY);
             eatPeach(detectPeach());
         }
-<<<<<<< HEAD
-        if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
-            setRotation(Direction.NORTH);
-        }
-        else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
-            setRotation(Direction.SOUTH);
-        }
-        else if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) || Mayflower.isKeyDown(Keyboard.KEY_A)) {
-            setRotation(Direction.WEST);
-        }
-        else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
-            setRotation(Direction.EAST);
-        }
-        if(isTouching(wall.class) || isTouching(getClass()))
-        {
-            System.out.println("hitting wall");
-=======
         if(isTouching(wall.class) || isTouching(SnakeTail.class)){
->>>>>>> origin/mason
-            Mayflower.setWorld(new gameOverScreen());
+            Mayflower.setWorld(new InitialsInput());
         }
     }
     public void handleTail(int headX, int headY){

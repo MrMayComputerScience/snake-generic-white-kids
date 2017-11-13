@@ -3,8 +3,10 @@ package sample;
 import com.sun.istack.internal.Nullable;
 import mayflower.*;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 
 public class SnakeActor extends Actor{
@@ -24,18 +26,7 @@ public class SnakeActor extends Actor{
 
     public void act(){
 
-        if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
-            setRotation(Direction.NORTH);
-        }
-        else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
-            setRotation(Direction.SOUTH);
-        }
-        else if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) || Mayflower.isKeyDown(Keyboard.KEY_A)) {
-            setRotation(Direction.WEST);
-        }
-        else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
-            setRotation(Direction.EAST);
-        }
+
         if(t.isDone()){
             int headX = getX();
             int headY = getY();
@@ -61,17 +52,23 @@ public class SnakeActor extends Actor{
 
         }
         if(isTouching(wall.class) || isTouching(SnakeTail.class)){
-            Mayflower.setWorld(new gameOverScreen());
+            Mayflower.setWorld(new gameOverScreen(this));
 
         }
-    }
-    public int getTailLength(){
-        return tailLength;
     }
 
     public double getTime(){
         time = (time*75)/1000;
         return time;
+    }
+    public String getRatio(){
+
+        //String s = "" + getTailLength()/getTime();
+        //Pattern p = Pattern.compile("/d+/.?/d{0,3}");
+
+        //String parsed =  p.matcher(s).toMatchResult().group();
+        return "";
+
     }
 
     public void handleTail(int headX, int headY){
@@ -84,16 +81,10 @@ public class SnakeActor extends Actor{
             prevX = tempX;
             prevY = tempY;
         }
-
-
         if(getIntersectingObjects(this.getClass()).contains(new wall()))
         {
-            Mayflower.setWorld(new gameOverScreen());
+            Mayflower.setWorld(new gameOverScreen(this));
         }
-
-
-
-
 
     }
     public Peach detectPeach(){

@@ -1,6 +1,6 @@
 package sample;
 
-import mayflower.World;
+import mayflower.*;
 
 public class gameOverScreen extends World{
     Button paButton = new PlayAgainButton("PlayAgain.png");

@@ -27,6 +27,12 @@ public class Peach extends Actor{
     public static void addRandomPeach(PeachStage world){
         world.addRandomPeach();
     }
+    public boolean isTouching(){
+        if(getIntersectingObjects(Actor.class).size() > 0){
+            return true;
+        }
+        return false;
+    }
     @Override
     public void act(){
 

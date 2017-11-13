@@ -24,11 +24,6 @@ public class SnakeActor extends Actor{
 
     public void act(){
 
-        if(isTouching(wall.class) || isTouching(getClass()))
-        {
-            System.out.println("hitting wall");
-            Mayflower.setWorld(new gameOverScreen());
-        }
         if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
             setRotation(Direction.NORTH);
         }
@@ -47,6 +42,7 @@ public class SnakeActor extends Actor{
             bigify();
             t.reset();
 
+
             if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
                 setRotation(Direction.NORTH);
             } else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
@@ -61,6 +57,12 @@ public class SnakeActor extends Actor{
             move(20);
             handleTail(headX, headY);
             eatPeach(detectPeach());
+
+
+        }
+        if(isTouching(wall.class) || isTouching(SnakeTail.class)){
+            Mayflower.setWorld(new gameOverScreen());
+
         }
     }
     public int getTailLength(){
@@ -116,13 +118,15 @@ public class SnakeActor extends Actor{
             getWorld().addObject(t,getX(),getY());
         }
     }
+    public int getTailLength(){
+        return tailLength;
+    }
     class SnakeTail extends Actor{
         public SnakeTail(){
             setImage("eggplantsnake.jpg");
         }
         @Override
         public void act(){
-
         }
     }
 }

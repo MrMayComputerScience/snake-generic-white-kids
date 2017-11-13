@@ -37,18 +37,6 @@ public class SnakeActor extends Actor{
             int headY = getY();
             bigify();
             t.reset();
-            if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
-                setRotation(Direction.NORTH);
-            }
-            else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
-                setRotation(Direction.SOUTH);
-            }
-            else if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) || Mayflower.isKeyDown(Keyboard.KEY_A)) {
-                setRotation(Direction.WEST);
-            }
-            else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
-                setRotation(Direction.EAST);
-            }
             move(20);
             handleTail(headX, headY);
             eatPeach(detectPeach());

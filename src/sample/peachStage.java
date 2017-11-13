@@ -39,6 +39,7 @@ public class peachStage extends World{
 
     @Override
     public void act() {
+        if(getObjects(Peach.class).size())
 
     }
     public StageObject[][] getGrid() {

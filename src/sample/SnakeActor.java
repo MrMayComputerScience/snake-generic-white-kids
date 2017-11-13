@@ -20,6 +20,7 @@ public class SnakeActor extends Actor{
     }
 
     public void act(){
+
         if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
             setRotation(Direction.NORTH);
         }
@@ -40,6 +41,9 @@ public class SnakeActor extends Actor{
             move(20);
             handleTail(headX, headY);
             eatPeach(detectPeach());
+        }
+        if(isTouching(wall.class) || isTouching(SnakeTail.class)){
+            Mayflower.setWorld(new gameOverScreen());
         }
     }
     public void handleTail(int headX, int headY){
@@ -66,7 +70,7 @@ public class SnakeActor extends Actor{
         }
         getWorld().removeObject(peach);
         tailLength++;
-        Peach.addRandomPeach((PeachStage)getWorld()); //Should never throw invalid cast errors
+        Peach.addRandomPeach((peachStage)getWorld()); //Should never throw invalid cast errors
     }
     public void bigify(){
         if(tailLength > tail.size()){

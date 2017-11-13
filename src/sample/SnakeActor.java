@@ -3,6 +3,9 @@ package sample;
 import com.sun.istack.internal.Nullable;
 import mayflower.*;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,8 +48,19 @@ public class SnakeActor extends Actor{
 
         if(isTouching(wall.class) || isTouching(SnakeTail.class)){
             Mayflower.setWorld(new gameOverScreen());
-            
+            try
+            {
+                File file = new File("scores.txt");
+                FileWriter pw = new FileWriter(file, true);
+                pw.write(getTailLength());
+                pw.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
+        System.out.println(getTailLength());
     }
     public void handleTail(int headX, int headY){
         int prevX = headX;

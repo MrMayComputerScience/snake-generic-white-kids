@@ -91,7 +91,6 @@ public class SnakeActor extends Actor{
         }
         @Override
         public void act(){
-
         }
     }
 }

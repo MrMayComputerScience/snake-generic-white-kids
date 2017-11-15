@@ -21,6 +21,7 @@ public class InitialsInput extends World{
         highlight = new Label("___",34);
         dispInits.setColor(Color.WHITE);
         highlight.setColor(Color.YELLOW);
+        showText("Enter Your Initials!", 250, 150);
         addObject(dispInits, 300, 250);
         addObject(highlight, 300, 250);
         for(int i = 0; i < pos.length; i++){

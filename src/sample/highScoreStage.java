@@ -7,10 +7,7 @@ import mayflower.World;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class highScoreStage extends World{
     private List<Label> labels;
@@ -19,10 +16,13 @@ public class highScoreStage extends World{
         labels = new ArrayList<>();
         addScores();
         addNames();
+        labels.sort(scoreSort);
         for(int i = 0; i < labels.size(); i++){
             Label l = labels.get(i);
             l.setText(i+1+". "+l.getText());
+            addObject(l, 20, i*25);
         }
+
 
     }
     public void addNames(){
@@ -66,7 +66,6 @@ public class highScoreStage extends World{
             System.out.println(score);
             scoreList.add(Integer.parseInt(score));
         }
-        Collections.sort(scoreList, Collections.reverseOrder());
         if(scoreList.size() == 0)
         {
             addObject(new Label("No High Scores Yet"), 20, 20);
@@ -86,12 +85,23 @@ public class highScoreStage extends World{
             for(int i = 1; i < 11; i++)
             {
                 Label l = new Label(""+scoreList.get(i-1));
-                addObject(l, 20, i*25);
+
                 labels.add(l);
             }
         }
         addObject(new MainScreenButton("MainButton.png"), 625, 500);
     }
+    private Comparator<Label> scoreSort= new Comparator<Label>() {
+        @Override
+        public int compare(Label o1, Label o2) {
+            String t1 = o1.getText();
+            String t2 = o2.getText();
+            int i1 = Integer.parseInt(t1.substring(t1.indexOf(' ')+1, t1.length()));
+            int i2 = Integer.parseInt(t2.substring(t2.indexOf(' ')+1, t2.length()));
+            System.out.println(i1+", "+i2);
+            return i2-i1;
+        }
+    };
     @Override
     public void act() {
 

@@ -16,12 +16,15 @@ public class peachStage extends World{
         SNAKE,
         PEACH
     }
-    public SnakeActor snek = new SnakeActor();
-    public StageObject[][] peachGrid = new StageObject[30][40];
+    private SnakeActor snek;
+    private StageObject[][] peachGrid = new StageObject[30][40];
+    private Label playerScore;
     private final int mulitplier = 20;
     public peachStage()
     {
+        snek = new SnakeActor();
         Label scoreLabel = new Label("Highscore: " + getHS());
+        playerScore = new Label("Your Score: "+ snek.getTailLength());
         for(int r = 0; r < 30; r++)
         {
             for(int c = 0; c < 40; c++)
@@ -33,9 +36,9 @@ public class peachStage extends World{
                 }
             }
         }
-        SnakeActor snek = new SnakeActor();
         addObject(snek, 20, 20);
         addObject(scoreLabel, 0,0);
+        addObject(playerScore, 550,0);
         while(!addRandomPeach()){
 
         }
@@ -99,7 +102,9 @@ public class peachStage extends World{
     public StageObject[][] getGrid() {
         return peachGrid;
     }
+
     public boolean addRandomPeach(){
+        playerScore.setText("Your Score: "+snek.getTailLength());
         for(Actor a : getObjects()){
             if(a instanceof Peach){
                 return false;

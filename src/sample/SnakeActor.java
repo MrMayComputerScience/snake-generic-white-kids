@@ -5,6 +5,7 @@ import mayflower.*;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,21 +47,28 @@ public class SnakeActor extends Actor{
             eatPeach(detectPeach());
         }
         if(isTouching(wall.class) || isTouching(SnakeTail.class)){
-            Mayflower.setWorld(new gameOverScreen());
-            try
-            {
-                File test = new File("scores.txt");
-                FileWriter pw = new FileWriter(test, true);
-                pw.write("\r\n");
-                pw.write(Integer.toString(getTailLength()));
-                pw.close();
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+            Mayflower.setWorld(new InitialsInput(this));
         }
         System.out.println(getTailLength());
+    }
+    public void saveScore(String initials){
+        try
+        {
+            File scoreFile = new File("scores.txt");
+            File nameFile = new File("names.txt");
+            FileWriter scoreWriter = new FileWriter(scoreFile, true);
+            FileWriter nameWriter = new FileWriter(nameFile, true);
+            scoreWriter.write("\r\n");
+            scoreWriter.write(Integer.toString(getTailLength()));
+            scoreWriter.close();
+            nameWriter.write("\r\n");
+            nameWriter.write(initials);
+            nameWriter.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
     public void handleTail(int headX, int headY){
         int prevX = headX;

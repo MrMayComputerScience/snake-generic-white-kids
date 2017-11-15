@@ -3,24 +3,35 @@ package sample;
 import mayflower.*;
 
 public class InitialsInput extends World{
-    private String initials;
     private char[] pos;
+    private char[] light;
     private int current;
     private final char START = 'A';
     private final char END = 'Z';
     private final char INIT = '_';
     private Label dispInits;
-    public InitialsInput(){
+    private Label highlight;
+    private SnakeActor actor;
+    public InitialsInput(SnakeActor a){
+        actor = a;
         pos = new char[3];
+        light = new char[3];
         current = 0;
-        dispInits = new Label("___");
+        dispInits = new Label("___",34);
+        highlight = new Label("___",34);
+        dispInits.setColor(Color.WHITE);
+        highlight.setColor(Color.YELLOW);
         addObject(dispInits, 300, 250);
+        addObject(highlight, 300, 250);
         for(int i = 0; i < pos.length; i++){
             pos[i] = INIT;
+            light[i] = ' ';
         }
+        highlight.setText("_  ");
+        light[0]='_';
     }
     public String getInitials(){
-        return initials;
+        return dispInits.getText();
     }
     @Override
     public void act(){
@@ -58,18 +69,40 @@ public class InitialsInput extends World{
             dispInits.setText(label);
         }
         else if(Mayflower.isKeyPressed(Keyboard.KEY_A) || Mayflower.isKeyPressed(Keyboard.KEY_LEFT)){
-            if(current - 1 < 0)
+            light[current] = ' ';
+            if(current - 1 < 0){
                 current = pos.length-1;
-            else
+            }
+            else{
                 current--;
+            }
+            light[current] = '_';
+            String label = "";
+            StringBuilder builder = new StringBuilder();
+            for(char c : light){
+                builder.append(c);
+            }
+            label = builder.toString();
+            highlight.setText(label);
+
         }
         else if(Mayflower.isKeyPressed(Keyboard.KEY_RIGHT) || Mayflower.isKeyPressed(Keyboard.KEY_D)){
+            light[current] = ' ';
             if(current + 1 >= pos.length)
                 current = 0;
             else
                 current++;
+            light[current] = '_';
+            String label = "";
+            StringBuilder builder = new StringBuilder();
+            for(char c : light){
+                builder.append(c);
+            }
+            label = builder.toString();
+            highlight.setText(label);
         }
         if(Mayflower.isKeyPressed(Keyboard.KEY_ENTER)){
+            actor.saveScore(getInitials());
             Mayflower.setWorld(new gameOverScreen());
         }
     }

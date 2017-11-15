@@ -30,7 +30,7 @@ public class highScoreStage extends World{
         File file = new File("names.txt");
         try(Scanner in = new Scanner(file)){
             int count = 0;
-            while(in.hasNextLine()){
+            while(in.hasNextLine() && count < 10){
                 String line = in.nextLine();
                 if(!line.equals("")){
                     Label l = labels.get(count);

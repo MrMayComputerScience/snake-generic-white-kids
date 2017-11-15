@@ -9,7 +9,7 @@ import mayflower.Timer;
 
 import mayflower.World;
 
-public class PeachStage extends World{
+
 import mayflower.Label;
 import mayflower.World;
 
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class peachStage extends World{
+public class PeachStage extends World{
     enum StageObject{
         WALL,
         SNAKE,

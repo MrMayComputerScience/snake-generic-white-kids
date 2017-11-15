@@ -72,7 +72,7 @@ public class SnakeActor extends Actor{
         }
 
         if(isTouching(wall.class) || isTouching(SnakeTail.class)){
-            Mayflower.setWorld(new gameOverScreen());
+            Mayflower.setWorld(new gameOverScreen(this));
             try
             {
                 File test = new File("scores.txt");

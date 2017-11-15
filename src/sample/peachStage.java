@@ -44,7 +44,7 @@ public class peachStage extends World{
         }
     }
 
-    public int getHS()
+    public String getHS()
     {
         String score;
         List<String> scoreList = new ArrayList<String>();
@@ -59,7 +59,7 @@ public class peachStage extends World{
 
         if(!scoreFile.hasNext())
         {
-            return 0;
+            return "0";
         }
 
         while(scoreFile.hasNext())
@@ -69,21 +69,35 @@ public class peachStage extends World{
             System.out.println(score);
             scoreList.add(score);
         }
+
         System.out.println(scoreList);
         System.out.println(scoreList.get(0));
-
+        int count = 0;
+        int index = 0;
         high = Integer.parseInt(scoreList.get(0));
-        while(!scoreList.isEmpty())
+        while(count < scoreList.size())
         {
-            int temp = Integer.parseInt(scoreList.remove(0));
+            int temp = Integer.parseInt(scoreList.get(count));
             if(temp > high)
             {
+                index = count;
                 high = temp;
             }
+            count++;
         }
-
-
-        return high;
+        File nameFile = new File("names.txt");
+        String name = "";
+        try(Scanner in = new Scanner(nameFile)){
+            if(in.hasNextLine())
+                in.nextLine();
+            for(int i = 0; i <= index; i++){
+                name = in.nextLine();
+            }
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return name + ": " + high;
     }
 
 

@@ -49,7 +49,7 @@ public class SnakeActor extends Actor{
         if(isTouching(wall.class) || isTouching(SnakeTail.class)){
             Mayflower.setWorld(new InitialsInput(this));
         }
-        System.out.println(getTailLength());
+
     }
     public void saveScore(String initials){
         try

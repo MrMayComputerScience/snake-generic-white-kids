@@ -50,9 +50,10 @@ public class SnakeActor extends Actor{
             Mayflower.setWorld(new gameOverScreen());
             try
             {
-                File file = new File("scores.txt");
-                FileWriter pw = new FileWriter(file, true);
-                pw.write(getTailLength());
+                File test = new File("scores.txt");
+                FileWriter pw = new FileWriter(test, true);
+                pw.write("\r\n");
+                pw.write(Integer.toString(getTailLength()));
                 pw.close();
             }
             catch (Exception e)

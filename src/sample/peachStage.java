@@ -35,6 +35,7 @@ public class peachStage extends World{
         }
         SnakeActor snek = new SnakeActor();
         addObject(snek, 20, 20);
+        addObject(scoreLabel, 0,0);
         while(!addRandomPeach()){
 
         }
@@ -53,6 +54,11 @@ public class peachStage extends World{
         }
         int high;
 
+        if(!scoreFile.hasNext())
+        {
+            return 0;
+        }
+
         while(scoreFile.hasNext())
         {
 
@@ -67,7 +73,7 @@ public class peachStage extends World{
         while(!scoreList.isEmpty())
         {
             int temp = Integer.parseInt(scoreList.remove(0));
-            if(temp < high)
+            if(temp > high)
             {
                 high = temp;
             }

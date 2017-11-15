@@ -5,7 +5,7 @@ public class PlayAgainButton extends Button {
         super(name);
     }
     public void OnClick(){
-        Mayflower.setWorld(new PeachStage());
+        Mayflower.setWorld(new peachStage());
     }
 
 }

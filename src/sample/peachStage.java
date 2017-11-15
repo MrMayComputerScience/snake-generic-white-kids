@@ -2,6 +2,7 @@ package sample;
 
 import javafx.stage.Stage;
 import mayflower.Actor;
+
 import mayflower.Label;
 import mayflower.World;
 
@@ -9,16 +10,23 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javafx.stage.Stage;
+import mayflower.Actor;
+import mayflower.Timer;
+import mayflower.World;
 
 public class peachStage extends World{
+
     enum StageObject{
         WALL,
         SNAKE,
         PEACH
     }
+
     private SnakeActor snek;
     private StageObject[][] peachGrid = new StageObject[30][40];
     private Label playerScore;
+    private Timer t;
     private final int mulitplier = 20;
     public peachStage()
     {
@@ -39,9 +47,12 @@ public class peachStage extends World{
         addObject(snek, 20, 20);
         addObject(scoreLabel, 0,0);
         addObject(playerScore, 550,0);
+        t = new Timer(75);
+        peachGrid[1][1] = StageObject.SNAKE;
         while(!addRandomPeach()){
 
         }
+
     }
 
     public String getHS()
@@ -64,7 +75,6 @@ public class peachStage extends World{
 
         while(scoreFile.hasNext())
         {
-
             score = scoreFile.next();
             System.out.println(score);
             scoreList.add(score);
@@ -105,6 +115,8 @@ public class peachStage extends World{
     {
 
     }
+
+
 
 
     @Override

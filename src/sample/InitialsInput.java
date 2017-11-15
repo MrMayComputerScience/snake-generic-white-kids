@@ -104,7 +104,7 @@ public class InitialsInput extends World{
         }
         if(Mayflower.isKeyPressed(Keyboard.KEY_ENTER)){
             actor.saveScore(getInitials());
-            Mayflower.setWorld(new gameOverScreen());
+            Mayflower.setWorld(new gameOverScreen(actor));
         }
     }
 }

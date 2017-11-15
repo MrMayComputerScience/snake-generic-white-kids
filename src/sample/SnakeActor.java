@@ -7,44 +7,53 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 
 public class SnakeActor extends Actor{
     private Timer t = new Timer();
     private int tailLength;
+    private double time;
     private List<SnakeTail> tail;
     public SnakeActor()
     {
         tail = new ArrayList<>();
+        time = 0.0;
         tailLength = 0;
         setImage("eggplantsnake.jpg");
         t = new Timer(75);
     }
 
+
     public void act(){
 
-        if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
-            setRotation(Direction.NORTH);
-        }
-        else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
-            setRotation(Direction.SOUTH);
-        }
-        else if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) || Mayflower.isKeyDown(Keyboard.KEY_A)) {
-            setRotation(Direction.WEST);
-        }
-        else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
-            setRotation(Direction.EAST);
-        }
+
         if(t.isDone()){
             int headX = getX();
             int headY = getY();
             bigify();
             t.reset();
+
+
+            if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
+                setRotation(Direction.NORTH);
+            } else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
+                setRotation(Direction.SOUTH);
+            } else if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) || Mayflower.isKeyDown(Keyboard.KEY_A)) {
+                setRotation(Direction.WEST);
+            } else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
+                setRotation(Direction.EAST);
+            }
+            time++;
+            //System.out.println(t.toString());
             move(20);
             handleTail(headX, headY);
             eatPeach(detectPeach());
+
+
         }
         if(isTouching(wall.class) || isTouching(SnakeTail.class)){
             Mayflower.setWorld(new InitialsInput(this));
@@ -70,6 +79,18 @@ public class SnakeActor extends Actor{
             e.printStackTrace();
         }
     }
+
+    public double getTime(){
+        time = (time*75)/1000;
+        return time;
+    }
+    public String getRatio(){
+
+        double d = getTailLength()/getTime();
+        return String.format("%.3f", d);
+
+    }
+
     public void handleTail(int headX, int headY){
         int prevX = headX;
         int prevY = headY;
@@ -80,6 +101,11 @@ public class SnakeActor extends Actor{
             prevX = tempX;
             prevY = tempY;
         }
+        if(getIntersectingObjects(this.getClass()).contains(new wall()))
+        {
+            Mayflower.setWorld(new gameOverScreen(this));
+        }
+
     }
     public Peach detectPeach(){
         if(getIntersectingObjects(Peach.class).size() > 0){

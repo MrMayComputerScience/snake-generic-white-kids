@@ -3,6 +3,7 @@ package sample;
 import com.sun.istack.internal.Nullable;
 import mayflower.*;
 
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -77,6 +78,7 @@ public class SnakeActor extends Actor{
         catch (IOException e)
         {
             e.printStackTrace();
+
         }
     }
 
@@ -91,7 +93,6 @@ public class SnakeActor extends Actor{
         return String.format("%.3f", d);
 
     }
-
     public void handleTail(int headX, int headY){
         int prevX = headX;
         int prevY = headY;

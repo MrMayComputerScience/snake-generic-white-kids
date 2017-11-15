@@ -3,9 +3,13 @@ package sample;
 import javafx.stage.Stage;
 import mayflower.Actor;
 
+
+import javafx.stage.Stage;
+import mayflower.Actor;
+import mayflower.Timer;
+import mayflower.World;
 import mayflower.Label;
 import mayflower.World;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +20,6 @@ import mayflower.Timer;
 import mayflower.World;
 
 public class peachStage extends World{
-
     enum StageObject{
         WALL,
         SNAKE,

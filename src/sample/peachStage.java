@@ -10,6 +10,15 @@ import mayflower.Timer;
 import mayflower.World;
 
 public class PeachStage extends World{
+import mayflower.Label;
+import mayflower.World;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class peachStage extends World{
     enum StageObject{
         WALL,
         SNAKE,
@@ -22,6 +31,7 @@ public class PeachStage extends World{
     public PeachStage()
 
     {
+        Label scoreLabel = new Label("Highscore: " + getHS());
         for(int r = 0; r < 30; r++)
         {
             for(int c = 0; c < 40; c++)
@@ -37,11 +47,56 @@ public class PeachStage extends World{
         t = new Timer(75);
         peachGrid[1][1] = StageObject.SNAKE;
         addObject(snek, 2*mulitplier, 2*mulitplier);
+        SnakeActor snek = new SnakeActor();
+        addObject(scoreLabel, 0,0);
         while(!addRandomPeach()){
 
         }
 
     }
+
+    public int getHS()
+    {
+        String score;
+        List<String> scoreList = new ArrayList<String>();
+        File test = new File("scores.txt");
+        Scanner scoreFile = null;
+        try {
+            scoreFile = new Scanner(test);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        int high;
+
+        if(!scoreFile.hasNext())
+        {
+            return 0;
+        }
+
+        while(scoreFile.hasNext())
+        {
+
+            score = scoreFile.next();
+            System.out.println(score);
+            scoreList.add(score);
+        }
+        System.out.println(scoreList);
+        System.out.println(scoreList.get(0));
+
+        high = Integer.parseInt(scoreList.get(0));
+        while(!scoreList.isEmpty())
+        {
+            int temp = Integer.parseInt(scoreList.remove(0));
+            if(temp > high)
+            {
+                high = temp;
+            }
+        }
+
+
+        return high;
+    }
+
 
     public void updateStage()
     {

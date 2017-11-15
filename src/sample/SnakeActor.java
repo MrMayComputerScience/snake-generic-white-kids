@@ -4,6 +4,9 @@ import com.sun.istack.internal.Nullable;
 import mayflower.*;
 
 import java.text.DecimalFormat;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -55,6 +58,35 @@ public class SnakeActor extends Actor{
             Mayflower.setWorld(new gameOverScreen(this));
 
         }
+        if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
+            setRotation(Direction.NORTH);
+        }
+        else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
+            setRotation(Direction.SOUTH);
+        }
+        else if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) || Mayflower.isKeyDown(Keyboard.KEY_A)) {
+            setRotation(Direction.WEST);
+        }
+        else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
+            setRotation(Direction.EAST);
+        }
+
+        if(isTouching(wall.class) || isTouching(SnakeTail.class)){
+            Mayflower.setWorld(new gameOverScreen());
+            try
+            {
+                File test = new File("scores.txt");
+                FileWriter pw = new FileWriter(test, true);
+                pw.write("\r\n");
+                pw.write(Integer.toString(getTailLength()));
+                pw.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(getTailLength());
     }
 
     public double getTime(){
@@ -101,7 +133,8 @@ public class SnakeActor extends Actor{
             getWorld().addObject(t,getX(),getY());
         }
     }
-    public int getTailLength(){
+    public int getTailLength()
+    {
         return tailLength;
     }
     class SnakeTail extends Actor{

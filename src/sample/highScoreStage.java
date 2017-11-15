@@ -20,7 +20,8 @@ public class highScoreStage extends World{
         for(int i = 0; i < labels.size(); i++){
             Label l = labels.get(i);
             l.setText(i+1+". "+l.getText());
-            addObject(l, 20, i*25);
+            if(i < 10)
+                addObject(l, 20, i*30);
         }
 
 
@@ -30,7 +31,7 @@ public class highScoreStage extends World{
         File file = new File("names.txt");
         try(Scanner in = new Scanner(file)){
             int count = 0;
-            while(in.hasNextLine() && count < 10){
+            while(in.hasNextLine()){
                 String line = in.nextLine();
                 if(!line.equals("")){
                     Label l = labels.get(count);
@@ -70,22 +71,11 @@ public class highScoreStage extends World{
         {
             addObject(new Label("No High Scores Yet"), 20, 20);
         }
-        else if(scoreList.size() < 10)
+        else
         {
             for(int i = 1; i <= scoreList.size(); i++)
             {
                 Label l = new Label(""+scoreList.get(i-1));
-                addObject(l, 20, i*25);
-                labels.add(l);
-            }
-        }
-
-        else if(scoreList.size() >= 10)
-        {
-            for(int i = 1; i < 11; i++)
-            {
-                Label l = new Label(""+scoreList.get(i-1));
-
                 labels.add(l);
             }
         }

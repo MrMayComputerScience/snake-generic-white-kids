@@ -30,6 +30,7 @@ public class peachStage extends World{
     private final int mulitplier = 20;
     public peachStage()
     {
+    //    setBackground("background.png");
         snek = new SnakeActor();
         Label scoreLabel = new Label("Highscore: " + getHS());
         playerScore = new Label("Your Score: "+ snek.getTailLength());

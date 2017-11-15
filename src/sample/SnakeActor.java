@@ -81,12 +81,13 @@ public class SnakeActor extends Actor{
     }
 
     public double getTime(){
-        time = (time*75)/1000;
-        return time;
+        double ntime = (time*75)/1000;
+        return ntime;
     }
     public String getRatio(){
 
-        double d = getTailLength()/getTime();
+        double d = (double)(getTailLength()/getTime());
+        System.out.println("Ratio: "+d+"Length: "+getTailLength()+" Time: "+getTime());
         return String.format("%.3f", d);
 
     }
@@ -119,7 +120,7 @@ public class SnakeActor extends Actor{
             return;
         }
         getWorld().removeObject(peach);
-        tailLength++;
+        tailLength += 1;
         Peach.addRandomPeach((peachStage)getWorld()); //Should never throw invalid cast errors
     }
     public void bigify(){

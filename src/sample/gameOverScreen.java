@@ -24,7 +24,6 @@ public class gameOverScreen extends World{
         addObject(paButton, 200, 450);
         addObject(mainButton, 400, 450);
     }
-
     @Override
     public void act() {
 

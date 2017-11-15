@@ -61,15 +61,7 @@ public class SnakeActor extends Actor{
         time = (time*75)/1000;
         return time;
     }
-    public String getRatio(){
 
-        //String s = "" + getTailLength()/getTime();
-        //Pattern p = Pattern.compile("/d+/.?/d{0,3}");
-
-        //String parsed =  p.matcher(s).toMatchResult().group();
-        return "";
-
-    }
 
     public void handleTail(int headX, int headY){
         int prevX = headX;

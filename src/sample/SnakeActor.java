@@ -18,9 +18,11 @@ public class SnakeActor extends Actor{
     private Timer t = new Timer();
     private int tailLength;
     private double time;
+    private int lengthToAdd;
     private List<SnakeTail> tail;
     public SnakeActor()
     {
+        lengthToAdd = 1;
         tail = new ArrayList<>();
         time = 0.0;
         tailLength = 0;
@@ -30,11 +32,34 @@ public class SnakeActor extends Actor{
 
 
     public void act(){
+        if(Mayflower.isKeyPressed(Keyboard.KEY_ADD)){
+            if(Mayflower.isKeyPressed(Keyboard.KEY_LSHIFT) || Mayflower.isKeyPressed(Keyboard.KEY_RSHIFT)){
+                lengthToAdd += 10;
+                System.out.println("Shifted");
+            }
+            else if(Mayflower.isKeyPressed(Keyboard.KEY_LCONTROL) || Mayflower.isKeyPressed(Keyboard.KEY_RCONTROL)){
+                lengthToAdd += 1500;
+            }
+            else
+                lengthToAdd++;
+        }
+        if(Mayflower.isKeyPressed(Keyboard.KEY_MINUS)){
 
+            if(Mayflower.isKeyPressed(Keyboard.KEY_LSHIFT) || Mayflower.isKeyPressed(Keyboard.KEY_RSHIFT)){
+                System.out.println("Shifted");
+                lengthToAdd -= 10;
+            }
+            else if(Mayflower.isKeyPressed(Keyboard.KEY_LCONTROL) || Mayflower.isKeyPressed(Keyboard.KEY_RCONTROL)){
+                lengthToAdd -= 1500;
+            }
+            else
+                lengthToAdd--;
+        }
 
         if(t.isDone()){
             int headX = getX();
             int headY = getY();
+            int headRot = getRotation();
             bigify();
             t.reset();
 
@@ -51,7 +76,7 @@ public class SnakeActor extends Actor{
             time++;
             //System.out.println(t.toString());
             move(20);
-            handleTail(headX, headY);
+            handleTail(headX, headY, headRot);
             eatPeach(detectPeach());
 
 
@@ -93,15 +118,19 @@ public class SnakeActor extends Actor{
         return String.format("%.3f", d);
 
     }
-    public void handleTail(int headX, int headY){
+    public void handleTail(int headX, int headY, int headRot){
         int prevX = headX;
         int prevY = headY;
+        int prevRot = headRot;
         for(SnakeTail t : tail){
             int tempX = t.getX();
             int tempY = t.getY();
+            int tempRot = t.getRotation();
             t.setLocation(prevX, prevY);
+            t.setRotation(prevRot);
             prevX = tempX;
             prevY = tempY;
+            prevRot = tempRot;
         }
         if(getIntersectingObjects(this.getClass()).contains(new wall()))
         {
@@ -121,7 +150,7 @@ public class SnakeActor extends Actor{
             return;
         }
         getWorld().removeObject(peach);
-        tailLength += 1;
+        tailLength += lengthToAdd;
         Peach.addRandomPeach((peachStage)getWorld()); //Should never throw invalid cast errors
     }
     public void bigify(){

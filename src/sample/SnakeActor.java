@@ -33,23 +33,33 @@ public class SnakeActor extends Actor{
 
     public void act(){
         if(Mayflower.isKeyPressed(Keyboard.KEY_ADD)){
-            if(Mayflower.isKeyPressed(Keyboard.KEY_LSHIFT) || Mayflower.isKeyPressed(Keyboard.KEY_RSHIFT)){
-                lengthToAdd += 10;
+
+            if(Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)){
                 System.out.println("Shifted");
+                lengthToAdd += 10;
             }
-            else if(Mayflower.isKeyPressed(Keyboard.KEY_LCONTROL) || Mayflower.isKeyPressed(Keyboard.KEY_RCONTROL)){
+            else if(Mayflower.isKeyDown(Keyboard.KEY_LCONTROL) || Mayflower.isKeyDown(Keyboard.KEY_RCONTROL)){
                 lengthToAdd += 1500;
             }
             else
                 lengthToAdd++;
         }
-        if(Mayflower.isKeyPressed(Keyboard.KEY_MINUS)){
+        if(Mayflower.isKeyPressed(Keyboard.KEY_EQUALS) ){
+            if(Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)){
+                if(Mayflower.isKeyDown(Keyboard.KEY_LCONTROL) || Mayflower.isKeyDown(Keyboard.KEY_RCONTROL)){
+                    lengthToAdd += 1500;
+                }
+                else
+                    lengthToAdd += 10;
+            }
+        }
+        if(Mayflower.isKeyPressed(Keyboard.KEY_SUBTRACT) || Mayflower.isKeyPressed(Keyboard.KEY_MINUS)){
 
-            if(Mayflower.isKeyPressed(Keyboard.KEY_LSHIFT) || Mayflower.isKeyPressed(Keyboard.KEY_RSHIFT)){
+            if(Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)){
                 System.out.println("Shifted");
                 lengthToAdd -= 10;
             }
-            else if(Mayflower.isKeyPressed(Keyboard.KEY_LCONTROL) || Mayflower.isKeyPressed(Keyboard.KEY_RCONTROL)){
+            else if(Mayflower.isKeyDown(Keyboard.KEY_LCONTROL) || Mayflower.isKeyDown(Keyboard.KEY_RCONTROL)){
                 lengthToAdd -= 1500;
             }
             else
@@ -73,6 +83,8 @@ public class SnakeActor extends Actor{
             } else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
                 setRotation(Direction.EAST);
             }
+            if(Math.abs(getRotation()-headRot) % 180 == 0 && tailLength >= 2)
+                setRotation(headRot);
             time++;
             //System.out.println(t.toString());
             move(20);

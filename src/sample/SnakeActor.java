@@ -33,7 +33,7 @@ public class SnakeActor extends Actor{
 
     public void act(){
         if(Mayflower.isKeyPressed(Keyboard.KEY_ADD)){
-
+ 
             if(Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)){
                 System.out.println("Shifted");
                 lengthToAdd += 10;

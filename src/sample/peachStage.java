@@ -3,7 +3,7 @@ package sample;
 import javafx.stage.Stage;
 import mayflower.Actor;
 
-
+import mayflower.*;
 import javafx.stage.Stage;
 import mayflower.Actor;
 import mayflower.Timer;
@@ -48,6 +48,10 @@ public class peachStage extends World{
                 }
             }
         }
+        snek.setUpControl(Keyboard.KEY_UP);
+        snek.setDownControl(Keyboard.KEY_DOWN);
+        snek.setLeftControl(Keyboard.KEY_LEFT);
+        snek.setRightControl(Keyboard.KEY_RIGHT);
         addObject(snek, 20, 20);
         addObject(scoreLabel, 0,0);
         addObject(playerScore, 550,0);

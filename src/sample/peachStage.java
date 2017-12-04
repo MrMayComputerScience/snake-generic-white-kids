@@ -3,7 +3,7 @@ package sample;
 import javafx.stage.Stage;
 import mayflower.Actor;
 
-
+import mayflower.*;
 import javafx.stage.Stage;
 import mayflower.Actor;
 import mayflower.Timer;
@@ -34,7 +34,7 @@ public class peachStage extends World{
     public peachStage()
     {
     //    setBackground("background.png");
-        snek = new SnakeActor();
+        snek = new SnakeActor(4);
         Label scoreLabel = new Label("Highscore: " + getHS());
         playerScore = new Label("Your Score: "+ snek.getTailLength());
         for(int r = 0; r < 30; r++)
@@ -48,6 +48,10 @@ public class peachStage extends World{
                 }
             }
         }
+        snek.setUpControl(Keyboard.KEY_W);
+        snek.setDownControl(Keyboard.KEY_S);
+        snek.setLeftControl(Keyboard.KEY_A);
+        snek.setRightControl(Keyboard.KEY_D);
         addObject(snek, 20, 20);
         addObject(scoreLabel, 0,0);
         addObject(playerScore, 550,0);
@@ -127,6 +131,8 @@ public class peachStage extends World{
     public void act() {
         if(getObjects(Peach.class).size() < 1)
             addRandomPeach();
+        if(getObjects(SnakeActor.class).size() == 0)
+            Mayflower.setWorld(new gameOverScreen(snek));
     }
 
     public StageObject[][] getGrid() {

@@ -24,8 +24,14 @@ public class SnakeActor extends Actor{
     private List<SnakeTail> tail;
     private long timeLastUpdate;
     private int tickLen;
-    public SnakeActor()
+    private int upControl;
+    private int downControl;
+    private int leftControl;
+    private int rightControl;
+    private int id;
+    public SnakeActor(int di)
     {
+        id = di;
         tickLen = TICK_TIME;
         timeLastUpdate = -1;
         lengthToAdd = 1;
@@ -34,6 +40,18 @@ public class SnakeActor extends Actor{
         tailLength = 0;
         setImage("eggplantsnake.jpg");
         t = new Timer(TICK_TIME);
+    }
+    public void setUpControl(int keyboard){
+        upControl = keyboard;
+    }
+    public void setDownControl(int keyboard){
+        downControl = keyboard;
+    }
+    public void setLeftControl(int keyboard){
+        leftControl = keyboard;
+    }
+    public void setRightControl(int keyboard){
+        rightControl = keyboard;
     }
 
     public void act(){
@@ -88,13 +106,14 @@ public class SnakeActor extends Actor{
             int headY = getY();
             int headRot = getRotation();
             bigify();
-            if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
+            t.reset();
+            if (Mayflower.isKeyDown(upControl)) {
                 setRotation(Direction.NORTH);
-            } else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
+            } else if (Mayflower.isKeyDown(downControl)) {
                 setRotation(Direction.SOUTH);
-            } else if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) || Mayflower.isKeyDown(Keyboard.KEY_A)) {
+            } else if (Mayflower.isKeyDown(leftControl)) {
                 setRotation(Direction.WEST);
-            } else if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) || Mayflower.isKeyDown(Keyboard.KEY_D)) {
+            } else if (Mayflower.isKeyDown(rightControl)) {
                 setRotation(Direction.EAST);
             }
             if(Math.abs(getRotation()-headRot) % 180 == 0 && tailLength >= 2)
@@ -160,7 +179,7 @@ public class SnakeActor extends Actor{
         }
         if(getIntersectingObjects(this.getClass()).contains(new wall()))
         {
-            Mayflower.setWorld(new gameOverScreen(this));
+            this.getWorld().removeObject(this);
         }
 
     }

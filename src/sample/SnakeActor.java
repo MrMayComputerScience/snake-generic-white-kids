@@ -15,23 +15,33 @@ import java.util.regex.Pattern;
 
 
 public class SnakeActor extends Actor{
+    public static final int TICK_TIME = 75;
+    private double numTicks, sumTimes = 0;
     private Timer t = new Timer();
     private int tailLength;
     private double time;
     private int lengthToAdd;
     private List<SnakeTail> tail;
+    private long timeLastUpdate;
+    private int tickLen;
     public SnakeActor()
     {
+        tickLen = TICK_TIME;
+        timeLastUpdate = -1;
         lengthToAdd = 1;
         tail = new ArrayList<>();
         time = 0.0;
         tailLength = 0;
         setImage("eggplantsnake.jpg");
-        t = new Timer(75);
+        t = new Timer(TICK_TIME);
     }
 
-
     public void act(){
+        if(timeLastUpdate == -1){
+            timeLastUpdate = System.currentTimeMillis();
+            t.reset();
+        }
+
         if(Mayflower.isKeyPressed(Keyboard.KEY_ADD)){
  
             if(Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)){
@@ -67,13 +77,17 @@ public class SnakeActor extends Actor{
         }
 
         if(t.isDone()){
+            int trueTime = (int)(System.currentTimeMillis() - timeLastUpdate);
+            int diff = trueTime - tickLen;
+            tickLen = TICK_TIME - diff;
+            sumTimes += trueTime;
+            numTicks++;
+            t.set(TICK_TIME - diff);
+            timeLastUpdate = System.currentTimeMillis();
             int headX = getX();
             int headY = getY();
             int headRot = getRotation();
             bigify();
-            t.reset();
-
-
             if (Mayflower.isKeyDown(Keyboard.KEY_UP) || Mayflower.isKeyDown(Keyboard.KEY_W)) {
                 setRotation(Direction.NORTH);
             } else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) || Mayflower.isKeyDown(Keyboard.KEY_S)) {
@@ -93,7 +107,7 @@ public class SnakeActor extends Actor{
 
 
         }
-        if(isTouching(wall.class) || isTouching(SnakeTail.class)){
+        if(isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)){
             Mayflower.setWorld(new InitialsInput(this));
         }
 

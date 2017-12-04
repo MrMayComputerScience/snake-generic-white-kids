@@ -34,7 +34,7 @@ public class peachStage extends World{
     public peachStage()
     {
     //    setBackground("background.png");
-        snek = new SnakeActor(4);
+        snek = new SnakeActor(1);
         Label scoreLabel = new Label("Highscore: " + getHS());
         playerScore = new Label("Your Score: "+ snek.getTailLength());
         for(int r = 0; r < 30; r++)
@@ -118,21 +118,16 @@ public class peachStage extends World{
         return name + ": " + high;
     }
 
-
-    public void updateStage()
-    {
-
+    protected void detectWin(){
+        if(getObjects(SnakeActor.class).size() == 0)
+            Mayflower.setWorld(new InitialsInput(snek));
     }
-
-
-
 
     @Override
     public void act() {
         if(getObjects(Peach.class).size() < 1)
             addRandomPeach();
-        if(getObjects(SnakeActor.class).size() == 0)
-            Mayflower.setWorld(new gameOverScreen(snek));
+        detectWin();
     }
 
     public StageObject[][] getGrid() {

@@ -53,7 +53,9 @@ public class SnakeActor extends Actor{
     public void setRightControl(int keyboard){
         rightControl = keyboard;
     }
-
+    public int getId(){
+        return id;
+    }
     public void act(){
         if(timeLastUpdate == -1){
             timeLastUpdate = System.currentTimeMillis();
@@ -107,15 +109,7 @@ public class SnakeActor extends Actor{
             int headRot = getRotation();
             bigify();
             t.reset();
-            if (Mayflower.isKeyDown(upControl)) {
-                setRotation(Direction.NORTH);
-            } else if (Mayflower.isKeyDown(downControl)) {
-                setRotation(Direction.SOUTH);
-            } else if (Mayflower.isKeyDown(leftControl)) {
-                setRotation(Direction.WEST);
-            } else if (Mayflower.isKeyDown(rightControl)) {
-                setRotation(Direction.EAST);
-            }
+            moveHelper();
             if(Math.abs(getRotation()-headRot) % 180 == 0 && tailLength >= 2)
                 setRotation(headRot);
             time++;
@@ -127,9 +121,23 @@ public class SnakeActor extends Actor{
 
         }
         if(isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)){
-            Mayflower.setWorld(new InitialsInput(this));
+            getWorld().removeObject(this);
+            for(SnakeTail t : tail){
+                getWorld().removeObject(t);
+            }
         }
 
+    }
+    public void moveHelper(){
+        if (Mayflower.isKeyDown(upControl)) {
+            setRotation(Direction.NORTH);
+        } else if (Mayflower.isKeyDown(downControl)) {
+            setRotation(Direction.SOUTH);
+        } else if (Mayflower.isKeyDown(leftControl)) {
+            setRotation(Direction.WEST);
+        } else if (Mayflower.isKeyDown(rightControl)) {
+            setRotation(Direction.EAST);
+        }
     }
     public void saveScore(String initials){
         try

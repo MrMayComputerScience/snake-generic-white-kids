@@ -177,10 +177,7 @@ public class SnakeActor extends Actor{
             prevY = tempY;
             prevRot = tempRot;
         }
-        if(getIntersectingObjects(this.getClass()).contains(new wall()))
-        {
-            this.getWorld().removeObject(this);
-        }
+        
 
     }
     public Peach detectPeach(){

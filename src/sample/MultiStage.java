@@ -9,9 +9,9 @@ public class MultiStage extends peachStage{
     public MultiStage(int numnum)
     {
         super();
-        snek2 = new SnakeActor();
-        snek3 = new SnakeActor();
-        snek4 = new SnakeActor();
+        snek2 = new SnakeActor(2);
+        snek3 = new SnakeActor(3);
+        snek4 = new SnakeActor(4);
         numPlay = numnum;
         if(numPlay == 2)
         {

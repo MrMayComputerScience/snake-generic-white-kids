@@ -48,10 +48,10 @@ public class peachStage extends World{
                 }
             }
         }
-        snek.setUpControl(Keyboard.KEY_UP);
-        snek.setDownControl(Keyboard.KEY_DOWN);
-        snek.setLeftControl(Keyboard.KEY_LEFT);
-        snek.setRightControl(Keyboard.KEY_RIGHT);
+        snek.setUpControl(Keyboard.KEY_W);
+        snek.setDownControl(Keyboard.KEY_S);
+        snek.setLeftControl(Keyboard.KEY_A);
+        snek.setRightControl(Keyboard.KEY_D);
         addObject(snek, 20, 20);
         addObject(scoreLabel, 0,0);
         addObject(playerScore, 550,0);

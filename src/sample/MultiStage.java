@@ -9,8 +9,11 @@ public class MultiStage extends peachStage{
     public MultiStage(int numnum)
     {
         super();
+        snek2 = new SnakeActor();
+        snek3 = new SnakeActor();
+        snek4 = new SnakeActor();
         numPlay = numnum;
-        if(numPlay == 1)
+        if(numPlay == 2)
         {
             //player 2 = tfgh
             addObject(snek2, 740, 540);
@@ -19,7 +22,7 @@ public class MultiStage extends peachStage{
             snek2.setLeftControl(Keyboard.KEY_F);
             snek2.setRightControl(Keyboard.KEY_H);
         }
-        else if(numPlay == 2)
+        else if(numPlay == 3)
         {
             addObject(snek2, 740, 540);
             snek2.setUpControl(Keyboard.KEY_T);
@@ -34,7 +37,7 @@ public class MultiStage extends peachStage{
             snek3.setLeftControl(Keyboard.KEY_L);
             snek3.setRightControl(Keyboard.KEY_APOSTROPHE);
         }
-        else if(numPlay == 3)
+        else if(numPlay == 4)
         {
             addObject(snek2, 740, 540);
             snek2.setUpControl(Keyboard.KEY_T);

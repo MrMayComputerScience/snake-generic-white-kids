@@ -38,7 +38,10 @@ public class SnakeActor extends Actor{
         tail = new ArrayList<>();
         time = 0.0;
         tailLength = 0;
-        setImage("eggplantsnake.jpg");
+        if(id == 1)setImage("eggplantsnakep.jpg");
+        else if(id == 2)setImage("eggplantsnakeg.jpg");
+        else if(id == 3)setImage("eggplantsnakey.jpg");
+        else if(id == 4)setImage("eggplantsnaker.jpg");
         t = new Timer(TICK_TIME);
     }
     public void setUpControl(int keyboard){
@@ -122,11 +125,21 @@ public class SnakeActor extends Actor{
         }
         if(isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)){
             getWorld().removeObject(this);
-            for(SnakeTail t : tail){
-                getWorld().removeObject(t);
+            removeTail();
+            if(isTouching(SnakeActor.class)){
+               List<SnakeActor> others = getIntersectingObjects(SnakeActor.class);
+               for(SnakeActor a : others){
+                   getWorld().removeObject(a);
+                   a.removeTail();
+               }
             }
         }
 
+    }
+    public void removeTail(){
+        for(SnakeTail t : tail){
+            getWorld().removeObject(t);
+        }
     }
     public void moveHelper(){
         if (Mayflower.isKeyDown(upControl)) {
@@ -216,7 +229,11 @@ public class SnakeActor extends Actor{
     }
     class SnakeTail extends Actor{
         public SnakeTail(){
-            setImage("eggplantsnake.jpg");
+
+            if(id == 1)setImage("eggplantsnakep.jpg");
+            else if(id == 2)setImage("eggplantsnakeg.jpg");
+            else if(id == 3)setImage("eggplantsnakey.jpg");
+            else if(id == 4)setImage("eggplantsnaker.jpg");
         }
         @Override
         public void act(){

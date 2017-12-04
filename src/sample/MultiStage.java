@@ -4,6 +4,7 @@ import mayflower.*;
 import java.util.List;
 
 public class MultiStage extends peachStage{
+    private boolean hasWon;
     private int numPlay = 0;
     private SnakeActor snek2;
     private SnakeActor snek3;
@@ -12,6 +13,7 @@ public class MultiStage extends peachStage{
     public MultiStage(int numnum)
     {
         super();
+        hasWon = false;
         snek2 = new SnakeActor(2);
         snek3 = new SnakeActor(3);
         snek4 = new SnakeActor(4);
@@ -65,7 +67,14 @@ public class MultiStage extends peachStage{
     @Override
     protected void detectWin(){
         List<SnakeActor> sneks = getObjects(SnakeActor.class);
-        if(sneks.size() == 1)
+        if(hasWon){
+            if(sneks.size() > 0){
+                Mayflower.setWorld(new gameOverScreen(new SnakeActor(-1), numPlay));
+            }
             Mayflower.setWorld(new gameOverScreen(sneks.get(0), numPlay));
+        }
+
+        if(sneks.size() == 1)
+            hasWon = true;
     }
 }

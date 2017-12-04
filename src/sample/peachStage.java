@@ -52,7 +52,7 @@ public class peachStage extends World{
         snek.setDownControl(Keyboard.KEY_S);
         snek.setLeftControl(Keyboard.KEY_A);
         snek.setRightControl(Keyboard.KEY_D);
-        addObject(snek, 20, 20);
+        addObject(snek, 40, 40);
         addObject(scoreLabel, 0,0);
         addObject(playerScore, 550,0);
         t = new Timer(75);

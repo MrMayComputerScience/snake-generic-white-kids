@@ -62,6 +62,11 @@ public class peachStage extends World{
         }
 
     }
+    public void setSnek(SnakeActor sa){
+        removeObject(snek);
+        snek = sa;
+        addObject(snek, 40, 40);
+    }
 
     public String getHS()
     {

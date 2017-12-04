@@ -47,6 +47,7 @@ public class SnakeActor extends Actor{
     }
 
 
+
     public void act(){
         if(Mayflower.isKeyPressed(Keyboard.KEY_ADD)){
  
@@ -89,16 +90,8 @@ public class SnakeActor extends Actor{
             bigify();
             t.reset();
 
+            moveSnake();
 
-            if (Mayflower.isKeyDown(upControl)) {
-                setRotation(Direction.NORTH);
-            } else if (Mayflower.isKeyDown(downControl)) {
-                setRotation(Direction.SOUTH);
-            } else if (Mayflower.isKeyDown(leftControl)) {
-                setRotation(Direction.WEST);
-            } else if (Mayflower.isKeyDown(rightControl)) {
-                setRotation(Direction.EAST);
-            }
             if(Math.abs(getRotation()-headRot) % 180 == 0 && tailLength >= 2)
                 setRotation(headRot);
             time++;
@@ -113,6 +106,17 @@ public class SnakeActor extends Actor{
             Mayflower.setWorld(new InitialsInput(this));
         }
 
+    }
+    public void moveSnake(){
+        if (Mayflower.isKeyDown(upControl)) {
+            setRotation(Direction.NORTH);
+        } else if (Mayflower.isKeyDown(downControl)) {
+            setRotation(Direction.SOUTH);
+        } else if (Mayflower.isKeyDown(leftControl)) {
+            setRotation(Direction.WEST);
+        } else if (Mayflower.isKeyDown(rightControl)) {
+            setRotation(Direction.EAST);
+        }
     }
     public void saveScore(String initials){
         try

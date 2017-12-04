@@ -24,8 +24,10 @@ public class SnakeActor extends Actor{
     private int downControl;
     private int leftControl;
     private int rightControl;
-    public SnakeActor()
+    private int id;
+    public SnakeActor(int di)
     {
+        id = di;
         lengthToAdd = 1;
         tail = new ArrayList<>();
         time = 0.0;

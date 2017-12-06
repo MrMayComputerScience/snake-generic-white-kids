@@ -34,7 +34,7 @@ public class peachStage extends World{
     public peachStage()
     {
     //    setBackground("background.png");
-        snek = new SnakeActor();
+        snek = new SnakeActor(1);
         Label scoreLabel = new Label("Highscore: " + getHS());
         playerScore = new Label("Your Score: "+ snek.getTailLength());
         for(int r = 0; r < 30; r++)
@@ -158,4 +158,7 @@ public class peachStage extends World{
         return true;
     }
 
+    public SnakeActor getSnek() {
+        return snek;
+    }
 }

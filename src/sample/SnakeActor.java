@@ -25,6 +25,7 @@ public class SnakeActor extends Actor{
     private int leftControl;
     private int rightControl;
     private int id;
+    private boolean running;
     public SnakeActor(int di)
     {
         id = di;
@@ -32,11 +33,12 @@ public class SnakeActor extends Actor{
         tail = new ArrayList<>();
         time = 0.0;
         tailLength = 0;
+        running = false;
         if(id == 1)setImage("eggplantsnakep.jpg");
         else if(id == 2)setImage("eggplantsnakeg.jpg");
         else if(id == 3)setImage("eggplantsnakey.jpg");
         else if(id == 4)setImage("eggplantsnaker.jpg");
-        t = new Timer(75);
+        t = new Timer(Integer.MAX_VALUE);
     }
     public void setUpControl(int keyboard){
         upControl = keyboard;
@@ -196,6 +198,24 @@ public class SnakeActor extends Actor{
     public int getTailLength()
     {
         return tailLength;
+    }
+    public void startTimer()
+    {
+        t.set(75);
+    }
+    public boolean isPressing()
+    {
+        System.out.println(5);
+        if(Mayflower.isKeyDown(upControl) || Mayflower.isKeyDown(downControl) || Mayflower.isKeyDown(leftControl) || Mayflower.isKeyDown(rightControl)){
+            running = true;
+            System.out.println(6);
+            return true;
+        }
+        else {running = false; System.out.println(7); return false;}
+    }
+    public boolean getRunning()
+    {
+        return running;
     }
     class SnakeTail extends Actor{
         public SnakeTail(){

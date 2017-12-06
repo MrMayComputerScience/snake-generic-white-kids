@@ -9,21 +9,32 @@ public class MultiStage extends peachStage{
     public MultiStage(int numnum)
     {
         super();
-        snek2 = new SnakeActor();
-        snek3 = new SnakeActor();
-        snek4 = new SnakeActor();
+
         numPlay = numnum;
         if(numPlay == 2)
         {
+            snek2 = new SnakeActor(2);
             //player 2 = tfgh
             addObject(snek2, 740, 540);
             snek2.setUpControl(Keyboard.KEY_T);
             snek2.setDownControl(Keyboard.KEY_G);
             snek2.setLeftControl(Keyboard.KEY_F);
             snek2.setRightControl(Keyboard.KEY_H);
+            System.out.println(1);
+            while(!super.getSnek().getRunning() && !snek2.getRunning()) {
+                System.out.println(2);
+                if (super.getSnek().isPressing() && snek2.isPressing()) {
+                    super.getSnek().startTimer();
+                    System.out.println(3);
+                    snek2.startTimer();
+                }
+                System.out.println(4);
+            }
         }
         else if(numPlay == 3)
         {
+            snek2 = new SnakeActor(2);
+            snek3 = new SnakeActor(3);
             addObject(snek2, 740, 540);
             snek2.setUpControl(Keyboard.KEY_T);
             snek2.setDownControl(Keyboard.KEY_G);
@@ -36,9 +47,19 @@ public class MultiStage extends peachStage{
             snek3.setDownControl(Keyboard.KEY_SEMICOLON);
             snek3.setLeftControl(Keyboard.KEY_L);
             snek3.setRightControl(Keyboard.KEY_APOSTROPHE);
+            while(!super.getSnek().getRunning() && !snek2.getRunning() && !snek3.getRunning()) {
+                if (super.getSnek().isPressing() && snek2.isPressing() && snek3.isPressing()) {
+                    super.getSnek().startTimer();
+                    snek2.startTimer();
+                    snek3.startTimer();
+                }
+            }
         }
         else if(numPlay == 4)
         {
+            snek2 = new SnakeActor(2);
+            snek3 = new SnakeActor(3);
+            snek4 = new SnakeActor(4);
             addObject(snek2, 740, 540);
             snek2.setUpControl(Keyboard.KEY_T);
             snek2.setDownControl(Keyboard.KEY_G);
@@ -57,6 +78,14 @@ public class MultiStage extends peachStage{
             snek4.setDownControl(Keyboard.KEY_DOWN);
             snek4.setLeftControl(Keyboard.KEY_LEFT);
             snek4.setRightControl(Keyboard.KEY_RIGHT);
+            while(!super.getSnek().getRunning() && !snek2.getRunning() && !snek3.getRunning() && !snek4.getRunning()) {
+                if (super.getSnek().isPressing() && snek2.isPressing() && snek3.isPressing() && snek4.isPressing()) {
+                    super.getSnek().startTimer();
+                    snek2.startTimer();
+                    snek3.startTimer();
+                    snek4.startTimer();
+                }
+            }
         }
     }
 }

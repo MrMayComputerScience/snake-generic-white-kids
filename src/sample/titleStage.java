@@ -4,10 +4,7 @@ import mayflower.*;
 public class titleStage extends World{
     Button fpButton = new SinglePlayerButton("StartSinglePlayer.jpg");
     Button lanButton = new LANButton("NotImplemented.png");
-<<<<<<< HEAD
     //Button mpButton = new MultiplayerButton("NotImplemented.png");
-=======
->>>>>>> CP
     Button mpButton = new MultiplayerButton("Multiplayer.png");
     Button hsButton = new HighScoreButton("HighScoreButton.png");
     public titleStage(){

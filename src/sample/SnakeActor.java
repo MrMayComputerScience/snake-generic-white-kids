@@ -7,11 +7,8 @@ import mayflower.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 
 public class SnakeActor extends Actor{
@@ -115,7 +112,7 @@ public class SnakeActor extends Actor{
             int headRot = getRotation();
             bigify();
             t.reset();
-            moveHelper();
+            moveSnake();
             if(Math.abs(getRotation()-headRot) % 180 == 0 && tailLength >= 2)
                 setRotation(headRot);
             time++;
@@ -149,7 +146,7 @@ public class SnakeActor extends Actor{
             myWorld.removeObject(t);
         }
     }
-    public void moveHelper(){
+    public void moveSnake(){
         if (Mayflower.isKeyDown(upControl)) {
             setRotation(Direction.NORTH);
         } else if (Mayflower.isKeyDown(downControl)) {

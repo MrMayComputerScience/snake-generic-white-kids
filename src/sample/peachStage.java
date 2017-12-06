@@ -30,6 +30,7 @@ public class peachStage extends World{
     private StageObject[][] peachGrid = new StageObject[30][40];
     private Label playerScore;
     private Timer t;
+    private KeyDisplay wd;
     private final int mulitplier = 20;
     public peachStage()
     {
@@ -37,6 +38,7 @@ public class peachStage extends World{
         snek = new SnakeActor();
         Label scoreLabel = new Label("Highscore: " + getHS());
         playerScore = new Label("Your Score: "+ snek.getTailLength());
+        wd = new WDisplay("W.png",Keyboard.KEY_W);
         for(int r = 0; r < 30; r++)
         {
             for(int c = 0; c < 40; c++)
@@ -52,6 +54,7 @@ public class peachStage extends World{
         snek.setDownControl(Keyboard.KEY_S);
         snek.setLeftControl(Keyboard.KEY_A);
         snek.setRightControl(Keyboard.KEY_D);
+        addObject(wd, 700, 100);
         addObject(snek, 40, 40);
         addObject(scoreLabel, 0,0);
         addObject(playerScore, 550,0);

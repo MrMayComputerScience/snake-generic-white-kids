@@ -12,8 +12,10 @@ public class InitialsInput extends World{
     private Label dispInits;
     private Label highlight;
     private SnakeActor actor;
-    public InitialsInput(SnakeActor a){
+    private int numPlayers;
+    public InitialsInput(SnakeActor a, int numPlayers){
         actor = a;
+        this.numPlayers = numPlayers;
         pos = new char[3];
         light = new char[3];
         current = 0;
@@ -53,6 +55,7 @@ public class InitialsInput extends World{
             }
             label = builder.toString();
             dispInits.setText(label);
+
         }
         else if(Mayflower.isKeyPressed(Keyboard.KEY_DOWN) || Mayflower.isKeyPressed(Keyboard.KEY_S)){
             if(pos[current] == INIT)
@@ -104,7 +107,7 @@ public class InitialsInput extends World{
         }
         if(Mayflower.isKeyPressed(Keyboard.KEY_ENTER)){
             actor.saveScore(getInitials());
-            Mayflower.setWorld(new gameOverScreen(actor, 1));
+            Mayflower.setWorld(new gameOverScreen(actor, numPlayers));
         }
     }
 }

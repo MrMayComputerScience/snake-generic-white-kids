@@ -29,6 +29,7 @@ public class SnakeActor extends Actor{
     private int leftControl;
     private int rightControl;
     private int id;
+    private World myWorld;
     public SnakeActor(int di)
     {
         id = di;
@@ -60,6 +61,8 @@ public class SnakeActor extends Actor{
         return id;
     }
     public void act(){
+        if(getWorld() != null)
+            myWorld = getWorld();
         if(timeLastUpdate == -1){
             timeLastUpdate = System.currentTimeMillis();
             t.reset();
@@ -124,21 +127,26 @@ public class SnakeActor extends Actor{
 
         }
         if(isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)){
-            getWorld().removeObject(this);
-            removeTail();
+            myWorld = getWorld();
             if(isTouching(SnakeActor.class)){
                List<SnakeActor> others = getIntersectingObjects(SnakeActor.class);
                for(SnakeActor a : others){
-                   getWorld().removeObject(a);
+                   myWorld.removeObject(a);
                    a.removeTail();
                }
+                myWorld.removeObject(this);
+                removeTail();
+            }
+            else{
+                myWorld.removeObject(this);
+                removeTail();
             }
         }
 
     }
     public void removeTail(){
         for(SnakeTail t : tail){
-            getWorld().removeObject(t);
+            myWorld.removeObject(t);
         }
     }
     public void moveHelper(){

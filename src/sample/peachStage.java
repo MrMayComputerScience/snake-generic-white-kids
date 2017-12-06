@@ -120,7 +120,7 @@ public class peachStage extends World{
 
     protected void detectWin(){
         if(getObjects(SnakeActor.class).size() == 0)
-            Mayflower.setWorld(new InitialsInput(snek));
+            Mayflower.setWorld(new InitialsInput(snek, 1));
     }
 
     @Override

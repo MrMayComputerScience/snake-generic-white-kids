@@ -56,7 +56,7 @@ public class SnakeActor extends Actor{
 
     public void act(){
         if(Mayflower.isKeyPressed(Keyboard.KEY_ADD)){
- 
+
             if(Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)){
                 System.out.println("Shifted");
                 lengthToAdd += 10;
@@ -205,13 +205,11 @@ public class SnakeActor extends Actor{
     }
     public boolean isPressing()
     {
-        System.out.println(5);
         if(Mayflower.isKeyDown(upControl) || Mayflower.isKeyDown(downControl) || Mayflower.isKeyDown(leftControl) || Mayflower.isKeyDown(rightControl)){
             running = true;
-            System.out.println(6);
             return true;
         }
-        else {running = false; System.out.println(7); return false;}
+        else {running = false; return false;}
     }
     public boolean getRunning()
     {

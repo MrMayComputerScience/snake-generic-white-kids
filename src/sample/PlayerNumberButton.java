@@ -16,7 +16,6 @@ public abstract class PlayerNumberButton extends Actor{
 
     public void OnClick(){
         Mayflower.setWorld(new ModeMenu(players));
-
     }
 
 }

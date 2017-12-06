@@ -1,6 +1,11 @@
 package sample;
 import mayflower.*;
+
+import java.util.List;
+
 public class MultiStage extends peachStage{
+    public static final int NO_WIN = -42;
+    private boolean hasWon;
     private int numPlay = 0;
     private SnakeActor snek2;
     private SnakeActor snek3;
@@ -9,12 +14,24 @@ public class MultiStage extends peachStage{
     public MultiStage(int numnum)
     {
         super();
+<<<<<<< HEAD
 
         numPlay = numnum;
         if(numPlay == 2)
         {
             snek2 = new SnakeActor(2);
             //player 2 = tfgh
+=======
+        hasWon = false;
+        snek2 = new SnakeActor(2);
+        snek3 = new SnakeActor(3);
+        snek4 = new SnakeActor(4);
+        snek2.setRotation(Direction.WEST);
+        numPlay = numnum;
+        if(numPlay == 2)
+        {
+            //player 2 = yghj
+>>>>>>> origin/mason
             addObject(snek2, 740, 540);
             snek2.setUpControl(Keyboard.KEY_Y);
             snek2.setDownControl(Keyboard.KEY_H);
@@ -26,10 +43,10 @@ public class MultiStage extends peachStage{
             snek2 = new SnakeActor(2);
             snek3 = new SnakeActor(3);
             addObject(snek2, 740, 540);
-            snek2.setUpControl(Keyboard.KEY_T);
-            snek2.setDownControl(Keyboard.KEY_G);
-            snek2.setLeftControl(Keyboard.KEY_F);
-            snek2.setRightControl(Keyboard.KEY_H);
+            snek2.setUpControl(Keyboard.KEY_Y);
+            snek2.setDownControl(Keyboard.KEY_H);
+            snek2.setLeftControl(Keyboard.KEY_G);
+            snek2.setRightControl(Keyboard.KEY_J);
 
             //player 3 = pl;'
             addObject(snek3, 740, 40);
@@ -44,10 +61,10 @@ public class MultiStage extends peachStage{
             snek3 = new SnakeActor(3);
             snek4 = new SnakeActor(4);
             addObject(snek2, 740, 540);
-            snek2.setUpControl(Keyboard.KEY_T);
-            snek2.setDownControl(Keyboard.KEY_G);
-            snek2.setLeftControl(Keyboard.KEY_F);
-            snek2.setRightControl(Keyboard.KEY_H);
+            snek2.setUpControl(Keyboard.KEY_Y);
+            snek2.setDownControl(Keyboard.KEY_H);
+            snek2.setLeftControl(Keyboard.KEY_G);
+            snek2.setRightControl(Keyboard.KEY_J);
 
             addObject(snek3, 740, 40);
             snek3.setUpControl(Keyboard.KEY_P);
@@ -63,6 +80,7 @@ public class MultiStage extends peachStage{
             snek4.setRightControl(Keyboard.KEY_RIGHT);
         }
     }
+<<<<<<< HEAD
 
     @Override
     public void act() {
@@ -91,5 +109,20 @@ public class MultiStage extends peachStage{
                 snek4.startTimer();
             }
         }
+=======
+    @Override
+    protected void detectWin(){
+        List<SnakeActor> sneks = getObjects(SnakeActor.class);
+        if(hasWon){
+            if(sneks.size() == 0){
+                Mayflower.setWorld(new gameOverScreen(new SnakeActor(NO_WIN), numPlay));
+            }
+            else
+                Mayflower.setWorld(new gameOverScreen(sneks.get(0), numPlay));
+        }
+
+        if(sneks.size() <= 1)
+            hasWon = true;
+>>>>>>> origin/mason
     }
 }

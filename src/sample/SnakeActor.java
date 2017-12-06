@@ -7,28 +7,35 @@ import mayflower.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 
 public class SnakeActor extends Actor{
+    public static final int TICK_TIME = 75;
+    private double numTicks, sumTimes = 0;
     private Timer t = new Timer();
     private int tailLength;
     private double time;
     private int lengthToAdd;
     private List<SnakeTail> tail;
+    private long timeLastUpdate;
+    private int tickLen;
     private int upControl;
     private int downControl;
     private int leftControl;
     private int rightControl;
     private int id;
+<<<<<<< HEAD
     private boolean running;
+=======
+    private World myWorld;
+>>>>>>> origin/mason
     public SnakeActor(int di)
     {
         id = di;
+        tickLen = TICK_TIME;
+        timeLastUpdate = -1;
         lengthToAdd = 1;
         tail = new ArrayList<>();
         time = 0.0;
@@ -38,7 +45,11 @@ public class SnakeActor extends Actor{
         else if(id == 2)setImage("eggplantsnakeg.jpg");
         else if(id == 3)setImage("eggplantsnakey.jpg");
         else if(id == 4)setImage("eggplantsnaker.jpg");
+<<<<<<< HEAD
         t = new Timer(Integer.MAX_VALUE);
+=======
+        t = new Timer(TICK_TIME);
+>>>>>>> origin/mason
     }
     public void setUpControl(int keyboard){
         upControl = keyboard;
@@ -52,9 +63,17 @@ public class SnakeActor extends Actor{
     public void setRightControl(int keyboard){
         rightControl = keyboard;
     }
-
-
+    public int getId(){
+        return id;
+    }
     public void act(){
+        if(getWorld() != null)
+            myWorld = getWorld();
+        if(timeLastUpdate == -1){
+            timeLastUpdate = System.currentTimeMillis();
+            t.reset();
+        }
+
         if(Mayflower.isKeyPressed(Keyboard.KEY_ADD)){
 
             if(Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)){
@@ -90,22 +109,19 @@ public class SnakeActor extends Actor{
         }
 
         if(t.isDone()){
+            int trueTime = (int)(System.currentTimeMillis() - timeLastUpdate);
+            int diff = trueTime - tickLen;
+            tickLen = TICK_TIME - diff;
+            sumTimes += trueTime;
+            numTicks++;
+            t.set(TICK_TIME - diff);
+            timeLastUpdate = System.currentTimeMillis();
             int headX = getX();
             int headY = getY();
             int headRot = getRotation();
             bigify();
             t.reset();
-
-
-            if (Mayflower.isKeyDown(upControl)) {
-                setRotation(Direction.NORTH);
-            } else if (Mayflower.isKeyDown(downControl)) {
-                setRotation(Direction.SOUTH);
-            } else if (Mayflower.isKeyDown(leftControl)) {
-                setRotation(Direction.WEST);
-            } else if (Mayflower.isKeyDown(rightControl)) {
-                setRotation(Direction.EAST);
-            }
+            moveSnake();
             if(Math.abs(getRotation()-headRot) % 180 == 0 && tailLength >= 2)
                 setRotation(headRot);
             time++;
@@ -116,10 +132,39 @@ public class SnakeActor extends Actor{
 
 
         }
-        if(isTouching(wall.class) || isTouching(SnakeTail.class)){
-            Mayflower.setWorld(new InitialsInput(this));
+        if(isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)){
+            myWorld = getWorld();
+            if(isTouching(SnakeActor.class)){
+               List<SnakeActor> others = getIntersectingObjects(SnakeActor.class);
+               for(SnakeActor a : others){
+                   myWorld.removeObject(a);
+                   a.removeTail();
+               }
+                myWorld.removeObject(this);
+                removeTail();
+            }
+            else{
+                myWorld.removeObject(this);
+                removeTail();
+            }
         }
 
+    }
+    public void removeTail(){
+        for(SnakeTail t : tail){
+            myWorld.removeObject(t);
+        }
+    }
+    public void moveSnake(){
+        if (Mayflower.isKeyDown(upControl)) {
+            setRotation(Direction.NORTH);
+        } else if (Mayflower.isKeyDown(downControl)) {
+            setRotation(Direction.SOUTH);
+        } else if (Mayflower.isKeyDown(leftControl)) {
+            setRotation(Direction.WEST);
+        } else if (Mayflower.isKeyDown(rightControl)) {
+            setRotation(Direction.EAST);
+        }
     }
     public void saveScore(String initials){
         try
@@ -167,10 +212,7 @@ public class SnakeActor extends Actor{
             prevY = tempY;
             prevRot = tempRot;
         }
-        if(getIntersectingObjects(this.getClass()).contains(new wall()))
-        {
-            Mayflower.setWorld(new gameOverScreen(this));
-        }
+        
 
     }
     public Peach detectPeach(){

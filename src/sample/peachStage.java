@@ -62,6 +62,11 @@ public class peachStage extends World{
         }
 
     }
+    public void setSnek(SnakeActor sa){
+        removeObject(snek);
+        snek = sa;
+        addObject(snek, 40, 40);
+    }
 
     public String getHS()
     {
@@ -118,19 +123,16 @@ public class peachStage extends World{
         return name + ": " + high;
     }
 
-
-    public void updateStage()
-    {
-
+    protected void detectWin(){
+        if(getObjects(SnakeActor.class).size() == 0)
+            Mayflower.setWorld(new InitialsInput(snek, 1));
     }
-
-
-
 
     @Override
     public void act() {
         if(getObjects(Peach.class).size() < 1)
             addRandomPeach();
+        detectWin();
     }
 
     public StageObject[][] getGrid() {

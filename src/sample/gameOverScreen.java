@@ -22,8 +22,7 @@ public class gameOverScreen extends World{
             }
             showText("You Lasted " + s.getTime() + " Seconds And Ate " + s.getTailLength() + " Peaches", 50, 100);
             showText("Ratio: " + s.getRatio(),100,150);
-            addObject(paButton, 200, 450);
-            addObject(mainButton, 400, 450);
+
         }
         else if(numPlayers <= 4){
             if(s.getId() != MultiStage.NO_WIN)
@@ -36,6 +35,8 @@ public class gameOverScreen extends World{
             }
 
         }
+        addObject(paButton, 200, 450);
+        addObject(mainButton, 400, 450);
 
     }
     @Override

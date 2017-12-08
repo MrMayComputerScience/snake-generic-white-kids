@@ -14,6 +14,11 @@ public class Runner extends Mayflower{
        // Mayflower.showFPS(true);
     }
     public static void main(String[] args){
-        new Runner();
+        try{
+            new Runner();
+        }
+        catch(java.lang.UnsupportedOperationException e){
+
+        }
     }
 }

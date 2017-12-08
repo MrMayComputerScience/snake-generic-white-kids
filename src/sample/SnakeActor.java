@@ -26,21 +26,27 @@ public class SnakeActor extends Actor{
     private int leftControl;
     private int rightControl;
     private int id;
+    private boolean running;
     private World myWorld;
     public SnakeActor(int di)
     {
         id = di;
         tickLen = TICK_TIME;
-        timeLastUpdate = -1;
+        timeLastUpdate = -2;
         lengthToAdd = 1;
         tail = new ArrayList<>();
         time = 0.0;
         tailLength = 0;
+        running = false;
         if(id == 1)setImage("eggplantsnakep.jpg");
         else if(id == 2)setImage("eggplantsnakeg.jpg");
         else if(id == 3)setImage("eggplantsnakey.jpg");
         else if(id == 4)setImage("eggplantsnaker.jpg");
-        t = new Timer(TICK_TIME);
+        t = new Timer(Integer.MAX_VALUE);
+        setUpControl(Keyboard.KEY_W);
+        setDownControl(Keyboard.KEY_S);
+        setLeftControl(Keyboard.KEY_A);
+        setRightControl(Keyboard.KEY_D);
     }
     public void setUpControl(int keyboard){
         upControl = keyboard;
@@ -66,7 +72,7 @@ public class SnakeActor extends Actor{
         }
 
         if(Mayflower.isKeyPressed(Keyboard.KEY_ADD)){
- 
+
             if(Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)){
                 System.out.println("Shifted");
                 lengthToAdd += 10;
@@ -231,6 +237,23 @@ public class SnakeActor extends Actor{
     public int getTailLength()
     {
         return tailLength;
+    }
+    public void startTimer()
+    {
+        t.set(75);
+        timeLastUpdate = -1;
+    }
+    public boolean isPressing()
+    {
+        if(Mayflower.isKeyDown(upControl) || Mayflower.isKeyDown(downControl) || Mayflower.isKeyDown(leftControl) || Mayflower.isKeyDown(rightControl)){
+            running = true;
+            return true;
+        }
+        else {running = false; return false;}
+    }
+    public boolean getRunning()
+    {
+        return running;
     }
     class SnakeTail extends Actor{
         public SnakeTail(){

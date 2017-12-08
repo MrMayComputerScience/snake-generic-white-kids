@@ -7,13 +7,16 @@ import mayflower.World;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.util.*;
 
 public class highScoreStage extends World{
     private List<Label> labels;
+    private List<Label> twitchScores;
     public highScoreStage()
     {
         labels = new ArrayList<>();
+        twitchScores = new ArrayList<>();
         addScores();
         addNames();
         labels.sort(scoreSort);
@@ -23,7 +26,6 @@ public class highScoreStage extends World{
             if(i < 10)
                 addObject(l, 20, i*30);
         }
-
 
     }
     public void addNames(){

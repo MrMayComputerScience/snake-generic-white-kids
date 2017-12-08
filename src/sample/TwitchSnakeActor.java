@@ -3,6 +3,10 @@ package sample;
 import mayflower.*;
 import sample.SnakeActor;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class TwitchSnakeActor extends SnakeActor {
     private int num;
     public TwitchSnakeActor(int numPlayers, int id){
@@ -40,5 +44,28 @@ public class TwitchSnakeActor extends SnakeActor {
         }
 
     }
+    public int getNumPlayers(){
+        return num;
+    }
+    @Override
+    public void saveScore(String initials){
+        try
+        {
+            File scoreFile = new File("twitch_scores.txt");
+            File nameFile = new File("twitch_names.txt");
+            FileWriter scoreWriter = new FileWriter(scoreFile, true);
+            FileWriter nameWriter = new FileWriter(nameFile, true);
+            scoreWriter.write("\r\n");
+            scoreWriter.write(Integer.toString(getTailLength()));
+            scoreWriter.close();
+            nameWriter.write("\r\n");
+            nameWriter.write(initials);
+            nameWriter.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
 
+        }
+    }
 }

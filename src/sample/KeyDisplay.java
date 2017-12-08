@@ -4,7 +4,7 @@ public abstract class KeyDisplay extends Actor {
     private int key;
     public KeyDisplay(String name, int keynum){
         MayflowerImage img = new MayflowerImage(name);
-        img.scale(75,75);
+        img.scale(25,25);
         setImage(img);
         key = keynum;
     }

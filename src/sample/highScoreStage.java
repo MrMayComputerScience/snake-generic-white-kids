@@ -7,28 +7,40 @@ import mayflower.World;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.util.*;
 
 public class highScoreStage extends World{
     private List<Label> labels;
+    private List<Label> twitchScores;
     public highScoreStage()
     {
         labels = new ArrayList<>();
-        addScores();
-        addNames();
+        twitchScores = new ArrayList<>();
+        addScores("scores.txt", labels);
+        addNames("names.txt", labels);
+        addScores("twitch_scores.txt", twitchScores);
+        addNames("twitch_names.txt", twitchScores);
         labels.sort(scoreSort);
+        labels.add(0, new Label("Single Player:"));
+        twitchScores.add(0, new Label("Twitch:"));
         for(int i = 0; i < labels.size(); i++){
             Label l = labels.get(i);
             l.setText(i+1+". "+l.getText());
             if(i < 10)
                 addObject(l, 20, i*30);
         }
-
+        for(int i = 0; i < twitchScores.size(); i++){
+            Label l = twitchScores.get(i);
+            l.setText(i+1+". "+l.getText());
+            if(i < 10)
+                addObject(l, 120, i*30);
+        }
 
     }
-    public void addNames(){
+    public void addNames(String fname, List<Label> labels){
         List<String> names = new ArrayList<>();
-        File file = new File("names.txt");
+        File file = new File(fname);
         try(Scanner in = new Scanner(file)){
             int count = 0;
             while(in.hasNextLine()){
@@ -46,17 +58,17 @@ public class highScoreStage extends World{
         }
     }
 
-    public void addScores(){
+    public void addScores(String fname, List<Label> labels){
         String score;
         List<Integer> scoreList = new ArrayList<Integer>();
-        File test = new File("scores.txt");
+        File test = new File(fname);
         Scanner scoreFile = null;
         try {
             scoreFile = new Scanner(test);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             Mayflower.ask("Are you sure you typed that filename in right?");
-            Mayflower.ask("Your use of try/catch is a pathway to many errors some consider to be unnatural.");
+            Mayflower.ask("This use of try/catch is a pathway to many errors some consider to be unnatural.");
             Mayflower.ask("Ironic... I could save others from bad coding, but not myself");
         }
 

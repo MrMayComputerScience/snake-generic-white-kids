@@ -10,7 +10,7 @@ public class TwitchPlaysButton extends Actor{
         MayflowerImage img = new MayflowerImage("TwitchPlays.png");
         img.scale(150,150);
         setImage(img);
-        sa = new TwitchSnakeActor(players);
+        sa = new TwitchSnakeActor(players, 1);
     }
     public void act(){
         if(Mayflower.mouseClicked(this)){

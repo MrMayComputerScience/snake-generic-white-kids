@@ -46,7 +46,7 @@ public class peachStage extends World{
     public peachStage()
     {
     //    setBackground("background.png");
-        snek = new SnakeActor();
+        snek = new SnakeActor(1);
         Label scoreLabel = new Label("Highscore: " + getHS());
 
         playerScore = new Label("Your Score: "+ snek.getTailLength());
@@ -113,6 +113,7 @@ public class peachStage extends World{
         while(!addRandomPeach()){
 
         }
+        snek.startTimer();
 
     }
     public void setSnek(SnakeActor sa){
@@ -125,7 +126,8 @@ public class peachStage extends World{
     {
         String score;
         List<String> scoreList = new ArrayList<String>();
-        File test = new File("scores.txt");
+        File test = new File(snek instanceof TwitchSnakeActor ?
+                "twitch_scores.txt" : "scores.txt");
         Scanner scoreFile = null;
         try {
             scoreFile = new Scanner(test);
@@ -161,7 +163,8 @@ public class peachStage extends World{
             }
             count++;
         }
-        File nameFile = new File("names.txt");
+        File nameFile = new File(snek instanceof TwitchSnakeActor ?
+                "twitch_names.txt" : "names.txt");
         String name = "";
         try(Scanner in = new Scanner(nameFile)){
             if(in.hasNextLine())
@@ -176,19 +179,22 @@ public class peachStage extends World{
         return name + ": " + high;
     }
 
-
-    public void updateStage()
-    {
+    protected void detectWin(){
+        if(getObjects(SnakeActor.class).size() == 0)
+            if(snek instanceof TwitchSnakeActor){
+            TwitchSnakeActor s = (TwitchSnakeActor)snek;
+                Mayflower.setWorld(new InitialsInput(s, s.getNumPlayers()));
+            }
+            else
+                Mayflower.setWorld(new InitialsInput(snek, 1));
 
     }
-
-
-
 
     @Override
     public void act() {
         if(getObjects(Peach.class).size() < 1)
             addRandomPeach();
+        detectWin();
     }
 
     public StageObject[][] getGrid() {
@@ -216,4 +222,7 @@ public class peachStage extends World{
         return true;
     }
 
+    public SnakeActor getSnek() {
+        return snek;
+    }
 }

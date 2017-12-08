@@ -5,9 +5,6 @@ import sample.SnakeActor;
 
 public class TwitchSnakeActor extends SnakeActor {
     private int num;
-    public TwitchSnakeActor(int x){
-        super(x);
-        num = x;
     public TwitchSnakeActor(int numPlayers, int id){
         super(id);
         num = numPlayers;

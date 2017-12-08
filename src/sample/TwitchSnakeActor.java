@@ -6,7 +6,7 @@ import sample.SnakeActor;
 public class TwitchSnakeActor extends SnakeActor {
     private int num;
     public TwitchSnakeActor(int x){
-        super();
+        super(x);
         num = x;
     }
     public void moveSnake(){

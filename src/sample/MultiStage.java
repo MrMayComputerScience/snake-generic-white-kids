@@ -14,14 +14,7 @@ public class MultiStage extends peachStage{
     public MultiStage(int numnum)
     {
         super();
-<<<<<<< HEAD
 
-        numPlay = numnum;
-        if(numPlay == 2)
-        {
-            snek2 = new SnakeActor(2);
-            //player 2 = tfgh
-=======
         hasWon = false;
         snek2 = new SnakeActor(2);
         snek3 = new SnakeActor(3);
@@ -31,7 +24,6 @@ public class MultiStage extends peachStage{
         if(numPlay == 2)
         {
             //player 2 = yghj
->>>>>>> origin/mason
             addObject(snek2, 740, 540);
             snek2.setUpControl(Keyboard.KEY_Y);
             snek2.setDownControl(Keyboard.KEY_H);
@@ -80,28 +72,22 @@ public class MultiStage extends peachStage{
             snek4.setRightControl(Keyboard.KEY_RIGHT);
         }
     }
-<<<<<<< HEAD
 
     @Override
     public void act() {
         super.act();
-        if(numPlay == 2 && (!super.getSnek().getRunning() || !snek2.getRunning()))
-        {
+        if (numPlay == 2 && (!super.getSnek().getRunning() || !snek2.getRunning())) {
             if (snek2.isPressing() && super.getSnek().isPressing()) {
                 super.getSnek().startTimer();
                 snek2.startTimer();
             }
-        }
-        else if(numPlay == 3 && (!super.getSnek().getRunning() || !snek2.getRunning() || !snek3.getRunning()))
-        {
+        } else if (numPlay == 3 && (!super.getSnek().getRunning() || !snek2.getRunning() || !snek3.getRunning())) {
             if (super.getSnek().isPressing() && snek2.isPressing() && snek3.isPressing()) {
                 super.getSnek().startTimer();
                 snek2.startTimer();
                 snek3.startTimer();
             }
-        }
-        else if(numPlay == 4 && (!super.getSnek().getRunning() || !snek2.getRunning() || !snek3.getRunning() || !snek4.getRunning()))
-        {
+        } else if (numPlay == 4 && (!super.getSnek().getRunning() || !snek2.getRunning() || !snek3.getRunning() || !snek4.getRunning())) {
             if (super.getSnek().isPressing() && snek2.isPressing() && snek3.isPressing() && snek4.isPressing()) {
                 super.getSnek().startTimer();
                 snek2.startTimer();
@@ -109,7 +95,8 @@ public class MultiStage extends peachStage{
                 snek4.startTimer();
             }
         }
-=======
+    }
+
     @Override
     protected void detectWin(){
         List<SnakeActor> sneks = getObjects(SnakeActor.class);
@@ -123,6 +110,6 @@ public class MultiStage extends peachStage{
 
         if(sneks.size() <= 1)
             hasWon = true;
->>>>>>> origin/mason
+
     }
 }

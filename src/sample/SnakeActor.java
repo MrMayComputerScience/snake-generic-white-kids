@@ -26,11 +26,10 @@ public class SnakeActor extends Actor{
     private int leftControl;
     private int rightControl;
     private int id;
-<<<<<<< HEAD
     private boolean running;
-=======
+
     private World myWorld;
->>>>>>> origin/mason
+
     public SnakeActor(int di)
     {
         id = di;
@@ -45,11 +44,8 @@ public class SnakeActor extends Actor{
         else if(id == 2)setImage("eggplantsnakeg.jpg");
         else if(id == 3)setImage("eggplantsnakey.jpg");
         else if(id == 4)setImage("eggplantsnaker.jpg");
-<<<<<<< HEAD
         t = new Timer(Integer.MAX_VALUE);
-=======
-        t = new Timer(TICK_TIME);
->>>>>>> origin/mason
+
     }
     public void setUpControl(int keyboard){
         upControl = keyboard;

@@ -27,14 +27,18 @@ public class SnakeActor extends Actor{
     private int rightControl;
     private int id;
     private boolean running;
+<<<<<<< HEAD
 
     private World myWorld;
 
+=======
+    private World myWorld;
+>>>>>>> CP
     public SnakeActor(int di)
     {
         id = di;
         tickLen = TICK_TIME;
-        timeLastUpdate = -1;
+        timeLastUpdate = -2;
         lengthToAdd = 1;
         tail = new ArrayList<>();
         time = 0.0;
@@ -45,7 +49,14 @@ public class SnakeActor extends Actor{
         else if(id == 3)setImage("eggplantsnakey.jpg");
         else if(id == 4)setImage("eggplantsnaker.jpg");
         t = new Timer(Integer.MAX_VALUE);
+<<<<<<< HEAD
 
+=======
+        setUpControl(Keyboard.KEY_W);
+        setDownControl(Keyboard.KEY_S);
+        setLeftControl(Keyboard.KEY_A);
+        setRightControl(Keyboard.KEY_D);
+>>>>>>> CP
     }
     public void setUpControl(int keyboard){
         upControl = keyboard;
@@ -240,6 +251,7 @@ public class SnakeActor extends Actor{
     public void startTimer()
     {
         t.set(75);
+        timeLastUpdate = -1;
     }
     public boolean isPressing()
     {

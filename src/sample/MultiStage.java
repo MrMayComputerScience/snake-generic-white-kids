@@ -16,6 +16,7 @@ public class MultiStage extends peachStage{
         super();
 
         hasWon = false;
+        setSnek(new SnakeActor(1));
         snek2 = new SnakeActor(2);
         snek3 = new SnakeActor(3);
         snek4 = new SnakeActor(4);
@@ -72,7 +73,10 @@ public class MultiStage extends peachStage{
             snek4.setRightControl(Keyboard.KEY_RIGHT);
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> CP
     @Override
     public void act() {
         super.act();

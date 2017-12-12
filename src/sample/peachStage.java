@@ -1,23 +1,16 @@
 package sample;
 
-import javafx.stage.Stage;
 import mayflower.Actor;
 
 import mayflower.*;
-import javafx.stage.Stage;
-import mayflower.Actor;
 import mayflower.Timer;
 import mayflower.World;
 import mayflower.Label;
-import mayflower.World;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import javafx.stage.Stage;
-import mayflower.Actor;
-import mayflower.Timer;
-import mayflower.World;
 
 public class peachStage extends World{
     enum StageObject{
@@ -30,13 +23,52 @@ public class peachStage extends World{
     private StageObject[][] peachGrid = new StageObject[30][40];
     private Label playerScore;
     private Timer t;
-    private final int mulitplier = 20;
+    private KeyDisplay wd;
+    private KeyDisplay ad;
+    private KeyDisplay sd;
+    private KeyDisplay dd;
+
+    private KeyDisplay yd;
+    private KeyDisplay gd;
+    private KeyDisplay hd;
+    private KeyDisplay jd;
+
+    private KeyDisplay pd;
+    private KeyDisplay ld;
+    private KeyDisplay semid;
+    private KeyDisplay aposd;
+
+    private KeyDisplay upd;
+    private KeyDisplay leftd;
+    private KeyDisplay downd;
+    private KeyDisplay rightd;
+    private final int multiplier = 20;
     public peachStage()
     {
     //    setBackground("background.png");
         snek = new SnakeActor(1);
         Label scoreLabel = new Label("Highscore: " + getHS());
+
         playerScore = new Label("Your Score: "+ snek.getTailLength());
+        wd = new WDisplay("W.png",Keyboard.KEY_W);
+        ad = new ADisplay("A.png", Keyboard.KEY_A);
+        sd = new SDisplay("S.png", Keyboard.KEY_S);
+        dd = new DDisplay("D.png", Keyboard.KEY_D);
+
+        yd = new YDisplay("Y.png",Keyboard.KEY_Y);
+        gd = new GDisplay("G.png", Keyboard.KEY_G);
+        hd = new HDisplay("H.png", Keyboard.KEY_H);
+        jd = new JDisplay("J.png", Keyboard.KEY_J);
+
+        pd = new PDisplay("P.png",Keyboard.KEY_P);
+        ld = new LDisplay("L.png", Keyboard.KEY_L);
+        semid = new SemiDisplay("semicolon.png", Keyboard.KEY_SEMICOLON);
+        aposd = new AposDisplay("apostrophe.png", Keyboard.KEY_APOSTROPHE);
+
+        upd = new UpDisplay("up.png",Keyboard.KEY_UP);
+        leftd = new LeftDisplay("left.png", Keyboard.KEY_LEFT);
+        downd = new DownDisplay("down.png", Keyboard.KEY_DOWN);
+        rightd = new RightDisplay("right.png", Keyboard.KEY_RIGHT);
         for(int r = 0; r < 30; r++)
         {
             for(int c = 0; c < 40; c++)
@@ -44,7 +76,7 @@ public class peachStage extends World{
                 if(r == 0 || r == 29 || c == 0 || c == 39)
                 {
                     peachGrid[r][c] = StageObject.WALL;
-                    addObject(new wall(), c*mulitplier, r*mulitplier);
+                    addObject(new wall(), c* multiplier, r* multiplier);
                 }
             }
         }
@@ -52,6 +84,27 @@ public class peachStage extends World{
         snek.setDownControl(Keyboard.KEY_S);
         snek.setLeftControl(Keyboard.KEY_A);
         snek.setRightControl(Keyboard.KEY_D);
+
+        addObject(wd, 300, 50);
+        addObject(ad,275,75);
+        addObject(sd,300,75);
+        addObject(dd,325,75);
+
+        addObject(yd, 400, 50);
+        addObject(gd,375,75);
+        addObject(hd,400,75);
+        addObject(jd,425,75);
+
+        addObject(pd, 500, 50);
+        addObject(ld,475,75);
+        addObject(semid,500,75);
+        addObject(aposd,525,75);
+
+        addObject(upd, 600, 50);
+        addObject(leftd,575,75);
+        addObject(downd,600,75);
+        addObject(rightd,625,75);
+
         addObject(snek, 40, 40);
         addObject(scoreLabel, 0,0);
         addObject(playerScore, 550,0);
@@ -60,6 +113,7 @@ public class peachStage extends World{
         while(!addRandomPeach()){
 
         }
+        snek.startTimer();
 
     }
     public void setSnek(SnakeActor sa){
@@ -72,7 +126,8 @@ public class peachStage extends World{
     {
         String score;
         List<String> scoreList = new ArrayList<String>();
-        File test = new File("scores.txt");
+        File test = new File(snek instanceof TwitchSnakeActor ?
+                "twitch_scores.txt" : "scores.txt");
         Scanner scoreFile = null;
         try {
             scoreFile = new Scanner(test);
@@ -108,7 +163,8 @@ public class peachStage extends World{
             }
             count++;
         }
-        File nameFile = new File("names.txt");
+        File nameFile = new File(snek instanceof TwitchSnakeActor ?
+                "twitch_names.txt" : "names.txt");
         String name = "";
         try(Scanner in = new Scanner(nameFile)){
             if(in.hasNextLine())
@@ -125,7 +181,13 @@ public class peachStage extends World{
 
     protected void detectWin(){
         if(getObjects(SnakeActor.class).size() == 0)
-            Mayflower.setWorld(new InitialsInput(snek, 1));
+            if(snek instanceof TwitchSnakeActor){
+            TwitchSnakeActor s = (TwitchSnakeActor)snek;
+                Mayflower.setWorld(new InitialsInput(s, s.getNumPlayers()));
+            }
+            else
+                Mayflower.setWorld(new InitialsInput(snek, 1));
+
     }
 
     @Override

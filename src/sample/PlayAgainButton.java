@@ -1,7 +1,6 @@
 package sample;
 import mayflower.*;
 
-import java.lang.reflect.Constructor;
 
 public class PlayAgainButton extends Button {
     private World game;
@@ -20,6 +19,7 @@ public class PlayAgainButton extends Button {
                 TwitchSnakeActor s = (TwitchSnakeActor)g.getSnek();
                 peachStage n = new peachStage();
                 n.setSnek(new TwitchSnakeActor(s.getNumPlayers(),1));
+                Mayflower.setWorld(n);
             }
 
         }

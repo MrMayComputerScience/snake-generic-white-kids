@@ -102,7 +102,7 @@ public class MultiStage extends peachStage{
         List<SnakeActor> sneks = getObjects(SnakeActor.class);
         if(hasWon){
             if(sneks.size() == 0){
-                Mayflower.setWorld(new gameOverScreen(new SnakeActor(NO_WIN), numPlay));
+                Mayflower.setWorld(new gameOverScreen(new SnakeActor(NO_WIN).setWorld(this), numPlay));
             }
             else
                 Mayflower.setWorld(new gameOverScreen(sneks.get(0), numPlay));

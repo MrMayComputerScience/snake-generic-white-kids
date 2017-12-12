@@ -7,7 +7,8 @@ public class gameOverScreen extends World{
     Button mainButton = new MainScreenButton("MainButton.png");
     public gameOverScreen(SnakeActor s, int numPlayers)
     {
-        paButton = new PlayAgainButton("PlayAgain.png", s.getWorld());
+        System.out.println(s.getMyWorld());
+        paButton = new PlayAgainButton("PlayAgain.png", s.getMyWorld());
         if(numPlayers == 1){
             if(s.getTailLength() < 10){
                 showText("you suck", 400, 300);

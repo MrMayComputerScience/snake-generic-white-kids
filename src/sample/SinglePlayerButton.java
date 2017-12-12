@@ -7,9 +7,10 @@ public class SinglePlayerButton extends Button{
         super(name);
     }
     public void OnClick(){
-
-        Mayflower.setWorld(new peachStage());
-
-
+        SnakeActor snek = new SnakeActor(1);
+        snek.setTronMode(false);
+        peachStage stage = new peachStage();
+        stage.setSnek(snek);
+        Mayflower.setWorld(new PortalStage());
     }
 }

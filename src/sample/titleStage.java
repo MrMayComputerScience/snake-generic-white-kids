@@ -7,7 +7,7 @@ public class titleStage extends World{
     //Button mpButton = new MultiplayerButton("NotImplemented.png");
     Button mpButton = new MultiplayerButton("Multiplayer.png");
     Button hsButton = new HighScoreButton("HighScoreButton.png");
-    Button themeButton = new themeMenuButton("ChangeTheme.png");
+    Button themeButton = new themeMenuButton("theme.png");
     public titleStage(){
         setBackground("title.png");
         addObject(fpButton, 25,450);

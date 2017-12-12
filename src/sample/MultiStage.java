@@ -73,10 +73,6 @@ public class MultiStage extends peachStage{
             snek4.setRightControl(Keyboard.KEY_RIGHT);
         }
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> CP
     @Override
     public void act() {
         super.act();

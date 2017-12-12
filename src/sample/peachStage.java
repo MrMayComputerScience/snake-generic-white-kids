@@ -43,7 +43,7 @@ public class peachStage extends World{
     private KeyDisplay downd;
     private KeyDisplay rightd;
     private final int multiplier = 20;
-    public peachStage()
+    public peachStage(GameInfo info)
     {
     //    setBackground("background.png");
         snek = new SnakeActor(1);
@@ -220,6 +220,15 @@ public class peachStage extends World{
             addRandomPeach();
         }
         return true;
+    }
+
+    public void updateTheme(int theme)
+    {
+        if(theme == 1)
+        {
+            snek.setTheme(theme);
+
+        }
     }
 
     public SnakeActor getSnek() {

@@ -13,8 +13,10 @@ import java.util.*;
 public class highScoreStage extends World{
     private List<Label> labels;
     private List<Label> twitchScores;
-    public highScoreStage()
+    private GameInfo info;
+    public highScoreStage(GameInfo info)
     {
+        this.info = info;
         labels = new ArrayList<>();
         twitchScores = new ArrayList<>();
         addScores("scores.txt", labels);
@@ -91,7 +93,7 @@ public class highScoreStage extends World{
                 labels.add(l);
             }
         }
-        addObject(new MainScreenButton("MainButton.png"), 625, 500);
+        addObject(new MainScreenButton("MainButton.png", info), 625, 500);
     }
     private Comparator<Label> scoreSort= new Comparator<Label>() {
         @Override

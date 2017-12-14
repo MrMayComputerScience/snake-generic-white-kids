@@ -5,18 +5,20 @@ public class ModeMenu extends World {
     private FreeForAllButton ffa;
     private BackButton bb;
     private TwitchPlaysButton tpb;
-    public ModeMenu(int players){
+    private GameInfo info;
+    public ModeMenu(int players, GameInfo info){
+        this.info = info;
         showText("Select Game Mode", 250, 50);
         num = players;
-        ffa = new FreeForAllButton(num);
+        ffa = new FreeForAllButton(num, info);
         addObject(ffa, 125,200);
 
         if(num >= 3){
-            tpb = new TwitchPlaysButton(num);
+            tpb = new TwitchPlaysButton(num, info);
             addObject(tpb, 325, 200);
         }
 
-        bb = new BackButton("backbutton.png");
+        bb = new BackButton("backbutton.png", info);
         addObject(bb, 50,500);
 
 

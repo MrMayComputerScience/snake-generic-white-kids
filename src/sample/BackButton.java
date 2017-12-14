@@ -1,7 +1,9 @@
 package sample;
 import mayflower.*;
 public class BackButton extends Actor {
-    public BackButton(String name){
+    private GameInfo info;
+    public BackButton(String name, GameInfo info){
+        this.info = info;
         MayflowerImage img = new MayflowerImage(name);
         img.scale(75,75);
         setImage(img);
@@ -12,7 +14,7 @@ public class BackButton extends Actor {
             OnClick();
         }
     }
-    public void OnClick(){Mayflower.setWorld(new titleStage());}
+    public void OnClick(){Mayflower.setWorld(new titleStage(info));}
 
 
 }

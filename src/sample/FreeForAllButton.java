@@ -2,7 +2,9 @@ package sample;
 import mayflower.*;
 public class FreeForAllButton extends Actor{
     private int players;
-    public FreeForAllButton(int x){
+    private GameInfo info;
+    public FreeForAllButton(int x, GameInfo inf){
+        info = inf;
         MayflowerImage img = new MayflowerImage("freeforall.png");
         img.scale(150,150);
         setImage(img);
@@ -15,7 +17,7 @@ public class FreeForAllButton extends Actor{
         }
     }
     public void onClick(){
-        Mayflower.setWorld(new MultiStage(players));
+        Mayflower.setWorld(new MultiStage(players, info));
     }
 
 }

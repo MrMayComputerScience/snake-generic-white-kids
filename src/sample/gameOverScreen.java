@@ -4,9 +4,12 @@ import mayflower.*;
 
 public class gameOverScreen extends World{
     Button paButton;
-    Button mainButton = new MainScreenButton("MainButton.png");
-    public gameOverScreen(SnakeActor s, int numPlayers)
+    GameInfo info;
+
+    public gameOverScreen(SnakeActor s, int numPlayers, GameInfo inf)
     {
+        info = inf;
+        Button mainButton = new MainScreenButton("MainButton.png", info);
         paButton = new PlayAgainButton("PlayAgain.png", s.getWorld());
         System.out.println(s.getWorld());
         if(numPlayers == 1){

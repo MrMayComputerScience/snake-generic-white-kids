@@ -9,8 +9,11 @@ public class Peach extends Actor{
     private int x;
     private int y;
 
-    public Peach(String name){
-        setPicture(name);
+    public Peach(int i){
+        if(i == 1)setPicture("peach.png");
+        if(i == 2)setPicture("crystal.png");
+        if(i == 3)setPicture("coin.png");
+
     }
     public static GridPoint getEmptyRandomSpace(peachStage stage){
         List<GridPoint> empty = new LinkedList<>();

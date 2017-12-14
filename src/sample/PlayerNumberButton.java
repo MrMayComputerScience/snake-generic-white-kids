@@ -2,7 +2,9 @@ package sample;
 import mayflower.*;
 public abstract class PlayerNumberButton extends Actor{
     private int players;
-   public PlayerNumberButton(String name, int player){
+    private GameInfo info;
+   public PlayerNumberButton(String name, int player, GameInfo inf){
+       info = inf;
        MayflowerImage img = new MayflowerImage(name);
        img.scale(150,150);
        setImage(img);
@@ -15,7 +17,7 @@ public abstract class PlayerNumberButton extends Actor{
     }
 
     public void OnClick(){
-        Mayflower.setWorld(new ControlsScreen(players));
+        Mayflower.setWorld(new ControlsScreen(players, info));
     }
 
 }

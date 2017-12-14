@@ -4,7 +4,7 @@ public class GameInfo {
     private int gameTheme;
     private int numPlayers;
     public GameInfo(){
-
+        setGameTheme(1);
     }
     public int setGameTheme(int theme){
         int temp = gameTheme;

@@ -3,12 +3,14 @@ package sample;
 import mayflower.*;
 
 public class SinglePlayerButton extends Button{
-    public SinglePlayerButton(String name){
+    private GameInfo info;
+    public SinglePlayerButton(String name, GameInfo inf){
         super(name);
+        info = inf;
     }
     public void OnClick(){
 
-        Mayflower.setWorld(new peachStage());
+        Mayflower.setWorld(new peachStage(info));
 
 
     }

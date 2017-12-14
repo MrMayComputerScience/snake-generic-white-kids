@@ -10,11 +10,13 @@ public class MultiStage extends peachStage{
     private SnakeActor snek2;
     private SnakeActor snek3;
     private SnakeActor snek4;
+    private GameInfo info;
 
-    public MultiStage(int numnum)
+    public MultiStage(int numnum, GameInfo inf)
     {
-        super();
 
+        super(inf);
+        info = inf;
         hasWon = false;
         setSnek(new SnakeActor(1));
         snek2 = new SnakeActor(2);

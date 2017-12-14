@@ -43,8 +43,10 @@ public class peachStage extends World{
     private KeyDisplay downd;
     private KeyDisplay rightd;
     private final int multiplier = 20;
-    public peachStage(GameInfo info)
+    private GameInfo info;
+    public peachStage(GameInfo inf)
     {
+        info = inf;
     //    setBackground("background.png");
         snek = new SnakeActor(1);
         Label scoreLabel = new Label("Highscore: " + getHS());
@@ -210,7 +212,7 @@ public class peachStage extends World{
         }
         GridPoint point = Peach.getEmptyRandomSpace(this);
         //IF WE EVER USE A METHOD THAT UPDATES BASED ON GRID then this needs to change
-        Peach newPeach = new Peach();
+        Peach newPeach = new Peach(info.getGameTheme());
         addObject(newPeach, point.getC()*20, point.getR()*20);//grid[point.getR()][point.getC()] = StageObject.PEACH; //This is the code to change it to
         System.out.println("R: "+point.getR()+" C: "+point.getC());
         System.out.println(newPeach.getX()+" "+newPeach.getY());

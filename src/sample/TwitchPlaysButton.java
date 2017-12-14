@@ -5,7 +5,9 @@ import mayflower.*;
 public class TwitchPlaysButton extends Actor{
     private int players;
     private SnakeActor sa;
-    public TwitchPlaysButton(int x){
+    private GameInfo info;
+    public TwitchPlaysButton(int x, GameInfo inf){
+        info = inf;
         players = x;
         MayflowerImage img = new MayflowerImage("TwitchPlays.png");
         img.scale(150,150);
@@ -18,7 +20,7 @@ public class TwitchPlaysButton extends Actor{
         }
     }
     public void onClick(){
-        peachStage ps = new peachStage();
+        peachStage ps = new peachStage(info);
 
         ps.setSnek(sa);
         Mayflower.setWorld(ps);

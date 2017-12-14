@@ -6,7 +6,9 @@ public class PlayerMenu extends World{
     private PlayerNumberButton three;
     private PlayerNumberButton four;
     private BackButton bb;
-    public PlayerMenu(){
+    private GameInfo info;
+    public PlayerMenu(GameInfo inf){
+        info = inf;
         showText("Selected Number of Players", 175, 50);
 
         PlayerNumberButton two = new TwoPlayerButton("TwoPlayer.png", 2);
@@ -18,7 +20,7 @@ public class PlayerMenu extends World{
         PlayerNumberButton four = new FourPlayerButton("FourPlayer.png",4);
         addObject(four, 525, 200);
 
-        bb = new BackButton("backbutton.png");
+        bb = new BackButton("backbutton.png", info);
         addObject(bb, 50,500);
     }
     public void act() {

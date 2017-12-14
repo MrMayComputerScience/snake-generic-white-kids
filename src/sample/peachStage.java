@@ -122,7 +122,6 @@ public class peachStage extends World{
         removeObject(snek);
         snek = sa;
         addObject(snek, 40, 40);
-        snek.startTimer();
     }
 
     public String getHS()

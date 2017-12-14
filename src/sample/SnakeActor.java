@@ -258,14 +258,14 @@ public class SnakeActor extends Actor{
     {
         t.set(75);
         timeLastUpdate = -1;
+        running = true;
     }
     public boolean isPressing()
     {
         if(Mayflower.isKeyDown(upControl) || Mayflower.isKeyDown(downControl) || Mayflower.isKeyDown(leftControl) || Mayflower.isKeyDown(rightControl)){
-            running = true;
             return true;
         }
-        else {running = false; return false;}
+        else {return false;}
     }
     public boolean getRunning()
     {

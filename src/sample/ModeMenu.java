@@ -5,6 +5,7 @@ public class ModeMenu extends World {
     private FreeForAllButton ffa;
     private BackButton bb;
     private TwitchPlaysButton tpb;
+    private SvMButton svm;
     public ModeMenu(int players){
         showText("Select Game Mode", 250, 50);
         num = players;
@@ -14,6 +15,10 @@ public class ModeMenu extends World {
         if(num >= 3){
             tpb = new TwitchPlaysButton(num);
             addObject(tpb, 325, 200);
+        }
+        if(num == 4){
+            svm = new SvMButton();
+            addObject(svm,525,200);
         }
 
         bb = new BackButton("backbutton.png");

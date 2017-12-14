@@ -48,6 +48,12 @@ public class SnakeActor extends Actor{
         setLeftControl(Keyboard.KEY_A);
         setRightControl(Keyboard.KEY_D);
     }
+    public void setControls(int up, int down, int left, int right ){
+        setUpControl(up);
+        setDownControl(down);
+        setLeftControl(left);
+        setRightControl(right);
+    }
     public void setUpControl(int keyboard){
         upControl = keyboard;
     }
@@ -267,4 +273,5 @@ public class SnakeActor extends Actor{
         public void act(){
         }
     }
+
 }

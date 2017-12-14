@@ -9,8 +9,11 @@ public class Peach extends Actor{
     private int x;
     private int y;
 
-    public Peach(){
-        setImage("peach.png");
+    public Peach(int i){
+        if(i == 1)setPicture("peach.png");
+        if(i == 2)setPicture("crystal.png");
+        if(i == 3)setPicture("coin.png");
+
     }
     public static GridPoint getEmptyRandomSpace(peachStage stage){
         List<GridPoint> empty = new LinkedList<>();
@@ -36,5 +39,10 @@ public class Peach extends Actor{
     @Override
     public void act(){
 
+    }
+
+    public void setPicture(String name)
+    {
+        setImage(name);
     }
 }

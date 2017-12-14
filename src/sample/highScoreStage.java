@@ -14,6 +14,7 @@ public class highScoreStage extends World{
     private List<Label> labels;
     private List<Label> twitchScores;
     private GameInfo info;
+
     public highScoreStage(GameInfo info)
     {
         this.info = info;

@@ -5,6 +5,7 @@ public class GameInfo {
     private int numPlayers;
     private boolean hasPortals;
     public GameInfo(){
+        setGameTheme(1);
 
     }
     public int setGameTheme(int theme){
@@ -26,7 +27,8 @@ public class GameInfo {
         return temp;
     }
 
-    public boolean isHasPortals() {
+
+    public boolean hasPortals() {
         return hasPortals;
     }
 
@@ -34,3 +36,5 @@ public class GameInfo {
         this.hasPortals = hasPortals;
     }
 }
+
+

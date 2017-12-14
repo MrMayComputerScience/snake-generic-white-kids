@@ -217,7 +217,7 @@ public class peachStage extends World{
         }
         GridPoint point = Peach.getEmptyRandomSpace(this);
         //IF WE EVER USE A METHOD THAT UPDATES BASED ON GRID then this needs to change
-        Peach newPeach = new Peach();
+        Peach newPeach = new Peach(info.getGameTheme());
         addObject(newPeach, point.getC()*20, point.getR()*20);//grid[point.getR()][point.getC()] = StageObject.PEACH; //This is the code to change it to
         System.out.println("R: "+point.getR()+" C: "+point.getC());
         System.out.println(newPeach.getX()+" "+newPeach.getY());
@@ -227,6 +227,15 @@ public class peachStage extends World{
             addRandomPeach();
         }
         return true;
+    }
+
+    public void updateTheme(int theme)
+    {
+        if(theme == 1)
+        {
+            snek.setTheme(theme);
+
+        }
     }
 
     public SnakeActor getSnek() {

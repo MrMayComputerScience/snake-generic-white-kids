@@ -14,6 +14,5 @@ public class SinglePlayerButton extends Button{
         peachStage stage = new peachStage(info);
         stage.setSnek(snek);
         Mayflower.setWorld(new PortalStage(info));
-
     }
 }

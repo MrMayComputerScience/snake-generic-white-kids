@@ -1,31 +1,105 @@
 package sample;
+
+import com.sun.istack.internal.Nullable;
 import mayflower.*;
+
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class MouseActor extends Actor {
+    public static final int TICK_TIME = 75;
+    private double numTicks, sumTimes = 0;
+    private Timer t = new Timer();
+
+    private double time;
+    private long timeLastUpdate;
+    private int tickLen;
     private int upControl;
     private int downControl;
     private int leftControl;
     private int rightControl;
+    private int id;
+    private boolean running;
+    private World myWorld;
 
-    public MouseActor(String name){
-        MayflowerImage img = new MayflowerImage(name);
-        img.scale(20,20);
-        setImage(img);
+    public MouseActor(int di) {
+        id = di;
+        tickLen = TICK_TIME;
+        timeLastUpdate = -2;
+        time = 0.0;
+        running = false;
+        if (id == 1) setImage("peachp.jpg");
+        else if (id == 2) setImage("peachg.jpg");
+        else if (id == 3) setImage("peachy.jpg");
+        else if (id == 4) setImage("peachr.jpg");
+        t = new Timer(Integer.MAX_VALUE);
+        setUpControl(Keyboard.KEY_W);
+        setDownControl(Keyboard.KEY_S);
+        setLeftControl(Keyboard.KEY_A);
+        setRightControl(Keyboard.KEY_D);
     }
 
-    public void setUpControl(int keyboard){
+    public void setUpControl(int keyboard) {
         upControl = keyboard;
     }
-    public void setDownControl(int keyboard){
+
+    public void setDownControl(int keyboard) {
         downControl = keyboard;
     }
-    public void setLeftControl(int keyboard){
+
+    public void setLeftControl(int keyboard) {
         leftControl = keyboard;
     }
-    public void setRightControl(int keyboard){
+
+    public void setRightControl(int keyboard) {
         rightControl = keyboard;
     }
 
-    public void moveMouse(){
+    public int getId() {
+        return id;
+    }
+
+    public void act() {
+        if (getWorld() != null)
+            myWorld = getWorld();
+        if (timeLastUpdate == -1) {
+            timeLastUpdate = System.currentTimeMillis();
+            t.reset();
+        }
+        if (t.isDone()) {
+            int trueTime = (int) (System.currentTimeMillis() - timeLastUpdate);
+            int diff = trueTime - tickLen;
+            tickLen = TICK_TIME - diff;
+            sumTimes += trueTime;
+            numTicks++;
+            t.set(TICK_TIME - diff);
+            timeLastUpdate = System.currentTimeMillis();
+            int headX = getX();
+            int headY = getY();
+            int headRot = getRotation();
+
+            t.reset();
+            moveMouse();
+            time++;
+            //System.out.println(t.toString());
+            move(20);
+
+
+
+
+        }
+
+
+    }
+
+
+
+    public void moveMouse() {
         if (Mayflower.isKeyDown(upControl)) {
             setRotation(Direction.NORTH);
         } else if (Mayflower.isKeyDown(downControl)) {
@@ -37,7 +111,34 @@ public class MouseActor extends Actor {
         }
     }
 
-    public void act(){
 
+
+    public double getTime() {
+        double ntime = (time * 75) / 1000;
+        return ntime;
+    }
+
+
+
+
+
+
+    public void startTimer() {
+        t.set(75);
+        timeLastUpdate = -1;
+    }
+
+    public boolean isPressing() {
+        if (Mayflower.isKeyDown(upControl) || Mayflower.isKeyDown(downControl) || Mayflower.isKeyDown(leftControl) || Mayflower.isKeyDown(rightControl)) {
+            running = true;
+            return true;
+        } else {
+            running = false;
+            return false;
+        }
+    }
+
+    public boolean getRunning() {
+        return running;
     }
 }

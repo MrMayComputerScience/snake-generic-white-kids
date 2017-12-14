@@ -15,6 +15,7 @@ public class MultiStage extends peachStage{
     {
         super(info);
         this.info = info;
+
         hasWon = false;
         setSnek(new SnakeActor(1));
         snek2 = new SnakeActor(2);

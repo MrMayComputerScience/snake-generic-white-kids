@@ -8,6 +8,7 @@ public class TwitchPlaysButton extends Actor{
     private GameInfo info;
     public TwitchPlaysButton(int x, GameInfo info){
         this.info = info;
+
         players = x;
         MayflowerImage img = new MayflowerImage("TwitchPlays.png");
         img.scale(150,150);

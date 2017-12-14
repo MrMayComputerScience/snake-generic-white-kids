@@ -5,6 +5,7 @@ public class FreeForAllButton extends Actor{
     private GameInfo info;
     public FreeForAllButton(int x, GameInfo info){
         this.info = info;
+
         MayflowerImage img = new MayflowerImage("freeforall.png");
         img.scale(150,150);
         setImage(img);

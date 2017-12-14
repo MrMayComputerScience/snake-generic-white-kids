@@ -11,13 +11,13 @@ public class PlayerMenu extends World{
         info = inf;
         showText("Selected Number of Players", 175, 50);
 
-        PlayerNumberButton two = new TwoPlayerButton("TwoPlayer.png", 2);
+        PlayerNumberButton two = new TwoPlayerButton("TwoPlayer.png", 2, info);
         addObject(two, 125, 200);
 
-        PlayerNumberButton three = new ThreePlayerButton("ThreePlayer.png", 3);
+        PlayerNumberButton three = new ThreePlayerButton("ThreePlayer.png", 3, info);
         addObject(three, 325, 200);
 
-        PlayerNumberButton four = new FourPlayerButton("FourPlayer.png",4);
+        PlayerNumberButton four = new FourPlayerButton("FourPlayer.png",4, info);
         addObject(four, 525, 200);
 
         bb = new BackButton("backbutton.png", info);

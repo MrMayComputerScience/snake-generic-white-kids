@@ -44,10 +44,12 @@ public class peachStage extends World{
     private KeyDisplay rightd;
     private final int multiplier = 20;
     private GameInfo info;
+
     public peachStage(GameInfo inf)
     {
         info = inf;
     //    setBackground("background.png");
+        this.info = info;
         snek = new SnakeActor(1);
         Label scoreLabel = new Label("Highscore: " + getHS());
 
@@ -115,13 +117,14 @@ public class peachStage extends World{
         while(!addRandomPeach()){
 
         }
-        snek.startTimer();
+
 
     }
     public void setSnek(SnakeActor sa){
         removeObject(snek);
         snek = sa;
         addObject(snek, 40, 40);
+        snek.startTimer();
     }
 
     public String getHS()
@@ -185,15 +188,19 @@ public class peachStage extends World{
         if(getObjects(SnakeActor.class).size() == 0)
             if(snek instanceof TwitchSnakeActor){
             TwitchSnakeActor s = (TwitchSnakeActor)snek;
-                Mayflower.setWorld(new InitialsInput(s, s.getNumPlayers()));
+                Mayflower.setWorld(new InitialsInput(s, s.getNumPlayers(), info));
             }
             else
-                Mayflower.setWorld(new InitialsInput(snek, 1));
+                Mayflower.setWorld(new InitialsInput(snek, 1, info));
 
     }
 
     @Override
     public void act() {
+        if(!snek.getRunning()){
+            if(snek.isPressing())
+                snek.startTimer();
+        }
         if(getObjects(Peach.class).size() < 1)
             addRandomPeach();
         detectWin();

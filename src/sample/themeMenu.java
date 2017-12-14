@@ -6,9 +6,11 @@ public class themeMenu extends World{
     Button mainMenuButton;
     Button defaultThemeButton;
     Button themePickButton;
-    public themeMenu()
+    private GameInfo info;
+    public themeMenu(GameInfo info)
     {
-        mainMenuButton = new MainScreenButton("MainButton.png");
+        this.info = info;
+        mainMenuButton = new MainScreenButton("MainButton.png", this.info);
         defaultThemeButton = new defaultThemeButton("DefaultTheme.png");
         themePickButton = new themePickingButton("PickTeam.png");
         addObject(mainMenuButton, 400,450);

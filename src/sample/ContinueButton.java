@@ -2,7 +2,9 @@ package sample;
 import mayflower.*;
 public class ContinueButton extends Actor {
     private int players;
-    public ContinueButton(String name, int x){
+    private GameInfo info;
+    public ContinueButton(String name, int x, GameInfo info){
+        this.info = info;
         players = x;
         MayflowerImage img = new MayflowerImage(name);
         img.scale(75,75);
@@ -15,6 +17,6 @@ public class ContinueButton extends Actor {
         }
     }
     public void OnClick(){
-        Mayflower.setWorld(new ModeMenu(players));
+        Mayflower.setWorld(new ModeMenu(players, info));
     }
 }

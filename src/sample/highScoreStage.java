@@ -14,9 +14,10 @@ public class highScoreStage extends World{
     private List<Label> labels;
     private List<Label> twitchScores;
     private GameInfo info;
-    public highScoreStage(GameInfo inf)
+
+    public highScoreStage(GameInfo info)
     {
-        info = inf;
+        this.info = info;
         labels = new ArrayList<>();
         twitchScores = new ArrayList<>();
         addScores("scores.txt", labels);

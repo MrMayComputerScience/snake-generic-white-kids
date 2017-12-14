@@ -6,8 +6,9 @@ public class TwitchPlaysButton extends Actor{
     private int players;
     private SnakeActor sa;
     private GameInfo info;
-    public TwitchPlaysButton(int x, GameInfo inf){
-        info = inf;
+
+    public TwitchPlaysButton(int x, GameInfo info){
+        this.info = info;
         players = x;
         MayflowerImage img = new MayflowerImage("TwitchPlays.png");
         img.scale(150,150);

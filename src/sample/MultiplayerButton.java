@@ -2,9 +2,9 @@ package sample;
 import mayflower.*;
 public class MultiplayerButton extends Button {
     private GameInfo info;
-    public MultiplayerButton(String name, GameInfo inf){
+    public MultiplayerButton(String name, GameInfo info){
         super(name);
-        info = inf;
+        this.info = info;
     }
     public void OnClick(){
         Mayflower.setWorld(new PlayerMenu(info));

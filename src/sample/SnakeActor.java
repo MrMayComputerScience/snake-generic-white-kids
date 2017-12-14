@@ -28,9 +28,11 @@ public class SnakeActor extends Actor{
     private int id;
     private boolean running;
     private World myWorld;
+    private boolean tronMode;
 
     public SnakeActor(int di)
     {
+        tronMode = false;
         id = di;
         tickLen = TICK_TIME;
         timeLastUpdate = -2;
@@ -65,6 +67,16 @@ public class SnakeActor extends Actor{
     public int getId(){
         return id;
     }
+    public SnakeActor setWorld(World w){
+        myWorld = w;
+        return this;
+    }
+    public World getMyWorld(){
+        return myWorld;
+    }
+    public void setTronMode(boolean mode){
+        tronMode = mode;
+    }
     public void act(){
         if(getWorld() != null)
             myWorld = getWorld();
@@ -72,6 +84,8 @@ public class SnakeActor extends Actor{
             timeLastUpdate = System.currentTimeMillis();
             t.reset();
         }
+        if(tronMode)
+            tailLength++;
 
         if(Mayflower.isKeyPressed(Keyboard.KEY_ADD)){
 
@@ -238,7 +252,7 @@ public class SnakeActor extends Actor{
     }
     public int getTailLength()
     {
-        return tailLength;
+        return tail.size();
     }
     public void startTimer()
     {

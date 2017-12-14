@@ -4,14 +4,12 @@ import mayflower.*;
 
 public class gameOverScreen extends World{
     Button paButton;
-    GameInfo info;
-
-    public gameOverScreen(SnakeActor s, int numPlayers, GameInfo inf)
+    Button mainButton;
+    public gameOverScreen(SnakeActor s, int numPlayers, GameInfo info)
     {
-        info = inf;
-        Button mainButton = new MainScreenButton("MainButton.png", info);
-        paButton = new PlayAgainButton("PlayAgain.png", s.getWorld());
-        System.out.println(s.getWorld());
+        mainButton = new MainScreenButton("MainButton.png", info);
+        System.out.println(s.getMyWorld());
+        paButton = new PlayAgainButton("PlayAgain.png", s.getMyWorld(), info);
         if(numPlayers == 1){
             if(s.getTailLength() < 10){
                 showText("you suck", 400, 300);

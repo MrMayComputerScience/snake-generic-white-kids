@@ -3,6 +3,7 @@ package sample;
 public class GameInfo {
     private int gameTheme;
     private int numPlayers;
+    private boolean hasPortals;
     public GameInfo(){
         setGameTheme(1);
     }
@@ -23,5 +24,13 @@ public class GameInfo {
         int temp = this.numPlayers;
         this.numPlayers = numPlayers;
         return temp;
+    }
+
+    public boolean isHasPortals() {
+        return hasPortals;
+    }
+
+    public void setHasPortals(boolean hasPortals) {
+        this.hasPortals = hasPortals;
     }
 }

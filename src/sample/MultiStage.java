@@ -12,11 +12,11 @@ public class MultiStage extends peachStage{
     private SnakeActor snek4;
     private GameInfo info;
 
-    public MultiStage(int numnum, GameInfo inf)
+    public MultiStage(int numnum, GameInfo info)
     {
+        super(info);
+        this.info = info;
 
-        super(inf);
-        info = inf;
         hasWon = false;
         setSnek(new SnakeActor(1));
         snek2 = new SnakeActor(2);
@@ -104,14 +104,18 @@ public class MultiStage extends peachStage{
         List<SnakeActor> sneks = getObjects(SnakeActor.class);
         if(hasWon){
             if(sneks.size() == 0){
-                Mayflower.setWorld(new gameOverScreen(new SnakeActor(NO_WIN), numPlay));
+                Mayflower.setWorld(new gameOverScreen(new SnakeActor(NO_WIN).setWorld(this), numPlay, info));
             }
             else
-                Mayflower.setWorld(new gameOverScreen(sneks.get(0), numPlay));
+                Mayflower.setWorld(new gameOverScreen(sneks.get(0), numPlay, info));
         }
 
         if(sneks.size() <= 1)
             hasWon = true;
 
+    }
+
+    public int getNumPlayers(){
+        return numPlay;
     }
 }

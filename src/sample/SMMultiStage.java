@@ -201,10 +201,24 @@ public class SMMultiStage extends SMStage {
         scores[id - 1]++;
     }
 
+    void addPortals(){
+        if(info.hasPortals() && getObjects(Portal.class).size() == 0){
+            Portal p = new Portal();
+            addObject(p, 1,1);
+            p.setRandomLocation();
+            while(p.isTouching())
+                p.setRandomLocation();
+            p.createPair(1,1);
+            p.getPair().setRandomLocation();
+            while(p.getPair().isTouching())
+                p.getPair().setRandomLocation();
+        }
+    }
+
     @Override
     public void act() {
         super.act();
-
+        addPortals();
         if (rand == 1) {
             if ((!super.getSnek().getRunning() || !ms2.getRunning() || !ms3.getRunning() || !ms4.getRunning())) {
                 if (super.getSnek().isPressing() && ms2.isPressing() && ms3.isPressing() && ms4.isPressing()) {
@@ -256,7 +270,7 @@ public class SMMultiStage extends SMStage {
         System.out.println(mice +" "+ this);
         if (mice.size() == 1) {
             hasWon = true;
-            //Of fucking course prefix vs postfic would fuck my ass here
+            //Of fucking course prefix vs postfix would fuck my ass here
             int score = ++scores[mice.get(0).getId() - 1];
             if (score == 3) {
                 SnakeActor winner = new SnakeActor(mice.get(0).getId(),info);
@@ -268,7 +282,11 @@ public class SMMultiStage extends SMStage {
             hasWon = true;
             int score = ++scores[getSnek().getId() - 1];
             if (score == 3) {
+<<<<<<< HEAD
                 SnakeActor winner = new SnakeActor(mice.get(0).getId(),info);
+=======
+                SnakeActor winner = new SnakeActor(mice.get(0).getId(), info);
+>>>>>>> mason
                 Mayflower.setWorld(new gameOverScreen(winner, 4, info));
             }
             else

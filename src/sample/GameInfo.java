@@ -4,6 +4,7 @@ public class GameInfo {
     private int gameTheme;
     private int numPlayers;
     private boolean hasPortals;
+    private boolean tronMode;
     public GameInfo(){
         setGameTheme(1);
 
@@ -39,4 +40,12 @@ public class GameInfo {
     }
 }
 
+    public boolean isTron() {
+        return tronMode;
+    }
+
+    public void setTron(boolean tronMode) {
+        this.tronMode = tronMode;
+    }
+}
 

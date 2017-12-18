@@ -15,7 +15,7 @@ public class MultiStage extends peachStage{
     {
         super(info);
         this.info = info;
-
+        info.setNumPlayers(numnum);
         hasWon = false;
         setSnek(new SnakeActor(1, info));
         snek2 = new SnakeActor(2, info);
@@ -76,43 +76,64 @@ public class MultiStage extends peachStage{
     }
     @Override
     public void act() {
-        super.act();
-        if (numPlay == 2 && (!super.getSnek().getRunning() || !snek2.getRunning())) {
-            if (snek2.isPressing() && super.getSnek().isPressing()) {
-                super.getSnek().startTimer();
-                snek2.startTimer();
-            }
-        } else if (numPlay == 3 && (!super.getSnek().getRunning() || !snek2.getRunning() || !snek3.getRunning())) {
-            if (super.getSnek().isPressing() && snek2.isPressing() && snek3.isPressing()) {
-                super.getSnek().startTimer();
-                snek2.startTimer();
-                snek3.startTimer();
-            }
-        } else if (numPlay == 4 && (!super.getSnek().getRunning() || !snek2.getRunning() || !snek3.getRunning() || !snek4.getRunning())) {
-            if (super.getSnek().isPressing() && snek2.isPressing() && snek3.isPressing() && snek4.isPressing()) {
-                super.getSnek().startTimer();
-                snek2.startTimer();
-                snek3.startTimer();
-                snek4.startTimer();
+        System.out.println("Stage: "+this);
+        if(!hasWon){
+            super.act();
+            activateTron();
+            if (numPlay == 2 && (!super.getSnek().getRunning() || !snek2.getRunning())) {
+                if (snek2.isPressing() && super.getSnek().isPressing()) {
+                    super.getSnek().startTimer();
+                    snek2.startTimer();
+                }
+            } else if (numPlay == 3 && (!super.getSnek().getRunning() || !snek2.getRunning() || !snek3.getRunning())) {
+                if (super.getSnek().isPressing() && snek2.isPressing() && snek3.isPressing()) {
+                    super.getSnek().startTimer();
+                    snek2.startTimer();
+                    snek3.startTimer();
+                }
+            } else if (numPlay == 4 && (!super.getSnek().getRunning() || !snek2.getRunning() || !snek3.getRunning() || !snek4.getRunning())) {
+                if (super.getSnek().isPressing() && snek2.isPressing() && snek3.isPressing() && snek4.isPressing()) {
+                    super.getSnek().startTimer();
+                    snek2.startTimer();
+                    snek3.startTimer();
+                    snek4.startTimer();
+                }
             }
         }
     }
 
+    private void activateTron(){
+        if(info.isTron() && !getSnek().getTronMode()){
+            getSnek().setTronMode(true);
+            snek2.setTronMode(true);
+            snek3.setTronMode(true);
+            snek4.setTronMode(true);
+        }
+        if(info.isTron())
+            for(Peach p : getObjects(Peach.class)){
+                removeObject(p);
+            }
+    }
     @Override
     protected void detectWin(){
-        List<SnakeActor> sneks = getObjects(SnakeActor.class);
-        if(hasWon){
+        if(!hasWon){
+            List<SnakeActor> sneks = getObjects(SnakeActor.class);
             if(sneks.size() == 0){
                 Mayflower.setWorld(new gameOverScreen(new SnakeActor(NO_WIN, info).setWorld(this), numPlay, info));
+                hasWon = true;
             }
-            else
+            else if(sneks.size() <= 1){
                 Mayflower.setWorld(new gameOverScreen(sneks.get(0), numPlay, info));
+                hasWon = true;
+            }
         }
 
-        if(sneks.size() <= 1)
-            hasWon = true;
 
     }
+
+
+
+
 
     public int getNumPlayers(){
         return numPlay;

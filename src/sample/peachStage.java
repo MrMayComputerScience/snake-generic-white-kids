@@ -200,7 +200,7 @@ public class peachStage extends World{
             if(snek.isPressing())
                 snek.startTimer();
         }
-        if(getObjects(Peach.class).size() < 1)
+        if(getObjects(Peach.class).size() < 1 && !info.isTron())
             addRandomPeach();
         addPortals();
         detectWin();

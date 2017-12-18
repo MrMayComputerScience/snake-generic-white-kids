@@ -26,17 +26,37 @@ public class MouseActor extends Actor {
     private int id;
     private boolean running;
     private World myWorld;
+    GameInfo info;
 
-    public MouseActor(int di) {
+    public MouseActor(int di, GameInfo info) {
+        this.info = info;
         id = di;
         tickLen = TICK_TIME;
         timeLastUpdate = -2;
         time = 0.0;
         running = false;
-        if (id == 1) setImage("peachp.png");
-        else if (id == 2) setImage("peachg.png");
-        else if (id == 3) setImage("peachy.png");
-        else if (id == 4) setImage("peachr.png");
+        if(info.getGameTheme() == 1)
+        {
+            if(id == 1)setImage("peachp.png");
+            else if(id == 2)setImage("peachg.png");
+            else if(id == 3)setImage("peachy.png");
+            else if(id == 4)setImage("peachr.png");
+        }
+        else if(info.getGameTheme() == 2)
+        {
+            if(id == 1)setImage("mario.jpg");
+            else if(id == 2)setImage("luigi.jpg");
+            else if(id == 3)setImage("wario.jpg");
+            else if(id == 4)setImage("wal.jpg");
+        }
+        else if(info.getGameTheme() == 3)
+        {
+            if(id == 1)setImage("luke.jpg");
+            else if(id == 2)setImage("darth.jpg");
+            else if(id == 3)setImage("black.jpg");
+            else if(id == 4)setImage("yoda.jpg");
+        }
+
         t = new Timer(Integer.MAX_VALUE);
 
     }

@@ -22,7 +22,10 @@ public class SvMSnakeActor extends Actor{
     private boolean running;
     private World myWorld;
     private int counter;
-    public SvMSnakeActor(int di){
+    GameInfo info;
+
+    public SvMSnakeActor(int di, GameInfo info){
+        this.info = info;
         id = di;
         int counter = 0;
         tickLen = TICK_TIME;
@@ -32,10 +35,27 @@ public class SvMSnakeActor extends Actor{
         time = 0.0;
         tailLength = 0;
         running = false;
-        if(id == 1)setImage("eggplantsnakep.jpg");
-        else if(id == 2)setImage("eggplantsnakeg.jpg");
-        else if(id == 3)setImage("eggplantsnakey.jpg");
-        else if(id == 4)setImage("eggplantsnaker.jpg");
+        if(info.getGameTheme() == 1)
+        {
+            if(id == 1)setImage("eggplantsnakep.jpg");
+            else if(id == 2)setImage("eggplantsnakeg.jpg");
+            else if(id == 3)setImage("eggplantsnakey.jpg");
+            else if(id == 4)setImage("eggplantsnaker.jpg");
+        }
+        else if(info.getGameTheme() == 2)
+        {
+            if(id == 1)setImage("mario.jpg");
+            else if(id == 2)setImage("luigi.jpg");
+            else if(id == 3)setImage("wario.jpg");
+            else if(id == 4)setImage("wal.jpg");
+        }
+        else if(info.getGameTheme() == 3)
+        {
+            if(id == 1)setImage("luke.jpg");
+            else if(id == 2)setImage("darth.jpg");
+            else if(id == 3)setImage("black.jpg");
+            else if(id == 4)setImage("yoda.jpg");
+        }
         t = new Timer(Integer.MAX_VALUE);
 
 
@@ -178,11 +198,27 @@ public class SvMSnakeActor extends Actor{
     }
     class SnakeTail extends Actor{
         public SnakeTail(){
-
-            if(id == 1)setImage("eggplantsnakep.jpg");
-            else if(id == 2)setImage("eggplantsnakeg.jpg");
-            else if(id == 3)setImage("eggplantsnakey.jpg");
-            else if(id == 4)setImage("eggplantsnaker.jpg");
+            if(info.getGameTheme() == 1)
+            {
+                if(id == 1)setImage("eggplantsnakep.jpg");
+                else if(id == 2)setImage("eggplantsnakeg.jpg");
+                else if(id == 3)setImage("eggplantsnakey.jpg");
+                else if(id == 4)setImage("eggplantsnaker.jpg");
+            }
+            else if(info.getGameTheme() == 2)
+            {
+                if(id == 1)setImage("mario.jpg");
+                else if(id == 2)setImage("luigi.jpg");
+                else if(id == 3)setImage("wario.jpg");
+                else if(id == 4)setImage("wal.jpg");
+            }
+            else if(info.getGameTheme() == 3)
+            {
+                if(id == 1)setImage("luke.jpg");
+                else if(id == 2)setImage("darth.jpg");
+                else if(id == 3)setImage("black.jpg");
+                else if(id == 4)setImage("yoda.jpg");
+            }
         }
         @Override
         public void act(){

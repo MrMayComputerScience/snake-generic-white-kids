@@ -31,7 +31,10 @@ public class SMMultiStage extends SMStage {
         this.info = info;
         hasWon = false;
         rand = 1 + (int) (Math.random() * 4);
+<<<<<<< HEAD
 
+=======
+>>>>>>> Trevor
         wins1 = 0;
         wins2 = 0;
         wins3 = 0;
@@ -39,12 +42,12 @@ public class SMMultiStage extends SMStage {
         System.out.println(rand);
 
         if (rand == 1) {
-            snek = new SvMSnakeActor(1);
+            snek = new SvMSnakeActor(1, info);
             setSnek(snek, 1);
             snek.setControls(Keyboard.KEY_W, Keyboard.KEY_S, Keyboard.KEY_A, Keyboard.KEY_D);
-            ms2 = new MouseActor(2);
-            ms3 = new MouseActor(3);
-            ms4 = new MouseActor(4);
+            ms2 = new MouseActor(2, info);
+            ms3 = new MouseActor(3, info);
+            ms4 = new MouseActor(4, info);
             //addObject(getSnek(), 40, 40);
             addObject(ms2, 740, 540);
             ms2.setUpControl(Keyboard.KEY_Y);
@@ -65,12 +68,12 @@ public class SMMultiStage extends SMStage {
             ms4.setLeftControl(Keyboard.KEY_LEFT);
             ms4.setRightControl(Keyboard.KEY_RIGHT);
         } else if (rand == 2) {
-            snek = new SvMSnakeActor(2);
+            snek = new SvMSnakeActor(2, info);
             setSnek(snek, 2);
             snek.setControls(Keyboard.KEY_Y, Keyboard.KEY_H, Keyboard.KEY_G, Keyboard.KEY_J);
-            ms1 = new MouseActor(1);
-            ms3 = new MouseActor(3);
-            ms4 = new MouseActor(4);
+            ms1 = new MouseActor(1, info);
+            ms3 = new MouseActor(3, info);
+            ms4 = new MouseActor(4, info);
             //addObject(getSnek(), 740, 540);
             addObject(ms1, 40, 40);
             ms1.setControls(Keyboard.KEY_W, Keyboard.KEY_S, Keyboard.KEY_A, Keyboard.KEY_D);
@@ -80,11 +83,11 @@ public class SMMultiStage extends SMStage {
             addObject(ms4, 40, 540);
 
         } else if (rand == 3) {
-            snek = new SvMSnakeActor(3);
+            snek = new SvMSnakeActor(3, info);
             setSnek(snek, 3);
-            ms1 = new MouseActor(1);
-            ms2 = new MouseActor(2);
-            ms4 = new MouseActor(4);
+            ms1 = new MouseActor(1, info);
+            ms2 = new MouseActor(2, info);
+            ms4 = new MouseActor(4, info);
             ms2.setControls(Keyboard.KEY_Y, Keyboard.KEY_H, Keyboard.KEY_G, Keyboard.KEY_J);
             addObject(getSnek(), 740, 40);
             addObject(ms1, 40, 40);
@@ -94,11 +97,11 @@ public class SMMultiStage extends SMStage {
             ms4.setControls(Keyboard.KEY_UP, Keyboard.KEY_DOWN, Keyboard.KEY_LEFT, Keyboard.KEY_RIGHT);
             addObject(ms4, 40, 540);
         } else if (rand == 4) {
-            snek = new SvMSnakeActor(4);
+            snek = new SvMSnakeActor(4, info);
             setSnek(snek, 4);
-            ms1 = new MouseActor(1);
-            ms3 = new MouseActor(3);
-            ms2 = new MouseActor(2);
+            ms1 = new MouseActor(1, info);
+            ms3 = new MouseActor(3, info);
+            ms2 = new MouseActor(2, info);
             ms2.setControls(Keyboard.KEY_Y, Keyboard.KEY_H, Keyboard.KEY_G, Keyboard.KEY_J);
             addObject(ms3, 740, 40);
             addObject(ms1, 40, 40);
@@ -123,12 +126,12 @@ public class SMMultiStage extends SMStage {
         rand = winner;
         System.out.println("Rand: " + rand);
         if (rand == 1) {
-            snek = new SvMSnakeActor(1);
+            snek = new SvMSnakeActor(1, info);
             setSnek(snek, 1);
             snek.setControls(Keyboard.KEY_W, Keyboard.KEY_S, Keyboard.KEY_A, Keyboard.KEY_D);
-            ms2 = new MouseActor(2);
-            ms3 = new MouseActor(3);
-            ms4 = new MouseActor(4);
+            ms2 = new MouseActor(2, info);
+            ms3 = new MouseActor(3, info);
+            ms4 = new MouseActor(4, info);
             addObject(getSnek(), 40, 40);
             addObject(ms2, 740, 540);
             ms2.setUpControl(Keyboard.KEY_Y);
@@ -149,12 +152,12 @@ public class SMMultiStage extends SMStage {
             ms4.setLeftControl(Keyboard.KEY_LEFT);
             ms4.setRightControl(Keyboard.KEY_RIGHT);
         } else if (rand == 2) {
-            snek = new SvMSnakeActor(2);
+            snek = new SvMSnakeActor(2, info);
             setSnek(snek, 2);
             snek.setControls(Keyboard.KEY_Y, Keyboard.KEY_H, Keyboard.KEY_G, Keyboard.KEY_J);
-            ms1 = new MouseActor(1);
-            ms3 = new MouseActor(3);
-            ms4 = new MouseActor(4);
+            ms1 = new MouseActor(1, info);
+            ms3 = new MouseActor(3, info);
+            ms4 = new MouseActor(4, info);
             addObject(getSnek(), 740, 540);
             addObject(ms1, 40, 40);
             ms1.setControls(Keyboard.KEY_W, Keyboard.KEY_S, Keyboard.KEY_A, Keyboard.KEY_D);
@@ -164,12 +167,12 @@ public class SMMultiStage extends SMStage {
             addObject(ms4, 40, 540);
 
         } else if (rand == 3) {
-            snek = new SvMSnakeActor(3);
+            snek = new SvMSnakeActor(3, info);
             setSnek(snek, 3);
 
-            ms1 = new MouseActor(1);
-            ms2 = new MouseActor(2);
-            ms4 = new MouseActor(4);
+            ms1 = new MouseActor(1, info);
+            ms2 = new MouseActor(2, info);
+            ms4 = new MouseActor(4, info);
             ms2.setControls(Keyboard.KEY_Y, Keyboard.KEY_H, Keyboard.KEY_G, Keyboard.KEY_J);
             addObject(getSnek(), 740, 40);
             addObject(ms1, 40, 40);
@@ -179,12 +182,12 @@ public class SMMultiStage extends SMStage {
             ms4.setControls(Keyboard.KEY_UP, Keyboard.KEY_DOWN, Keyboard.KEY_LEFT, Keyboard.KEY_RIGHT);
             addObject(ms4, 40, 540);
         } else if (rand == 4) {
-            snek = new SvMSnakeActor(4);
+            snek = new SvMSnakeActor(4, info);
             setSnek(snek, 4);
 
-            ms1 = new MouseActor(1);
-            ms3 = new MouseActor(3);
-            ms2 = new MouseActor(2);
+            ms1 = new MouseActor(1, info);
+            ms3 = new MouseActor(3, info);
+            ms2 = new MouseActor(2, info);
             ms2.setControls(Keyboard.KEY_Y, Keyboard.KEY_H, Keyboard.KEY_G, Keyboard.KEY_J);
             addObject(ms3, 740, 40);
             addObject(ms1, 40, 40);

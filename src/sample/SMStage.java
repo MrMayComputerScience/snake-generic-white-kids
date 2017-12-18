@@ -12,7 +12,7 @@ public class SMStage extends World{
         SNAKE,
         MOUSE
     }
-    private SnakeActor snek;
+    private SvMSnakeActor snek1;
     private StageObject[][] peachGrid = new StageObject[30][40];
     private final int multiplier = 20;
     public SMStage(){
@@ -28,65 +28,11 @@ public class SMStage extends World{
             }
         }
     }
-    public void setSnek(SnakeActor sa){
-        removeObject(snek);
-        snek = sa;
-        addObject(snek, 40, 40);
-    }
-
-    public String getHS()
-    {
-        String score;
-        List<String> scoreList = new ArrayList<String>();
-        File test = new File("scores.txt");
-        Scanner scoreFile = null;
-        try {
-            scoreFile = new Scanner(test);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        int high;
-
-        if(!scoreFile.hasNext())
-        {
-            return "0";
-        }
-
-        while(scoreFile.hasNext())
-        {
-            score = scoreFile.next();
-            System.out.println(score);
-            scoreList.add(score);
-        }
-
-        System.out.println(scoreList);
-        System.out.println(scoreList.get(0));
-        int count = 0;
-        int index = 0;
-        high = Integer.parseInt(scoreList.get(0));
-        while(count < scoreList.size())
-        {
-            int temp = Integer.parseInt(scoreList.get(count));
-            if(temp > high)
-            {
-                index = count;
-                high = temp;
-            }
-            count++;
-        }
-        File nameFile = new File("names.txt");
-        String name = "";
-        try(Scanner in = new Scanner(nameFile)){
-            if(in.hasNextLine())
-                in.nextLine();
-            for(int i = 0; i <= index; i++){
-                name = in.nextLine();
-            }
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        return name + ": " + high;
+    public void setSnek(SvMSnakeActor sa, int id){
+        removeObject(snek1);
+        snek1 = sa;
+        int randomNum = 1 + (int)(Math.random()*40);
+        addObject(snek1, 40, 40);
     }
 
 
@@ -100,11 +46,16 @@ public class SMStage extends World{
 
     @Override
     public void act() {
+        detectWin();
+    }
+    protected void detectWin(){
 
     }
-
     public StageObject[][] getGrid() {
         return peachGrid;
+    }
+    public SvMSnakeActor getSnek() {
+        return snek1;
     }
 
 

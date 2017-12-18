@@ -33,17 +33,19 @@ public class MouseActor extends Actor {
         timeLastUpdate = -2;
         time = 0.0;
         running = false;
-        if (id == 1) setImage("peachp.jpg");
-        else if (id == 2) setImage("peachg.jpg");
-        else if (id == 3) setImage("peachy.jpg");
-        else if (id == 4) setImage("peachr.jpg");
+        if (id == 1) setImage("peachp.png");
+        else if (id == 2) setImage("peachg.png");
+        else if (id == 3) setImage("peachy.png");
+        else if (id == 4) setImage("peachr.png");
         t = new Timer(Integer.MAX_VALUE);
-        setUpControl(Keyboard.KEY_W);
-        setDownControl(Keyboard.KEY_S);
-        setLeftControl(Keyboard.KEY_A);
-        setRightControl(Keyboard.KEY_D);
-    }
 
+    }
+    public void setControls(int up, int down, int left, int right ){
+        setUpControl(up);
+        setDownControl(down);
+        setLeftControl(left);
+        setRightControl(right);
+    }
     public void setUpControl(int keyboard) {
         upControl = keyboard;
     }
@@ -79,9 +81,9 @@ public class MouseActor extends Actor {
             numTicks++;
             t.set(TICK_TIME - diff);
             timeLastUpdate = System.currentTimeMillis();
-            int headX = getX();
-            int headY = getY();
-            int headRot = getRotation();
+            //int headX = getX();
+            //int headY = getY();
+            //int headRot = getRotation();
 
             t.reset();
             moveMouse();
@@ -93,7 +95,15 @@ public class MouseActor extends Actor {
 
 
         }
-
+        if(isTouching(SvMSnakeActor.class)) {
+            myWorld = getWorld();
+            if (isTouching(SvMSnakeActor.class)) {
+                myWorld.removeObject(this);
+            }
+        }
+        if (isTouching(wall.class)) {
+                move(-20);
+            }
 
     }
 
@@ -126,14 +136,15 @@ public class MouseActor extends Actor {
     public void startTimer() {
         t.set(75);
         timeLastUpdate = -1;
+        running = true;
     }
 
     public boolean isPressing() {
         if (Mayflower.isKeyDown(upControl) || Mayflower.isKeyDown(downControl) || Mayflower.isKeyDown(leftControl) || Mayflower.isKeyDown(rightControl)) {
-            running = true;
+            //running = true;
             return true;
         } else {
-            running = false;
+            //running = false;
             return false;
         }
     }

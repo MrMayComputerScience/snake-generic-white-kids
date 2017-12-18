@@ -22,9 +22,8 @@ public class TwitchPlaysButton extends Actor{
     }
     public void onClick(){
         peachStage ps = new peachStage(info);
-
         ps.setSnek(sa);
-        Mayflower.setWorld(ps);
+        Mayflower.setWorld(new PortalSelectScreen(info, ps));
 
     }
 }

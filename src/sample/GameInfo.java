@@ -32,8 +32,10 @@ public class GameInfo {
         return hasPortals;
     }
 
-    public void setHasPortals(boolean hasPortals) {
+    public boolean setHasPortals(boolean hasPortals) {
+        boolean temp = this.hasPortals;
         this.hasPortals = hasPortals;
+        return temp;
     }
 }
 

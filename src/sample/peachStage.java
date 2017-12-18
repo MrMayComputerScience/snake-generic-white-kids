@@ -110,8 +110,10 @@ public class peachStage extends World{
         addObject(snek, 40, 40);
         addObject(scoreLabel, 0,0);
         addObject(playerScore, 550,0);
+
         t = new Timer(75);
-        peachGrid[1][1] = StageObject.SNAKE;
+
+
         while(!addRandomPeach()){
 
         }
@@ -200,9 +202,22 @@ public class peachStage extends World{
         }
         if(getObjects(Peach.class).size() < 1)
             addRandomPeach();
+        addPortals();
         detectWin();
     }
-
+    void addPortals(){
+        if(info.hasPortals() && getObjects(Portal.class).size() == 0){
+            Portal p = new Portal();
+            addObject(p, 1,1);
+            p.setRandomLocation();
+            while(p.isTouching())
+                p.setRandomLocation();
+            p.createPair(1,1);
+            p.getPair().setRandomLocation();
+            while(p.getPair().isTouching())
+                p.getPair().setRandomLocation();
+        }
+    }
     public StageObject[][] getGrid() {
         return peachGrid;
     }

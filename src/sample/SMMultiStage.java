@@ -1,6 +1,7 @@
 package sample;
 import mayflower.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SMMultiStage extends SMStage {
@@ -21,10 +22,12 @@ public class SMMultiStage extends SMStage {
     private int wins2;
     private int wins3;
     private int wins4;
-    private List<MouseActor> mice;
+    private int[] scores;
     private GameInfo info;
+
     public SMMultiStage(GameInfo info) {
         super();
+        scores = new int[4];
         this.info = info;
         hasWon = false;
         //rand = 1 + (int) (Math.random() * 4);
@@ -34,7 +37,6 @@ public class SMMultiStage extends SMStage {
         wins3 = 0;
         wins4 = 0;
         System.out.println(rand);
-
 
         if (rand == 1) {
             snek = new SvMSnakeActor(1);
@@ -80,7 +82,6 @@ public class SMMultiStage extends SMStage {
         } else if (rand == 3) {
             snek = new SvMSnakeActor(3);
             setSnek(snek, 3);
-
             ms1 = new MouseActor(1);
             ms2 = new MouseActor(2);
             ms4 = new MouseActor(4);
@@ -95,7 +96,6 @@ public class SMMultiStage extends SMStage {
         } else if (rand == 4) {
             snek = new SvMSnakeActor(4);
             setSnek(snek, 4);
-
             ms1 = new MouseActor(1);
             ms3 = new MouseActor(3);
             ms2 = new MouseActor(2);
@@ -111,18 +111,17 @@ public class SMMultiStage extends SMStage {
     }
 
 
-
-    public SMMultiStage(int winner) {
+    public SMMultiStage(int winner, int[] scores, GameInfo info) {
         super();
-
-        System.out.println("player 1 wins: " + wins1);
-        System.out.println("player 2 wins: " + wins2);
-        System.out.println("player 3 wins: " + wins3);
-        System.out.println("player 4 wins: " + wins4);
-
+        this.info = info;
+        this.scores = scores;
+        System.out.println("player 1 wins: " + scores[0]);
+        System.out.println("player 2 wins: " + scores[1]);
+        System.out.println("player 3 wins: " + scores[2]);
+        System.out.println("player 4 wins: " + scores[3]);
         //hasWon = false;
         rand = winner;
-        System.out.println(rand);
+        System.out.println("Rand: " + rand);
         if (rand == 1) {
             snek = new SvMSnakeActor(1);
             setSnek(snek, 1);
@@ -196,14 +195,16 @@ public class SMMultiStage extends SMStage {
             addObject(snek, 40, 540);
         }
     }
-    public void addWin(int id){
-        id++;
+
+    //Useless function?
+    public void addWin(int id) {
+        scores[id - 1]++;
     }
 
     @Override
     public void act() {
         super.act();
-        mice = getObjects(MouseActor.class);
+
         if (rand == 1) {
             if ((!super.getSnek().getRunning() || !ms2.getRunning() || !ms3.getRunning() || !ms4.getRunning())) {
                 if (super.getSnek().isPressing() && ms2.isPressing() && ms3.isPressing() && ms4.isPressing()) {
@@ -244,31 +245,34 @@ public class SMMultiStage extends SMStage {
 
 
         }
-        if(mice.size() == 1){
-
-            if(mice.get(0).getId()==1) addWin(wins1);
-            else if(mice.get(0).getId()==2)addWin(wins2);
-            else if(mice.get(0).getId()==3)addWin(wins3);
-            else if(mice.get(0).getId()==4)addWin(wins4);
-            Mayflower.setWorld(new SMMultiStage(mice.get(0).getId()));
+        if(!hasWon){
+            detectWin();
         }
-        detectWin();
-
     }
 
 
     protected void detectWin() {
-
-        if (hasWon) {
-
-
-             if(wins1 == 3 || wins2 == 3 || wins3 == 3 || wins4 == 3){
-                 hasWon = true;
-                 Mayflower.setWorld(new ModeMenu(4, info));
-             }
-
-
-
+        List<MouseActor> mice = getObjects(MouseActor.class);
+        System.out.println(mice +" "+ this);
+        if (mice.size() == 1) {
+            hasWon = true;
+            //Of fucking course prefix vs postfic would fuck my ass here
+            int score = ++scores[mice.get(0).getId() - 1];
+            if (score == 3) {
+                SnakeActor winner = new SnakeActor(mice.get(0).getId());
+                Mayflower.setWorld(new gameOverScreen(winner, 4, info));
+            }
+            else
+                Mayflower.setWorld(new SMMultiStage(mice.get(0).getId(), scores, info));
+        } else if (mice.size() == 0) {
+            hasWon = true;
+            int score = ++scores[getSnek().getId() - 1];
+            if (score == 3) {
+                SnakeActor winner = new SnakeActor(mice.get(0).getId());
+                Mayflower.setWorld(new gameOverScreen(winner, 4, info));
+            }
+            else
+                Mayflower.setWorld(new SMMultiStage(mice.get(0).getId(), scores, info));
         }
     }
 }

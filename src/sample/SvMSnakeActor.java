@@ -76,7 +76,12 @@ public class SvMSnakeActor extends Actor{
 
 
         }
-
+        if(isTouching(MouseActor.class)){
+            for(MouseActor m : getIntersectingObjects(MouseActor.class)){
+                getWorld().removeObject(m);
+                tailLength++;
+            }
+        }
         if(isTouching(wall.class)){
             move(-20);
         }

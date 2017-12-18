@@ -95,12 +95,6 @@ public class MouseActor extends Actor {
 
 
         }
-        if(isTouching(SvMSnakeActor.class)) {
-            myWorld = getWorld();
-            if (isTouching(SvMSnakeActor.class)) {
-                myWorld.removeObject(this);
-            }
-        }
         if (isTouching(wall.class)) {
                 move(-20);
             }
@@ -128,7 +122,9 @@ public class MouseActor extends Actor {
         return ntime;
     }
 
-
+    public String toString(){
+        return "MouseActor#" + id;
+    }
 
 
 

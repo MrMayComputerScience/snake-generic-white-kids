@@ -259,7 +259,7 @@ public class SMMultiStage extends SMStage {
             //Of fucking course prefix vs postfic would fuck my ass here
             int score = ++scores[mice.get(0).getId() - 1];
             if (score == 3) {
-                SnakeActor winner = new SnakeActor(mice.get(0).getId());
+                SnakeActor winner = new SnakeActor(mice.get(0).getId(),info);
                 Mayflower.setWorld(new gameOverScreen(winner, 4, info));
             }
             else
@@ -268,7 +268,7 @@ public class SMMultiStage extends SMStage {
             hasWon = true;
             int score = ++scores[getSnek().getId() - 1];
             if (score == 3) {
-                SnakeActor winner = new SnakeActor(mice.get(0).getId());
+                SnakeActor winner = new SnakeActor(mice.get(0).getId(),info);
                 Mayflower.setWorld(new gameOverScreen(winner, 4, info));
             }
             else

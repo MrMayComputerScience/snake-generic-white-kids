@@ -29,10 +29,7 @@ public class SnakeActor extends Actor{
     private boolean running;
     private World myWorld;
     private boolean tronMode;
-
-    public SnakeActor(int di)
     GameInfo info;
-
     public SnakeActor(int di, GameInfo info)
     {
         this.info = info;

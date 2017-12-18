@@ -6,9 +6,6 @@ public class TwitchPlaysButton extends Actor{
     private int players;
     private SnakeActor sa;
     private GameInfo info;
-    public TwitchPlaysButton(int x, GameInfo info){
-        this.info = info;
-
 
     public TwitchPlaysButton(int x, GameInfo info){
         this.info = info;

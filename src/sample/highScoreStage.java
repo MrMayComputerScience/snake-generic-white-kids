@@ -37,7 +37,7 @@ public class highScoreStage extends World{
             Label l = twitchScores.get(i);
             l.setText(i+1+". "+l.getText());
             if(i < 10)
-                addObject(l, 120, i*30);
+                addObject(l, 420, i*30);
         }
 
     }

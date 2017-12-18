@@ -196,14 +196,17 @@ public class peachStage extends World{
 
     @Override
     public void act() {
-        if(!snek.getRunning()){
-            if(snek.isPressing())
-                snek.startTimer();
-        }
+        startGame();
         if(getObjects(Peach.class).size() < 1 && !info.isTron())
             addRandomPeach();
         addPortals();
         detectWin();
+    }
+    void startGame(){
+        if(!snek.getRunning()){
+            if(snek.isPressing())
+                snek.startTimer();
+        }
     }
     void addPortals(){
         if(info.hasPortals() && getObjects(Portal.class).size() == 0){

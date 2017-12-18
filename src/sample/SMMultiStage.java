@@ -30,8 +30,7 @@ public class SMMultiStage extends SMStage {
         scores = new int[4];
         this.info = info;
         hasWon = false;
-        //rand = 1 + (int) (Math.random() * 4);
-        rand = 3;
+        rand = 1 + (int) (Math.random() * 4);
         wins1 = 0;
         wins2 = 0;
         wins3 = 0;

@@ -110,8 +110,7 @@ public class SnakeActor extends Actor{
             timeLastUpdate = System.currentTimeMillis();
             t.reset();
         }
-        if(tronMode)
-            tailLength++;
+
 
         if(Mayflower.isKeyPressed(Keyboard.KEY_ADD)){
 
@@ -148,6 +147,8 @@ public class SnakeActor extends Actor{
         }
 
         if(t.isDone()){
+            if(tronMode)
+                tailLength++;
             int trueTime = (int)(System.currentTimeMillis() - timeLastUpdate);
             int diff = trueTime - tickLen;
             tickLen = TICK_TIME - diff;

@@ -11,10 +11,19 @@ public class MultiStage extends peachStage{
     private SnakeActor snek3;
     private SnakeActor snek4;
     private GameInfo info;
+    private Label pos1;
+    private Label pos2;
+    private Label pos3;
+    private Label pos4;
 
     public MultiStage(int numnum, GameInfo info)
     {
         super(info);
+        pos1 = new Label("1", 24);
+        pos2 = new Label("2", 24);
+        pos3 = new Label("3", 24);
+        pos4 = new Label("4", 24);
+        addObject(pos1, 20, 40);
         System.out.println("MultiStage Constructor");
         this.info = info;
         info.setNumPlayers(numnum);
@@ -33,6 +42,7 @@ public class MultiStage extends peachStage{
             snek2.setDownControl(Keyboard.KEY_H);
             snek2.setLeftControl(Keyboard.KEY_G);
             snek2.setRightControl(Keyboard.KEY_J);
+            addObject(pos2, 760, 560);
         }
         else if(numPlay == 3)
         {
@@ -50,6 +60,8 @@ public class MultiStage extends peachStage{
             snek3.setDownControl(Keyboard.KEY_SEMICOLON);
             snek3.setLeftControl(Keyboard.KEY_L);
             snek3.setRightControl(Keyboard.KEY_APOSTROPHE);
+            addObject(pos2, 760, 560);
+            addObject(pos3, 760, 40);
         }
         else if(numPlay == 4)
         {
@@ -74,6 +86,9 @@ public class MultiStage extends peachStage{
             snek4.setDownControl(Keyboard.KEY_DOWN);
             snek4.setLeftControl(Keyboard.KEY_LEFT);
             snek4.setRightControl(Keyboard.KEY_RIGHT);
+            addObject(pos2, 760, 560);
+            addObject(pos3, 760, 40);
+            addObject(pos4, 20,560);
         }
     }
     @Override
@@ -82,28 +97,40 @@ public class MultiStage extends peachStage{
         if(!hasWon){
             super.act();
             activateTron();
-            if (numPlay == 2 && (!super.getSnek().getRunning() || !snek2.getRunning())) {
-                if (snek2.isPressing() && super.getSnek().isPressing()) {
-                    super.getSnek().startTimer();
-                    snek2.startTimer();
-                }
-            } else if (numPlay == 3 && (!super.getSnek().getRunning() || !snek2.getRunning() || !snek3.getRunning())) {
-                if (super.getSnek().isPressing() && snek2.isPressing() && snek3.isPressing()) {
-                    super.getSnek().startTimer();
-                    snek2.startTimer();
-                    snek3.startTimer();
-                }
-            } else if (numPlay == 4 && (!super.getSnek().getRunning() || !snek2.getRunning() || !snek3.getRunning() || !snek4.getRunning())) {
-                if (super.getSnek().isPressing() && snek2.isPressing() && snek3.isPressing() && snek4.isPressing()) {
-                    super.getSnek().startTimer();
-                    snek2.startTimer();
-                    snek3.startTimer();
-                    snek4.startTimer();
-                }
+            startGame();
+        }
+    }
+    @Override
+    void startGame(){
+        if (numPlay == 2 && (!super.getSnek().getRunning() || !snek2.getRunning())) {
+            if (snek2.isPressing() && super.getSnek().isPressing()) {
+                super.getSnek().startTimer();
+                snek2.startTimer();
+                removeObject(pos1);
+                removeObject(pos2);
+            }
+        } else if (numPlay == 3 && (!super.getSnek().getRunning() || !snek2.getRunning() || !snek3.getRunning())) {
+            if (super.getSnek().isPressing() && snek2.isPressing() && snek3.isPressing()) {
+                super.getSnek().startTimer();
+                snek2.startTimer();
+                snek3.startTimer();
+                removeObject(pos1);
+                removeObject(pos2);
+                removeObject(pos3);
+            }
+        } else if (numPlay == 4 && (!super.getSnek().getRunning() || !snek2.getRunning() || !snek3.getRunning() || !snek4.getRunning())) {
+            if (super.getSnek().isPressing() && snek2.isPressing() && snek3.isPressing() && snek4.isPressing()) {
+                super.getSnek().startTimer();
+                snek2.startTimer();
+                snek3.startTimer();
+                snek4.startTimer();
+                removeObject(pos1);
+                removeObject(pos2);
+                removeObject(pos3);
+                removeObject(pos4);
             }
         }
     }
-
     private void activateTron(){
         if(info.isTron() && !getSnek().getTronMode()){
             getSnek().setTronMode(true);

@@ -11,6 +11,7 @@ public class PlayerMenu extends World{
 
         this.info = info;
 
+
         showText("Selected Number of Players", 175, 50);
 
         PlayerNumberButton two = new TwoPlayerButton("TwoPlayer.png", 2, info);

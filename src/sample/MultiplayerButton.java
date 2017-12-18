@@ -5,7 +5,6 @@ public class MultiplayerButton extends Button {
     public MultiplayerButton(String name, GameInfo info){
         super(name);
         this.info = info;
-
     }
     public void OnClick(){
         Mayflower.setWorld(new PlayerMenu(info));

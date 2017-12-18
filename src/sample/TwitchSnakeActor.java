@@ -11,8 +11,8 @@ public class TwitchSnakeActor extends SnakeActor {
     private int num;
     private boolean isRunning;
     private boolean wasRunning;
-    public TwitchSnakeActor(int numPlayers, int id){
-        super(id);
+    public TwitchSnakeActor(int numPlayers, int id, GameInfo info){
+        super(id, info);
         isRunning = false;
         wasRunning = false;
         num = numPlayers;

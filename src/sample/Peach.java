@@ -11,8 +11,8 @@ public class Peach extends Actor{
 
     public Peach(int i){
         if(i == 1)setPicture("peach.png");
-        if(i == 2)setPicture("crystal.png");
-        if(i == 3)setPicture("coin.png");
+        if(i == 2)setPicture("coin.png");
+        if(i == 3)setPicture("crystal.jpg");
 
     }
     public static GridPoint getEmptyRandomSpace(peachStage stage){

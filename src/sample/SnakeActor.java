@@ -29,9 +29,10 @@ public class SnakeActor extends Actor{
     private boolean running;
     private World myWorld;
     private boolean tronMode;
-
-    public SnakeActor(int di)
+    private GameInfo info;
+    public SnakeActor(int di, GameInfo info)
     {
+        this.info = info;
         tronMode = false;
         id = di;
         tickLen = TICK_TIME;
@@ -41,10 +42,29 @@ public class SnakeActor extends Actor{
         time = 0.0;
         tailLength = 0;
         running = false;
-        if(id == 1)setImage("eggplantsnakep.jpg");
-        else if(id == 2)setImage("eggplantsnakeg.jpg");
-        else if(id == 3)setImage("eggplantsnakey.jpg");
-        else if(id == 4)setImage("eggplantsnaker.jpg");
+        if(info.getGameTheme() == 1)
+        {
+            if(id == 1)setImage("eggplantsnakep.jpg");
+            else if(id == 2)setImage("eggplantsnakeg.jpg");
+            else if(id == 3)setImage("eggplantsnakey.jpg");
+            else if(id == 4)setImage("eggplantsnaker.jpg");
+        }
+        else if(info.getGameTheme() == 2)
+        {
+            if(id == 1)setImage("mario.jpg");
+            else if(id == 2)setImage("luigi.jpg");
+            else if(id == 3)setImage("wario.jpg");
+            else if(id == 4)setImage("wal.jpg");
+        }
+        else if(info.getGameTheme() == 3)
+        {
+            if(id == 1)setImage("luke.jpg");
+            else if(id == 2)setImage("darth.jpg");
+            else if(id == 3)setImage("black.jpg");
+            else if(id == 4)setImage("yoda.jpg");
+        }
+
+
         t = new Timer(Integer.MAX_VALUE);
 
         setUpControl(Keyboard.KEY_W);
@@ -251,7 +271,7 @@ public class SnakeActor extends Actor{
     }
     public void bigify(){
         if(tailLength > tail.size()){
-            SnakeTail t = new SnakeTail();
+            SnakeTail t = new SnakeTail(id, info);
             tail.add(t);
             getWorld().addObject(t,getX(),getY());
         }
@@ -305,44 +325,37 @@ public class SnakeActor extends Actor{
     public boolean getTronMode(){
         return tronMode;
     }
-    class SnakeTail extends Actor{
-        private String im1 = "eggplantsnakep.jpg";
-        private String im2 = "eggplantsnakep.jpg";
-        private String im3 = "eggplantsnakep.jpg";
-        private String im4 = "eggplantsnakep.jpg";
-        public SnakeTail(){
 
-            if(id == 1)setImage(im1);
-            else if(id == 2)setImage(im2);
-            else if(id == 3)setImage(im3);
-            else if(id == 4)setImage(im4);
+    class SnakeTail extends Actor{
+        GameInfo info;
+        int id;
+        public SnakeTail(int id, GameInfo info){
+            this.info = info;
+            this.id = id;
+            if(info.getGameTheme() == 1)
+            {
+                if(id == 1)setImage("eggplantsnakep.jpg");
+                else if(id == 2)setImage("eggplantsnakeg.jpg");
+                else if(id == 3)setImage("eggplantsnakey.jpg");
+                else if(id == 4)setImage("eggplantsnaker.jpg");
+            }
+            else if(info.getGameTheme() == 2)
+            {
+                if(id == 1)setImage("mario.jpg");
+                else if(id == 2)setImage("luigi.jpg");
+                else if(id == 3)setImage("wario.jpg");
+                else if(id == 4)setImage("wal.jpg");
+            }
+            else if(info.getGameTheme() == 3)
+            {
+                if(id == 1)setImage("luke.jpg");
+                else if(id == 2)setImage("darth.jpg");
+                else if(id == 3)setImage("black.jpg");
+                else if(id == 4)setImage("yoda.jpg");
+            }
         }
         @Override
         public void act(){
-        }
-        public void setTheme(int theme)
-        {
-            if(theme == 1)
-            {
-                if (id == 1) im1 = "eggplantsnakep.jpg";
-                else if(id == 2) im2 = "eggplantsnakeg.jpg";
-                else if(id == 3) im3 = "eggplantsnakey.jpg";
-                else if(id == 4) im4 = "eggplantsnaker.jpg";
-            }
-            else if(theme == 2)
-            {
-                if (id == 1)im1 = ("luke.jpg");
-                else if(id == 2) im2 = ("yoda.jpg");
-                else if(id == 3) im3 = ("darth.jpg");
-                else if(id == 4) im4 = ("black.jpg");
-            }
-            else if(theme == 3)
-            {
-                if (id == 1) im1 = ("mario.jpg");
-                else if(id == 2) im2 = ("luigi.jpg");
-                else if(id == 3) im3 = ("wario.jpg");
-                else if(id == 4) im4 = ("wal.jpg");
-            }
         }
     }
 

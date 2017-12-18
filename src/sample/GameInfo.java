@@ -7,7 +7,6 @@ public class GameInfo {
     private boolean tronMode;
     public GameInfo(){
         setGameTheme(1);
-
     }
     public int setGameTheme(int theme){
         int temp = gameTheme;
@@ -47,5 +46,4 @@ public class GameInfo {
         this.tronMode = tronMode;
     }
 }
-
 

@@ -9,7 +9,7 @@ public class SinglePlayerButton extends Button{
         this.info = info;
     }
     public void OnClick(){
-        SnakeActor snek = new SnakeActor(1);
+        SnakeActor snek = new SnakeActor(1, info);
         snek.setTronMode(false);
         peachStage stage = new peachStage(info);
         stage.setSnek(snek);

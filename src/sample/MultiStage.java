@@ -18,10 +18,10 @@ public class MultiStage extends peachStage{
         this.info = info;
 
         hasWon = false;
-        setSnek(new SnakeActor(1));
-        snek2 = new SnakeActor(2);
-        snek3 = new SnakeActor(3);
-        snek4 = new SnakeActor(4);
+        setSnek(new SnakeActor(1, info));
+        snek2 = new SnakeActor(2, info);
+        snek3 = new SnakeActor(3, info);
+        snek4 = new SnakeActor(4,info);
         snek2.setRotation(Direction.WEST);
         numPlay = numnum;
         if(numPlay == 2)
@@ -35,8 +35,8 @@ public class MultiStage extends peachStage{
         }
         else if(numPlay == 3)
         {
-            snek2 = new SnakeActor(2);
-            snek3 = new SnakeActor(3);
+            snek2 = new SnakeActor(2, info);
+            snek3 = new SnakeActor(3, info);
             addObject(snek2, 740, 540);
             snek2.setUpControl(Keyboard.KEY_Y);
             snek2.setDownControl(Keyboard.KEY_H);
@@ -52,9 +52,9 @@ public class MultiStage extends peachStage{
         }
         else if(numPlay == 4)
         {
-            snek2 = new SnakeActor(2);
-            snek3 = new SnakeActor(3);
-            snek4 = new SnakeActor(4);
+            snek2 = new SnakeActor(2, info);
+            snek3 = new SnakeActor(3, info);
+            snek4 = new SnakeActor(4, info);
             addObject(snek2, 740, 540);
             snek2.setUpControl(Keyboard.KEY_Y);
             snek2.setDownControl(Keyboard.KEY_H);
@@ -104,7 +104,7 @@ public class MultiStage extends peachStage{
         List<SnakeActor> sneks = getObjects(SnakeActor.class);
         if(hasWon){
             if(sneks.size() == 0){
-                Mayflower.setWorld(new gameOverScreen(new SnakeActor(NO_WIN).setWorld(this), numPlay, info));
+                Mayflower.setWorld(new gameOverScreen(new SnakeActor(NO_WIN, info).setWorld(this), numPlay, info));
             }
             else
                 Mayflower.setWorld(new gameOverScreen(sneks.get(0), numPlay, info));

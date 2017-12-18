@@ -50,7 +50,7 @@ public class peachStage extends World{
         info = inf;
     //    setBackground("background.png");
         this.info = info;
-        snek = new SnakeActor(1);
+        snek = new SnakeActor(1, inf);
         Label scoreLabel = new Label("Highscore: " + getHS());
 
         playerScore = new Label("Your Score: "+ snek.getTailLength());
@@ -229,15 +229,6 @@ public class peachStage extends World{
             addRandomPeach();
         }
         return true;
-    }
-
-    public void updateTheme(int theme)
-    {
-        if(theme == 1)
-        {
-            snek.setTheme(theme);
-
-        }
     }
 
     public SnakeActor getSnek() {

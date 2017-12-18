@@ -43,9 +43,11 @@ public class peachStage extends World{
     private KeyDisplay downd;
     private KeyDisplay rightd;
     private final int multiplier = 20;
-    public peachStage()
+    private GameInfo info;
+    public peachStage(GameInfo info)
     {
     //    setBackground("background.png");
+        this.info = info;
         snek = new SnakeActor(1);
         Label scoreLabel = new Label("Highscore: " + getHS());
 
@@ -108,12 +110,14 @@ public class peachStage extends World{
         addObject(snek, 40, 40);
         addObject(scoreLabel, 0,0);
         addObject(playerScore, 550,0);
+
         t = new Timer(75);
-        peachGrid[1][1] = StageObject.SNAKE;
+
+
         while(!addRandomPeach()){
 
         }
-        snek.startTimer();
+
 
     }
     public void setSnek(SnakeActor sa){
@@ -183,20 +187,37 @@ public class peachStage extends World{
         if(getObjects(SnakeActor.class).size() == 0)
             if(snek instanceof TwitchSnakeActor){
             TwitchSnakeActor s = (TwitchSnakeActor)snek;
-                Mayflower.setWorld(new InitialsInput(s, s.getNumPlayers()));
+                Mayflower.setWorld(new InitialsInput(s, s.getNumPlayers(), info));
             }
             else
-                Mayflower.setWorld(new InitialsInput(snek, 1));
+                Mayflower.setWorld(new InitialsInput(snek, 1, info));
 
     }
 
     @Override
     public void act() {
+        if(!snek.getRunning()){
+            if(snek.isPressing())
+                snek.startTimer();
+        }
         if(getObjects(Peach.class).size() < 1)
             addRandomPeach();
+        addPortals();
         detectWin();
     }
-
+    void addPortals(){
+        if(info.hasPortals() && getObjects(Portal.class).size() == 0){
+            Portal p = new Portal();
+            addObject(p, 1,1);
+            p.setRandomLocation();
+            while(p.isTouching())
+                p.setRandomLocation();
+            p.createPair(1,1);
+            p.getPair().setRandomLocation();
+            while(p.getPair().isTouching())
+                p.getPair().setRandomLocation();
+        }
+    }
     public StageObject[][] getGrid() {
         return peachGrid;
     }
@@ -210,7 +231,7 @@ public class peachStage extends World{
         }
         GridPoint point = Peach.getEmptyRandomSpace(this);
         //IF WE EVER USE A METHOD THAT UPDATES BASED ON GRID then this needs to change
-        Peach newPeach = new Peach();
+        Peach newPeach = new Peach(info.getGameTheme());
         addObject(newPeach, point.getC()*20, point.getR()*20);//grid[point.getR()][point.getC()] = StageObject.PEACH; //This is the code to change it to
         System.out.println("R: "+point.getR()+" C: "+point.getC());
         System.out.println(newPeach.getX()+" "+newPeach.getY());
@@ -220,6 +241,15 @@ public class peachStage extends World{
             addRandomPeach();
         }
         return true;
+    }
+
+    public void updateTheme(int theme)
+    {
+        if(theme == 1)
+        {
+            snek.setTheme(theme);
+
+        }
     }
 
     public SnakeActor getSnek() {

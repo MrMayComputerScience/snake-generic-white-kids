@@ -5,7 +5,9 @@ import mayflower.*;
 public class SvMButton extends Actor{
     private int players;
     private SnakeActor sa;
-    public SvMButton(){
+    private GameInfo info;
+    public SvMButton(GameInfo info){
+        this.info = info;
         MayflowerImage img = new MayflowerImage("svm.png");
         img.scale(150,150);
         setImage(img);
@@ -16,7 +18,7 @@ public class SvMButton extends Actor{
         }
     }
     public void onClick(){
-        Mayflower.setWorld(new SMMultiStage());
+        Mayflower.setWorld(new SMMultiStage(info));
 
     }
 }

@@ -23,10 +23,12 @@ public class ControlsScreen extends World{
     private KeyActor leftkey;
     private KeyActor downkey;
     private KeyActor rightkey;
-    public ControlsScreen(int players){
+    private GameInfo info;
+    public ControlsScreen(int players, GameInfo info){
+        this.info = info;
             num = players;
-            cb = new ContinueButton("ContinueButton.png", num);
-            bb = new BackButton("backbutton.png");
+            cb = new ContinueButton("ContinueButton.png", num, info);
+            bb = new BackButton("backbutton.png", info);
             //player one
             wkey = new KeyActor("W.png");
             addObject(wkey, 150,100);

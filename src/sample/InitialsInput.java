@@ -13,7 +13,9 @@ public class InitialsInput extends World{
     private Label highlight;
     private SnakeActor actor;
     private int numPlayers;
-    public InitialsInput(SnakeActor a, int numPlayers){
+    private GameInfo info;
+    public InitialsInput(SnakeActor a, int numPlayers, GameInfo info){
+        this.info = info;
         actor = a;
         this.numPlayers = numPlayers;
         pos = new char[3];
@@ -107,7 +109,7 @@ public class InitialsInput extends World{
         }
         if(Mayflower.isKeyPressed(Keyboard.KEY_ENTER)){
             actor.saveScore(getInitials());
-            Mayflower.setWorld(new gameOverScreen(actor, numPlayers));
+            Mayflower.setWorld(new gameOverScreen(actor, numPlayers, info));
         }
     }
 }

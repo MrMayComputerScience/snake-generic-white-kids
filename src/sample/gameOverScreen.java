@@ -3,10 +3,13 @@ package sample;
 import mayflower.*;
 
 public class gameOverScreen extends World{
-    Button paButton = new PlayAgainButton("PlayAgain.png");
-    Button mainButton = new MainScreenButton("MainButton.png");
-    public gameOverScreen(SnakeActor s, int numPlayers)
+    Button paButton;
+    Button mainButton;
+    public gameOverScreen(SnakeActor s, int numPlayers, GameInfo info)
     {
+        mainButton = new MainScreenButton("MainButton.png", info);
+        System.out.println(s.getMyWorld());
+        paButton = new PlayAgainButton("PlayAgain.png", s.getMyWorld(), info);
         if(numPlayers == 1){
             if(s.getTailLength() < 10){
                 showText("you suck", 400, 300);
@@ -37,7 +40,6 @@ public class gameOverScreen extends World{
         }
         addObject(paButton, 200, 450);
         addObject(mainButton, 400, 450);
-
     }
     @Override
     public void act() {

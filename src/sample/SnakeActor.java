@@ -28,8 +28,11 @@ public class SnakeActor extends Actor{
     private int id;
     private boolean running;
     private World myWorld;
+    private boolean tronMode;
+
     public SnakeActor(int di)
     {
+        tronMode = false;
         id = di;
         tickLen = TICK_TIME;
         timeLastUpdate = -2;
@@ -43,6 +46,7 @@ public class SnakeActor extends Actor{
         else if(id == 3)setImage("eggplantsnakey.jpg");
         else if(id == 4)setImage("eggplantsnaker.jpg");
         t = new Timer(Integer.MAX_VALUE);
+
         setUpControl(Keyboard.KEY_W);
         setDownControl(Keyboard.KEY_S);
         setLeftControl(Keyboard.KEY_A);
@@ -69,6 +73,16 @@ public class SnakeActor extends Actor{
     public int getId(){
         return id;
     }
+    public SnakeActor setWorld(World w){
+        myWorld = w;
+        return this;
+    }
+    public World getMyWorld(){
+        return myWorld;
+    }
+    public void setTronMode(boolean mode){
+        tronMode = mode;
+    }
     public void act(){
         if(getWorld() != null)
             myWorld = getWorld();
@@ -76,6 +90,8 @@ public class SnakeActor extends Actor{
             timeLastUpdate = System.currentTimeMillis();
             t.reset();
         }
+        if(tronMode)
+            tailLength++;
 
         if(Mayflower.isKeyPressed(Keyboard.KEY_ADD)){
 
@@ -242,35 +258,89 @@ public class SnakeActor extends Actor{
     }
     public int getTailLength()
     {
-        return tailLength;
+        return tail.size();
     }
     public void startTimer()
     {
         t.set(75);
         timeLastUpdate = -1;
+        running = true;
     }
     public boolean isPressing()
     {
         if(Mayflower.isKeyDown(upControl) || Mayflower.isKeyDown(downControl) || Mayflower.isKeyDown(leftControl) || Mayflower.isKeyDown(rightControl)){
-            running = true;
             return true;
         }
-        else {running = false; return false;}
+        else {return false;}
     }
     public boolean getRunning()
     {
         return running;
     }
-    class SnakeTail extends Actor{
-        public SnakeTail(){
 
-            if(id == 1)setImage("eggplantsnakep.jpg");
+    public void setTheme(int theme)
+    {
+        if(theme == 1)
+        {
+            if (id == 1)setImage("eggplantsnakep.jpg");
             else if(id == 2)setImage("eggplantsnakeg.jpg");
             else if(id == 3)setImage("eggplantsnakey.jpg");
             else if(id == 4)setImage("eggplantsnaker.jpg");
         }
+        else if(theme == 2)
+        {
+            if (id == 1)setImage("luke.jpg");
+            else if(id == 2)setImage("yoda.jpg");
+            else if(id == 3)setImage("darth.jpg");
+            else if(id == 4)setImage("black.jpg");
+        }
+        else if(theme == 3)
+        {
+            if (id == 1)setImage("mario.jpg");
+            else if(id == 2)setImage("luigi.jpg");
+            else if(id == 3)setImage("wario.jpg");
+            else if(id == 4)setImage("wal.jpg");
+        }
+    }
+
+    class SnakeTail extends Actor{
+        private String im1 = "eggplantsnakep.jpg";
+        private String im2 = "eggplantsnakep.jpg";
+        private String im3 = "eggplantsnakep.jpg";
+        private String im4 = "eggplantsnakep.jpg";
+        public SnakeTail(){
+
+            if(id == 1)setImage(im1);
+            else if(id == 2)setImage(im2);
+            else if(id == 3)setImage(im3);
+            else if(id == 4)setImage(im4);
+        }
         @Override
         public void act(){
+        }
+        public void setTheme(int theme)
+        {
+            if(theme == 1)
+            {
+                if (id == 1) im1 = "eggplantsnakep.jpg";
+                else if(id == 2) im2 = "eggplantsnakeg.jpg";
+                else if(id == 3) im3 = "eggplantsnakey.jpg";
+                else if(id == 4) im4 = "eggplantsnaker.jpg";
+            }
+            else if(theme == 2)
+            {
+                if (id == 1)im1 = ("luke.jpg");
+                else if(id == 2) im2 = ("yoda.jpg");
+                else if(id == 3) im3 = ("darth.jpg");
+                else if(id == 4) im4 = ("black.jpg");
+            }
+            else if(theme == 3)
+            {
+                if (id == 1) im1 = ("mario.jpg");
+                else if(id == 2) im2 = ("luigi.jpg");
+                else if(id == 3) im3 = ("wario.jpg");
+                else if(id == 4) im4 = ("wal.jpg");
+            }
         }
     }
 

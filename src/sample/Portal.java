@@ -96,6 +96,7 @@ public class Portal extends Actor {
                     System.out.println("What the actual hell did you do to make the rotation of the snake not a cardinal direction");
             }
             snek.setLocation(pair.getX() + (dx * 20), pair.getY() + (dy * 20));
+            snek.act();
 
         }
     }

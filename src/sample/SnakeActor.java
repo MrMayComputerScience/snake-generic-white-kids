@@ -302,7 +302,9 @@ public class SnakeActor extends Actor{
             else if(id == 4)setImage("wal.jpg");
         }
     }
-
+    public boolean getTronMode(){
+        return tronMode;
+    }
     class SnakeTail extends Actor{
         private String im1 = "eggplantsnakep.jpg";
         private String im2 = "eggplantsnakep.jpg";

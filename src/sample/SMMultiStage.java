@@ -30,8 +30,8 @@ public class SMMultiStage extends SMStage {
         scores = new int[4];
         this.info = info;
         hasWon = false;
-        //rand = 1 + (int) (Math.random() * 4);
-        rand = 3;
+        rand = 1 + (int) (Math.random() * 4);
+
         wins1 = 0;
         wins2 = 0;
         wins3 = 0;
@@ -282,11 +282,9 @@ public class SMMultiStage extends SMStage {
             hasWon = true;
             int score = ++scores[getSnek().getId() - 1];
             if (score == 3) {
-<<<<<<< HEAD
+
                 SnakeActor winner = new SnakeActor(mice.get(0).getId(),info);
-=======
-                SnakeActor winner = new SnakeActor(mice.get(0).getId(), info);
->>>>>>> mason
+
                 Mayflower.setWorld(new gameOverScreen(winner, 4, info));
             }
             else

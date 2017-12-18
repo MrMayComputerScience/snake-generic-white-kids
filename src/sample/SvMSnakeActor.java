@@ -186,6 +186,12 @@ public class SvMSnakeActor extends Actor{
         }
         @Override
         public void act(){
+            if(isTouching(MouseActor.class)){
+                for(MouseActor m : getIntersectingObjects(MouseActor.class)){
+                    getWorld().removeObject(m);
+                    tailLength++;
+                }
+            }
         }
     }
 

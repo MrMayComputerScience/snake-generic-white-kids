@@ -297,7 +297,7 @@ public class SnakeActor extends Actor{
     {
         return running;
     }
-
+    public boolean getTronMode(){return tronMode;}
     class SnakeTail extends Actor{
         GameInfo info;
         int id;

@@ -36,7 +36,6 @@ public class SMStage extends World{
     }
 
 
-
     public void updateStage()
     {
 

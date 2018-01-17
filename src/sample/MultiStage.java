@@ -11,6 +11,7 @@ public class MultiStage extends peachStage{
     private SnakeActor snek3;
     private SnakeActor snek4;
     private GameInfo info;
+
     private Label pos1;
     private Label pos2;
     private Label pos3;

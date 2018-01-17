@@ -1,6 +1,5 @@
 package sample;
 
-
 public class MarioButton extends Button {
     GameInfo info;
     public MarioButton(String dir, GameInfo info)
@@ -13,5 +12,4 @@ public class MarioButton extends Button {
     public void OnClick() {
         info.setGameTheme(2);
     }
-
 }

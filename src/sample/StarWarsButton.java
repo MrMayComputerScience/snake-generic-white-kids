@@ -1,6 +1,5 @@
 package sample;
 
-
 public class StarWarsButton extends Button {
     GameInfo info;
     public StarWarsButton(String dir, GameInfo info)
@@ -13,5 +12,4 @@ public class StarWarsButton extends Button {
     public void OnClick() {
         info.setGameTheme(3);
     }
-
 }

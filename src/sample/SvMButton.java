@@ -18,8 +18,7 @@ public class SvMButton extends Actor{
         }
     }
     public void onClick(){
-        SMMultiStage stage = new SMMultiStage(info);
-        Mayflower.setWorld(new PortalSelectScreen(info, stage));
+        Mayflower.setWorld(new SMMultiStage(info));
 
     }
 }

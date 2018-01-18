@@ -29,9 +29,13 @@ public class SnakeActor extends Actor{
     private boolean running;
     private World myWorld;
     private boolean tronMode;
-    GameInfo info;
+    private int score;
+    private GameInfo info;
+    private int x;
+    private int y;
     public SnakeActor(int di, GameInfo info)
     {
+        score = 0;
         this.info = info;
         tronMode = false;
         id = di;
@@ -158,39 +162,7 @@ public class SnakeActor extends Actor{
             t.reset();
         }
         checkForPointChange();
-        if(t.isDone()){
-            if(tronMode)
-                tailLength++;
-            //Record how long the tick actually took
-            int trueTime = (int)(System.currentTimeMillis() - timeLastUpdate);
-            int diff = trueTime - tickLen;
-            System.out.println("Went over by " +diff+ "ms");
-            tickLen = TICK_TIME - diff;
-            //Debugging tool, allows us to calculate the average time
-            sumTimes += trueTime;
-            numTicks++;
-            //Accommodate for difference in time
-            t.set(TICK_TIME - diff);
-            timeLastUpdate = System.currentTimeMillis();
-            //Record the properties of the Snake Head to use in handling the tail
-            int headX = getX();
-            int headY = getY();
-            int headRot = getRotation();
-            //If the snake needs to get bigger, make it bigger
-            bigify();
-            //Reset the timer
-            t.reset();
-            moveSnake();
-            if(Math.abs(getRotation()-headRot) % 180 == 0 && tailLength >= 2)
-                setRotation(headRot);
-            time++;
-            //System.out.println(t.toString());
-            move(20);
-            handleTail(headX, headY, headRot);
-            eatPeach(detectPeach());
 
-
-        }
         if(isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)){
             myWorld = getWorld();
             if(isTouching(SnakeActor.class)){
@@ -209,6 +181,92 @@ public class SnakeActor extends Actor{
         }
 
     }
+
+    public void turnLeft()
+    {
+        setRotation(Direction.WEST);
+    }
+
+    public void turnRight()
+    {
+        setRotation(Direction.EAST);
+    }
+
+    public void turnUp()
+    {
+        setRotation(Direction.NORTH);
+    }
+
+    public void turnDown()
+    {
+        setRotation(Direction.SOUTH);
+    }
+
+    public void tick()
+    {
+        int trueTime = (int)(System.currentTimeMillis() - timeLastUpdate);
+        int diff = trueTime - tickLen;
+        tickLen = TICK_TIME - diff;
+        sumTimes += trueTime;
+        numTicks++;
+        t.set(TICK_TIME - diff);
+        timeLastUpdate = System.currentTimeMillis();
+        int headX = getX();
+        int headY = getY();
+        int headRot = getRotation();
+        bigify();
+        t.reset();
+        moveSnake();
+        if(Math.abs(getRotation()-headRot) % 180 == 0 && tailLength >= 2)
+            setRotation(headRot);
+        time++;
+        //System.out.println(t.toString());
+        move(20);
+        handleTail(headX, headY, headRot);
+        eatPeach(detectPeach());
+    }
+
+    public void die()
+    {
+        myWorld.removeObject(this);
+    }
+
+    public void grow()
+    {
+        if(tailLength > tail.size()){
+            SnakeTail t = new SnakeTail(id, info);
+            tail.add(t);
+            getWorld().addObject(t,getX(),getY());
+        }
+    }
+
+    public void collect(@Nullable Peach peach)
+    {
+        if(peach == null){
+            //    System.out.println("Peach is null");
+            return;
+        }
+        getWorld().removeObject(peach);
+        tailLength += lengthToAdd;
+        Peach.addRandomPeach((peachStage)getWorld()); //Should never throw invalid cast errors
+    }
+
+    public void increaseScore()
+    {
+        score++;
+    }
+
+    public int getScore()
+    {
+        return score;
+    }
+
+    public void teleport(int x, int y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+
     public void removeTail(){
         for(SnakeTail t : tail){
             myWorld.removeObject(t);

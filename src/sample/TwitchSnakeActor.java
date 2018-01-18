@@ -17,21 +17,21 @@ public class TwitchSnakeActor extends SnakeActor {
         wasRunning = false;
         num = numPlayers;
     }
-    public void moveSnake(){
+    public void moveSnake(String direction){
         if(num == 3){
-            if(Mayflower.isKeyDown(Keyboard.KEY_W) && Mayflower.isKeyDown(Keyboard.KEY_Y) && Mayflower.isKeyDown(Keyboard.KEY_P)){
+            if(direction.equals("p1up")){
                 setRotation(Direction.NORTH);
                 isRunning = true;
             }
-            else if(Mayflower.isKeyDown(Keyboard.KEY_S) && Mayflower.isKeyDown(Keyboard.KEY_H) && Mayflower.isKeyDown(Keyboard.KEY_SEMICOLON)){
+            else if(direction.equals("p1Down")){
                 setRotation(Direction.SOUTH);
                 isRunning = true;
             }
-            else if(Mayflower.isKeyDown(Keyboard.KEY_A) && Mayflower.isKeyDown(Keyboard.KEY_G) && Mayflower.isKeyDown(Keyboard.KEY_L)){
+            else if(direction.equals("p1left")){
                 setRotation(Direction.WEST);
                 isRunning = true;
             }
-            else if(Mayflower.isKeyDown(Keyboard.KEY_D) && Mayflower.isKeyDown(Keyboard.KEY_J) && Mayflower.isKeyDown(Keyboard.KEY_APOSTROPHE)){
+            else if(direction.equals("p1right")){
                 setRotation(Direction.EAST);
                 isRunning = true;
             }

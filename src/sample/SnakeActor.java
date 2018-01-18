@@ -29,7 +29,7 @@ public class SnakeActor extends Actor{
     private boolean running;
     private World myWorld;
     private boolean tronMode;
-    private GameInfo info;
+    GameInfo info;
     public SnakeActor(int di, GameInfo info)
     {
         this.info = info;
@@ -323,35 +323,7 @@ public class SnakeActor extends Actor{
     {
         return running;
     }
-
-    public void setTheme(int theme)
-    {
-        if(theme == 1)
-        {
-            if (id == 1)setImage("eggplantsnakep.jpg");
-            else if(id == 2)setImage("eggplantsnakeg.jpg");
-            else if(id == 3)setImage("eggplantsnakey.jpg");
-            else if(id == 4)setImage("eggplantsnaker.jpg");
-        }
-        else if(theme == 2)
-        {
-            if (id == 1)setImage("luke.jpg");
-            else if(id == 2)setImage("yoda.jpg");
-            else if(id == 3)setImage("darth.jpg");
-            else if(id == 4)setImage("black.jpg");
-        }
-        else if(theme == 3)
-        {
-            if (id == 1)setImage("mario.jpg");
-            else if(id == 2)setImage("luigi.jpg");
-            else if(id == 3)setImage("wario.jpg");
-            else if(id == 4)setImage("wal.jpg");
-        }
-    }
-    public boolean getTronMode(){
-        return tronMode;
-    }
-
+    public boolean getTronMode(){return tronMode;}
     class SnakeTail extends Actor{
         GameInfo info;
         int id;

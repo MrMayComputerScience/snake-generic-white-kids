@@ -240,15 +240,9 @@ public class SnakeActor extends Actor{
         }
     }
 
-    public void collect(@Nullable Peach peach)
+    public void collect()
     {
-        if(peach == null){
-            //    System.out.println("Peach is null");
-            return;
-        }
-        getWorld().removeObject(peach);
-        tailLength += lengthToAdd;
-        Peach.addRandomPeach((peachStage)getWorld()); //Should never throw invalid cast errors
+        eatPeach(getWorld().getObjects(Peach.class).get(0));
     }
 
     public void increaseScore()

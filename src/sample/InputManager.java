@@ -10,10 +10,27 @@ import java.util.Set;
 
 public class InputManager extends Actor{
     private Map<Integer, Action> actionMap;
+    private Map<Integer, Action> releaseMap;
     private Set<Integer> keysPressed;
     private AbstractGameModeManager gm;
     public InputManager(){
         actionMap = getActionMap();
+        releaseMap.put(Keyboard.KEY_W, Action.P1_RELEASE);
+        releaseMap.put(Keyboard.KEY_A, Action.P1_RELEASE);
+        releaseMap.put(Keyboard.KEY_S, Action.P1_RELEASE);
+        releaseMap.put(Keyboard.KEY_D, Action.P1_RELEASE);
+        releaseMap.put(Keyboard.KEY_Y, Action.P2_RELEASE);
+        releaseMap.put(Keyboard.KEY_G, Action.P2_RELEASE);
+        releaseMap.put(Keyboard.KEY_H, Action.P2_RELEASE);
+        releaseMap.put(Keyboard.KEY_J, Action.P2_RELEASE);
+        releaseMap.put(Keyboard.KEY_P, Action.P3_RELEASE);
+        releaseMap.put(Keyboard.KEY_L, Action.P3_RELEASE);
+        releaseMap.put(Keyboard.KEY_SEMICOLON, Action.P3_RELEASE);
+        releaseMap.put(Keyboard.KEY_APOSTROPHE, Action.P3_RELEASE);
+        releaseMap.put(Keyboard.KEY_UP, Action.P4_RELEASE);
+        releaseMap.put(Keyboard.KEY_LEFT, Action.P4_RELEASE);
+        releaseMap.put(Keyboard.KEY_DOWN, Action.P4_RELEASE);
+        releaseMap.put(Keyboard.KEY_RIGHT, Action.P4_RELEASE);
     }
     public static Map<Integer, Action> getActionMap(){
         Map<Integer, Action> map = new HashMap<>();
@@ -47,8 +64,11 @@ public class InputManager extends Actor{
                     gm.process(actionMap.get(key));
                 }
             }
-            else
+            else{
                 keysPressed.remove(key);
+                gm.process(releaseMap.get(key));
+            }
+
         }
     }
 }

@@ -38,7 +38,15 @@ public class StandardGameModeManager extends AbstractGameModeManager {
     }
 
     @Override
-    public void process(Action action, SnakeActor a) {
-
+    public void process(Action action, SnakeActor snek) {
+        if(action == Action.COLLECT){
+            snek.collect();
+        }
+        else if(action == Action.DIE){
+            snek.die();
+        }
+        else if(action == Action.GROW){
+            snek.grow();
+        }
     }
 }

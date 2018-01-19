@@ -5,6 +5,19 @@ public class GameInfo {
     private int numPlayers;
     private boolean hasPortals;
     private boolean tronMode;
+    private AbstractGameModeManager gm;
+    private InputManager input;
+
+    public AbstractGameModeManager getGameModeManager() {
+        return gm;
+    }
+    public void setGameModeManager(AbstractGameModeManager gm) {
+        this.gm = gm;
+        input.setGameModeManager(gm);
+    }
+    public InputManager getInputManager() {
+        return input;
+    }
     public GameInfo(){
         setGameTheme(1);
 
@@ -38,7 +51,6 @@ public class GameInfo {
         this.hasPortals = hasPortals;
         return temp;
     }
-
 
     public boolean isTron() {
         return tronMode;

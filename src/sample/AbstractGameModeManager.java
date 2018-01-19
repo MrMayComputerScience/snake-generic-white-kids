@@ -5,6 +5,10 @@ import java.util.List;
 public abstract class AbstractGameModeManager {
     private List<SnakeActor> sneks;
     private World snakeWorld;
+    private GameInfo info;
+    public AbstractGameModeManager(GameInfo info){
+        this.info = info;
+    }
     public List<SnakeActor> getSnakes(){
         return sneks;
     }
@@ -20,5 +24,6 @@ public abstract class AbstractGameModeManager {
     public void setWorld(World wd){
         snakeWorld = wd;
     }
-    public abstract void process(String action);
+    public abstract void process(Action action);
+    public abstract void process(Action action, SnakeActor a);
 }

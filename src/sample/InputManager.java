@@ -11,6 +11,7 @@ import java.util.Set;
 public class InputManager extends Actor{
     private Map<Integer, Action> actionMap;
     private Set<Integer> keysPressed;
+    private AbstractGameModeManager gm;
     public InputManager(){
         actionMap = getActionMap();
     }
@@ -34,14 +35,20 @@ public class InputManager extends Actor{
         map.put(Keyboard.KEY_RIGHT, Action.P4_RIGHT);
         return map;
     }
-
+    public void setGameModeManager(AbstractGameModeManager gm){
+        this.gm = gm;
+    }
     @Override
     public void act() {
-        for(Integer k : actionMap.keySet()){
-            int key = k.intValue();
-            if(Mayflower.isKeyDown(key) && !keysPressed.contains(k)){
-
+        for(Integer key : actionMap.keySet()){
+            if(Mayflower.isKeyDown(key)){
+                if(!keysPressed.contains(key)){
+                    keysPressed.add(key);
+                    gm.process(actionMap.get(key));
+                }
             }
+            else
+                keysPressed.remove(key);
         }
     }
 }

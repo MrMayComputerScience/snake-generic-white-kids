@@ -160,11 +160,6 @@ public class MultiStage extends peachStage{
 
 
     }
-
-
-
-
-
     public int getNumPlayers(){
         return numPlay;
     }

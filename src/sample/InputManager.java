@@ -1,6 +1,6 @@
 package sample;
 
-public class InputManager {
+
 import mayflower.Actor;
 import mayflower.Keyboard;
 import mayflower.Mayflower;

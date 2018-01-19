@@ -113,23 +113,14 @@ public class SnakeActor extends Actor{
     public void setTronMode(boolean mode){
         tronMode = mode;
     }
-    public void act() {
-        if (getWorld() != null)
-            myWorld = getWorld();
-        if (timeLastUpdate == -1) {
-            timeLastUpdate = System.currentTimeMillis();
-            t.reset();
-        }
 
-
-        if (Mayflower.isKeyPressed(Keyboard.KEY_ADD)) {
     /**
         Method: checkForPointChange
         Checks to see if any buttons are being pressed that would change how many points
         the snake gets on eating a peach
      */
-    protected void checkForPointChange(){
-        if(Mayflower.isKeyPressed(Keyboard.KEY_ADD)){
+    protected void checkForPointChange() {
+        if (Mayflower.isKeyPressed(Keyboard.KEY_ADD)) {
 
             if (Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)) {
                 System.out.println("Shifted");
@@ -167,6 +158,7 @@ public class SnakeActor extends Actor{
             sumTimes += trueTime;
             numTicks++;
             t.set(TICK_TIME - diff);
+        }
     }
     public void act(){
         if(getWorld() != null)
@@ -203,7 +195,7 @@ public class SnakeActor extends Actor{
                 }
             }
 
-        }
+
     }
 
     public void turnLeft()

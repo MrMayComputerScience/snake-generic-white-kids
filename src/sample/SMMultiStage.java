@@ -24,9 +24,20 @@ public class SMMultiStage extends SMStage {
     private int wins4;
     private int[] scores;
     private GameInfo info;
-
+    private Label pos1;
+    private Label pos2;
+    private Label pos3;
+    private Label pos4;
     public SMMultiStage(GameInfo info) {
         super();
+        pos1 = new Label("1", 24);
+        pos2 = new Label("2", 24);
+        pos3 = new Label("3", 24);
+        pos4 = new Label("4", 24);
+        addObject(pos1, 20, 40);
+        addObject(pos2, 760, 560);
+        addObject(pos3, 760, 40);
+        addObject(pos4, 20,560);
         scores = new int[4];
         this.info = info;
         hasWon = false;
@@ -68,6 +79,7 @@ public class SMMultiStage extends SMStage {
             snek = new SvMSnakeActor(2, info);
             setSnek(snek, 2);
             snek.setControls(Keyboard.KEY_Y, Keyboard.KEY_H, Keyboard.KEY_G, Keyboard.KEY_J);
+            addObject(getSnek(), 740, 540);
             ms1 = new MouseActor(1, info);
             ms3 = new MouseActor(3, info);
             ms4 = new MouseActor(4, info);
@@ -113,6 +125,14 @@ public class SMMultiStage extends SMStage {
 
     public SMMultiStage(int winner, int[] scores, GameInfo info) {
         super();
+        pos1 = new Label("1", 24);
+        pos2 = new Label("2", 24);
+        pos3 = new Label("3", 24);
+        pos4 = new Label("4", 24);
+        addObject(pos1, 20, 40);
+        addObject(pos2, 760, 560);
+        addObject(pos3, 760, 40);
+        addObject(pos4, 20,560);
         this.info = info;
         this.scores = scores;
         System.out.println("player 1 wins: " + scores[0]);
@@ -226,6 +246,10 @@ public class SMMultiStage extends SMStage {
                     ms2.startTimer();
                     ms3.startTimer();
                     ms4.startTimer();
+                    removeObject(pos1);
+                    removeObject(pos2);
+                    removeObject(pos3);
+                    removeObject(pos4);
                 }
             }
         } else if (rand == 2) {
@@ -235,6 +259,10 @@ public class SMMultiStage extends SMStage {
                     ms1.startTimer();
                     ms3.startTimer();
                     ms4.startTimer();
+                    removeObject(pos1);
+                    removeObject(pos2);
+                    removeObject(pos3);
+                    removeObject(pos4);
                 }
             }
         } else if (rand == 3) {
@@ -244,6 +272,10 @@ public class SMMultiStage extends SMStage {
                     ms2.startTimer();
                     ms1.startTimer();
                     ms4.startTimer();
+                    removeObject(pos1);
+                    removeObject(pos2);
+                    removeObject(pos3);
+                    removeObject(pos4);
                 }
             }
 
@@ -254,6 +286,10 @@ public class SMMultiStage extends SMStage {
                     ms2.startTimer();
                     ms3.startTimer();
                     ms1.startTimer();
+                    removeObject(pos1);
+                    removeObject(pos2);
+                    removeObject(pos3);
+                    removeObject(pos4);
                 }
             }
 

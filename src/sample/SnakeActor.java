@@ -77,6 +77,11 @@ public class SnakeActor extends Actor{
         setLeftControl(Keyboard.KEY_A);
         setRightControl(Keyboard.KEY_D);
     }
+
+    public List<SnakeTail> getTail() {
+        return tail;
+    }
+
     public void setControls(int up, int down, int left, int right ){
         setUpControl(up);
         setDownControl(down);
@@ -118,6 +123,13 @@ public class SnakeActor extends Actor{
 
 
         if (Mayflower.isKeyPressed(Keyboard.KEY_ADD)) {
+    /**
+        Method: checkForPointChange
+        Checks to see if any buttons are being pressed that would change how many points
+        the snake gets on eating a peach
+     */
+    protected void checkForPointChange(){
+        if(Mayflower.isKeyPressed(Keyboard.KEY_ADD)){
 
             if (Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)) {
                 System.out.println("Shifted");
@@ -155,11 +167,14 @@ public class SnakeActor extends Actor{
             sumTimes += trueTime;
             numTicks++;
             t.set(TICK_TIME - diff);
+    }
+    public void act(){
+        if(getWorld() != null)
+            myWorld = getWorld();
+        //Check to see if we should start counting realtime yet
+        //If we dont do this, it causes a mad dash at the beginning of the game based on how long you wait to press a button
+        if(timeLastUpdate == -1){
             timeLastUpdate = System.currentTimeMillis();
-            int headX = getX();
-            int headY = getY();
-            int headRot = getRotation();
-            bigify();
             t.reset();
             moveSnake();
             if (Math.abs(getRotation() - headRot) % 180 == 0 && tailLength >= 2)
@@ -169,6 +184,8 @@ public class SnakeActor extends Actor{
             move(20);
             handleTail(headX, headY, headRot);
             eatPeach(detectPeach());
+        }
+        checkForPointChange();
 
             if (isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)) {
                 myWorld = getWorld();
@@ -279,7 +296,13 @@ public class SnakeActor extends Actor{
             myWorld.removeObject(t);
         }
     }
-    public void moveSnake(){
+
+    /**
+     * moveSnake()
+     * Determines if there has been any change in the direction of the snake, and
+     * if so, it changes the direction of the snake to reflect this change
+     */
+    protected void moveSnake(){
         if (Mayflower.isKeyDown(upControl)) {
             setRotation(Direction.NORTH);
         } else if (Mayflower.isKeyDown(downControl)) {
@@ -413,6 +436,9 @@ public class SnakeActor extends Actor{
         }
         @Override
         public void act(){
+        }
+        public String toString(){
+            return "(X: "+getX()+", Y: "+getY()+")";
         }
     }
 

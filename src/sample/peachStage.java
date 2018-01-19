@@ -117,8 +117,8 @@ public class peachStage extends World{
         while(!addRandomPeach()){
 
         }
-
-
+        //TESTING FOR AI
+        setSnek(new PointSnake(1, info));
     }
     public void setSnek(SnakeActor sa){
         removeObject(snek);

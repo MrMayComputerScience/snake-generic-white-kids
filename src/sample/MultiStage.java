@@ -11,11 +11,7 @@ public class MultiStage extends peachStage{
     private SnakeActor snek3;
     private SnakeActor snek4;
     private GameInfo info;
-<<<<<<< HEAD
-    public MultiStage(int numnum, GameInfo info)
-    {
-        super(info);
-=======
+
     private Label pos1;
     private Label pos2;
     private Label pos3;
@@ -30,7 +26,6 @@ public class MultiStage extends peachStage{
         pos4 = new Label("4", 24);
         addObject(pos1, 20, 40);
         System.out.println("MultiStage Constructor");
->>>>>>> mason
         this.info = info;
         info.setNumPlayers(numnum);
         hasWon = false;

@@ -38,7 +38,7 @@ public class GameInfo {
         this.hasPortals = hasPortals;
         return temp;
     }
-}
+
 
     public boolean isTron() {
         return tronMode;

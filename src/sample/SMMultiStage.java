@@ -31,10 +31,7 @@ public class SMMultiStage extends SMStage {
         this.info = info;
         hasWon = false;
         rand = 1 + (int) (Math.random() * 4);
-<<<<<<< HEAD
 
-=======
->>>>>>> Trevor
         wins1 = 0;
         wins2 = 0;
         wins3 = 0;

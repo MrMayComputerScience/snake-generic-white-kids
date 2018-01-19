@@ -8,13 +8,14 @@ public class titleStage extends World{
     //Button mpButton;
     Button mpButton;
     Button hsButton;
-    public titleStage(GameInfo info){
-        this.info = info;
-        fpButton = new SinglePlayerButton("StartSinglePlayer.jpg", info);
-        lanButton = new LANButton("NotImplemented.png");
-        //mpButton = new MultiplayerButton("NotImplemented.png");
-        mpButton = new MultiplayerButton("Multiplayer.png", info);
-        hsButton = new HighScoreButton("HighScoreButton.png", info);
+    public titleStage(GameInfo inf){
+        info = inf;
+        Button fpButton = new SinglePlayerButton("StartSinglePlayer.jpg", info);
+        Button lanButton = new LANButton("NotImplemented.png");
+        //Button mpButton = new MultiplayerButton("NotImplemented.png");
+        Button mpButton = new MultiplayerButton("Multiplayer.png", info);
+        Button hsButton = new HighScoreButton("HighScoreButton.png", info);
+
         Button themeButton = new themeMenuButton("theme.png", info);
 
         setBackground("title.png");

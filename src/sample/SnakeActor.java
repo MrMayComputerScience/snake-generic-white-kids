@@ -29,6 +29,7 @@ public class SnakeActor extends Actor{
     private boolean running;
     private World myWorld;
     private boolean tronMode;
+
     private int score;
     private GameInfo info;
     private int x;
@@ -76,6 +77,11 @@ public class SnakeActor extends Actor{
         setLeftControl(Keyboard.KEY_A);
         setRightControl(Keyboard.KEY_D);
     }
+
+    public List<SnakeTail> getTail() {
+        return tail;
+    }
+
     public void setControls(int up, int down, int left, int right ){
         setUpControl(up);
         setDownControl(down);
@@ -107,67 +113,80 @@ public class SnakeActor extends Actor{
     public void setTronMode(boolean mode){
         tronMode = mode;
     }
+
+    /**
+        Method: checkForPointChange
+        Checks to see if any buttons are being pressed that would change how many points
+        the snake gets on eating a peach
+     */
+    protected void checkForPointChange() {
+        if (Mayflower.isKeyPressed(Keyboard.KEY_ADD)) {
+
+            if (Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)) {
+                System.out.println("Shifted");
+                lengthToAdd += 10;
+            } else if (Mayflower.isKeyDown(Keyboard.KEY_LCONTROL) || Mayflower.isKeyDown(Keyboard.KEY_RCONTROL)) {
+                lengthToAdd += 1500;
+            } else
+                lengthToAdd++;
+        }
+        if (Mayflower.isKeyPressed(Keyboard.KEY_EQUALS)) {
+            if (Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)) {
+                if (Mayflower.isKeyDown(Keyboard.KEY_LCONTROL) || Mayflower.isKeyDown(Keyboard.KEY_RCONTROL)) {
+                    lengthToAdd += 1500;
+                } else
+                    lengthToAdd += 10;
+            }
+        }
+        if (Mayflower.isKeyPressed(Keyboard.KEY_SUBTRACT) || Mayflower.isKeyPressed(Keyboard.KEY_MINUS)) {
+
+            if (Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)) {
+                System.out.println("Shifted");
+                lengthToAdd -= 10;
+            } else if (Mayflower.isKeyDown(Keyboard.KEY_LCONTROL) || Mayflower.isKeyDown(Keyboard.KEY_RCONTROL)) {
+                lengthToAdd -= 1500;
+            } else
+                lengthToAdd--;
+        }
+
+        if (t.isDone()) {
+            if (tronMode)
+                tailLength++;
+            int trueTime = (int) (System.currentTimeMillis() - timeLastUpdate);
+            int diff = trueTime - tickLen;
+            tickLen = TICK_TIME - diff;
+            sumTimes += trueTime;
+            numTicks++;
+            t.set(TICK_TIME - diff);
+        }
+    }
     public void act(){
         if(getWorld() != null)
             myWorld = getWorld();
+        //Check to see if we should start counting realtime yet
+        //If we dont do this, it causes a mad dash at the beginning of the game based on how long you wait to press a button
         if(timeLastUpdate == -1){
             timeLastUpdate = System.currentTimeMillis();
             t.reset();
         }
-        if(tronMode)
-            tailLength++;
+        checkForPointChange();
 
-        if(Mayflower.isKeyPressed(Keyboard.KEY_ADD)){
-
-            if(Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)){
-                System.out.println("Shifted");
-                lengthToAdd += 10;
-            }
-            else if(Mayflower.isKeyDown(Keyboard.KEY_LCONTROL) || Mayflower.isKeyDown(Keyboard.KEY_RCONTROL)){
-                lengthToAdd += 1500;
-            }
-            else
-                lengthToAdd++;
-        }
-        if(Mayflower.isKeyPressed(Keyboard.KEY_EQUALS) ){
-            if(Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)){
-                if(Mayflower.isKeyDown(Keyboard.KEY_LCONTROL) || Mayflower.isKeyDown(Keyboard.KEY_RCONTROL)){
-                    lengthToAdd += 1500;
+            if (isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)) {
+                myWorld = getWorld();
+                if (isTouching(SnakeActor.class)) {
+                    List<SnakeActor> others = getIntersectingObjects(SnakeActor.class);
+                    for (SnakeActor a : others) {
+                        myWorld.removeObject(a);
+                        a.removeTail();
+                    }
+                    myWorld.removeObject(this);
+                    removeTail();
+                } else {
+                    myWorld.removeObject(this);
+                    removeTail();
                 }
-                else
-                    lengthToAdd += 10;
             }
-        }
-        if(Mayflower.isKeyPressed(Keyboard.KEY_SUBTRACT) || Mayflower.isKeyPressed(Keyboard.KEY_MINUS)){
 
-            if(Mayflower.isKeyDown(Keyboard.KEY_LSHIFT) || Mayflower.isKeyDown(Keyboard.KEY_RSHIFT)){
-                System.out.println("Shifted");
-                lengthToAdd -= 10;
-            }
-            else if(Mayflower.isKeyDown(Keyboard.KEY_LCONTROL) || Mayflower.isKeyDown(Keyboard.KEY_RCONTROL)){
-                lengthToAdd -= 1500;
-            }
-            else
-                lengthToAdd--;
-        }
-
-
-        if(isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)){
-            myWorld = getWorld();
-            if(isTouching(SnakeActor.class)){
-               List<SnakeActor> others = getIntersectingObjects(SnakeActor.class);
-               for(SnakeActor a : others){
-                   myWorld.removeObject(a);
-                   a.removeTail();
-               }
-                myWorld.removeObject(this);
-                removeTail();
-            }
-            else{
-                myWorld.removeObject(this);
-                removeTail();
-            }
-        }
 
     }
 
@@ -256,7 +275,13 @@ public class SnakeActor extends Actor{
             myWorld.removeObject(t);
         }
     }
-    public void moveSnake(){
+
+    /**
+     * moveSnake()
+     * Determines if there has been any change in the direction of the snake, and
+     * if so, it changes the direction of the snake to reflect this change
+     */
+    protected void moveSnake(){
         if (Mayflower.isKeyDown(upControl)) {
             setRotation(Direction.NORTH);
         } else if (Mayflower.isKeyDown(downControl)) {
@@ -359,35 +384,7 @@ public class SnakeActor extends Actor{
     {
         return running;
     }
-
-    public void setTheme(int theme)
-    {
-        if(theme == 1)
-        {
-            if (id == 1)setImage("eggplantsnakep.jpg");
-            else if(id == 2)setImage("eggplantsnakeg.jpg");
-            else if(id == 3)setImage("eggplantsnakey.jpg");
-            else if(id == 4)setImage("eggplantsnaker.jpg");
-        }
-        else if(theme == 2)
-        {
-            if (id == 1)setImage("luke.jpg");
-            else if(id == 2)setImage("yoda.jpg");
-            else if(id == 3)setImage("darth.jpg");
-            else if(id == 4)setImage("black.jpg");
-        }
-        else if(theme == 3)
-        {
-            if (id == 1)setImage("mario.jpg");
-            else if(id == 2)setImage("luigi.jpg");
-            else if(id == 3)setImage("wario.jpg");
-            else if(id == 4)setImage("wal.jpg");
-        }
-    }
-    public boolean getTronMode(){
-        return tronMode;
-    }
-
+    public boolean getTronMode(){return tronMode;}
     class SnakeTail extends Actor{
         GameInfo info;
         int id;
@@ -418,6 +415,9 @@ public class SnakeActor extends Actor{
         }
         @Override
         public void act(){
+        }
+        public String toString(){
+            return "(X: "+getX()+", Y: "+getY()+")";
         }
     }
 

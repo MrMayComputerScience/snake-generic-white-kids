@@ -4,6 +4,8 @@ import mayflower.World;
 
 public class themeMenu extends World{
     Button mainMenuButton;
+    Button defaultThemeButton;
+    Button themePickButton;
     Button peachButt;
     Button marioButt;
     Button starButt;
@@ -15,6 +17,8 @@ public class themeMenu extends World{
         peachButt = new PeachButton("peach.png", info);
         marioButt = new MarioButton("mario.jpg", info);
         starButt = new StarWarsButton("darth.jpg", info);
+
+
         addObject(mainMenuButton, 400,450);
         addObject(peachButt, 100, 100);
         addObject(marioButt, 200, 200);

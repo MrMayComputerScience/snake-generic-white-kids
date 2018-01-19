@@ -20,5 +20,5 @@ public abstract class AbstractGameModeManager {
     public void setWorld(World wd){
         snakeWorld = wd;
     }
-    public abstract void process(String action);
+    public abstract void process(Action action);
 }

@@ -14,19 +14,32 @@ public class TwitchPlaysGameModeManager extends AbstractGameModeManager {
         tSnake = getSnake(0);
         tWorld = getWorld();
     }
-    public void process(String action){
+    public void process(Action action){
         //Strings are temporary, may change once mason creates them officially
-        if(action.equals("p1up")){
+        if(action == Action.P1_UP){
             tSnake.turnUp();
         }
-        if(action.equals("p1down")){
+        if(action == Action.P1_DOWN){
             tSnake.turnDown();
         }
-        if(action.equals("p1left")){
+        if(action == Action.P1_LEFT){
             tSnake.turnLeft();
         }
-        if(action.equals("p1right")){
+        if(action == Action.P1_RIGHT){
             tSnake.turnRight();
         }
+        if(action == Action.COLLECT){
+            tSnake.collect();
+        }
+        if(action == Action.DIE){
+            tSnake.die();
+        }
+        if(action == Action.GROW){
+            tSnake.grow();
+        }
+        if(action == Action.TICK){
+            tSnake.tick();
+        }
+
     }
 }

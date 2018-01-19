@@ -168,14 +168,6 @@ public class SnakeActor extends Actor{
         if(timeLastUpdate == -1){
             timeLastUpdate = System.currentTimeMillis();
             t.reset();
-            moveSnake();
-            if (Math.abs(getRotation() - headRot) % 180 == 0 && tailLength >= 2)
-                setRotation(headRot);
-            time++;
-            //System.out.println(t.toString());
-            move(20);
-            handleTail(headX, headY, headRot);
-            eatPeach(detectPeach());
         }
         checkForPointChange();
 
@@ -256,13 +248,9 @@ public class SnakeActor extends Actor{
         }
     }
 
-    public void collect(@Nullable Peach peach)
+    public void collect()
     {
-        if(peach == null){
-            //    System.out.println("Peach is null");
-            return;
-        }
-        getWorld().removeObject(peach);
+        getWorld().removeObject(getWorld().getObjects(Peach.class).get(0));
         tailLength += lengthToAdd;
         Peach.addRandomPeach((peachStage)getWorld()); //Should never throw invalid cast errors
     }

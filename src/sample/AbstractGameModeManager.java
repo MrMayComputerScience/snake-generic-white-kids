@@ -1,10 +1,24 @@
 package sample;
 import mayflower.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 public abstract class AbstractGameModeManager {
+    GameInfo info;
+    private Map<String, String> themeMap;
     private List<SnakeActor> sneks;
     private World snakeWorld;
+    public AbstractGameModeManager(GameInfo info)
+    {
+        this.info = info;
+        sneks = new ArrayList<SnakeActor>();
+    }
+
     public List<SnakeActor> getSnakes(){
         return sneks;
     }

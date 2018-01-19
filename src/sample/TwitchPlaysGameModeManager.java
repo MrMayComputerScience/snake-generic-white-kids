@@ -7,8 +7,9 @@ public class TwitchPlaysGameModeManager extends AbstractGameModeManager {
     private int players;
     private SnakeActor tSnake;
     private World tWorld;
-    public TwitchPlaysGameModeManager(int numPlayers, GameInfo info){
-        players = numPlayers;
+    public TwitchPlaysGameModeManager(GameInfo info){
+        super(info);
+        players = info.getNumPlayers();
         addSnake(new TwitchSnakeActor(players, 1 , info));
         setWorld(new peachStage(info));
         tSnake = getSnake(0);

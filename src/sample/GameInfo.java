@@ -9,6 +9,7 @@ public class GameInfo {
     private boolean isTwitchPlays;
     private AbstractGameModeManager gm;
     private InputManager input;
+    private SnakeClient client;
 
     public AbstractGameModeManager getGameModeManager() {
         return gm;
@@ -33,7 +34,8 @@ public class GameInfo {
 
     public GameInfo(){
         setGameTheme(1);
-
+        input = new InputManager();
+        client = new SnakeClient();
     }
 
     public int setGameTheme(int theme){

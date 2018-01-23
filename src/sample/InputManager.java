@@ -1,10 +1,12 @@
 package sample;
 
+
 import mayflower.Actor;
 import mayflower.Keyboard;
 import mayflower.Mayflower;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,6 +17,8 @@ public class InputManager extends Actor{
     private AbstractGameModeManager gm;
     public InputManager(){
         actionMap = getActionMap();
+        releaseMap = new HashMap<>();
+        keysPressed = new HashSet<>();
         releaseMap.put(Keyboard.KEY_W, Action.P1_RELEASE);
         releaseMap.put(Keyboard.KEY_A, Action.P1_RELEASE);
         releaseMap.put(Keyboard.KEY_S, Action.P1_RELEASE);
@@ -53,8 +57,11 @@ public class InputManager extends Actor{
         return map;
     }
     public void setGameModeManager(AbstractGameModeManager gm){
+
         this.gm = gm;
-    }
+
+
+}
     @Override
     public void act() {
         for(Integer key : actionMap.keySet()){

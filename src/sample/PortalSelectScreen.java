@@ -12,6 +12,7 @@ public class PortalSelectScreen extends World {
             public void OnClick(){
                 info.setHasPortals(true);
 
+
             }
         };
         no = new Button("no.jpg") {
@@ -28,7 +29,7 @@ public class PortalSelectScreen extends World {
         addObject(yes, 300, 350);
         addObject(no, 500, 350);
     }
-    private 
+
     @Override
     public void act() {
 

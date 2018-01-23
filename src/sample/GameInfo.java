@@ -5,28 +5,43 @@ public class GameInfo {
     private int numPlayers;
     private boolean hasPortals;
     private boolean tronMode;
+    private boolean isSvM;
+    private boolean isTwitchPlays;
     private AbstractGameModeManager gm;
     private InputManager input;
 
     public AbstractGameModeManager getGameModeManager() {
         return gm;
     }
+
     public void setGameModeManager(AbstractGameModeManager gm) {
         this.gm = gm;
         input.setGameModeManager(gm);
     }
+
     public InputManager getInputManager() {
         return input;
     }
+
+    public boolean isTwitchPlays() {
+        return isTwitchPlays;
+    }
+
+    public void setTwitchPlays(boolean twitchPlays) {
+        isTwitchPlays = twitchPlays;
+    }
+
     public GameInfo(){
         setGameTheme(1);
 
     }
+
     public int setGameTheme(int theme){
         int temp = gameTheme;
         gameTheme = theme;
         return temp;
     }
+
     public int getGameTheme(){
         return gameTheme;
     }
@@ -41,6 +56,13 @@ public class GameInfo {
         return temp;
     }
 
+    public boolean isSvM() {
+        return isSvM;
+    }
+
+    public void setSvM(boolean svM) {
+        isSvM = svM;
+    }
 
     public boolean hasPortals() {
         return hasPortals;

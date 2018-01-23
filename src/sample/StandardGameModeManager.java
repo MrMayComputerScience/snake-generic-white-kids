@@ -2,15 +2,30 @@ package sample;
 
 import mayflower.Mayflower;
 
+import java.util.Map;
+
 public class StandardGameModeManager extends AbstractGameModeManager {
-
-    public StandardGameModeManager(GameInfo info){
-        super(info);
-        info.setGameModeManager(this);
-        if(info.getNumPlayers() > 1){
-            setWorld(new MultiStage(info.getNumPlayers(), info));
+    private static Map<GameInfo, StandardGameModeManager> managers;
+    public static StandardGameModeManager getInstance(GameInfo info) {
+        if(managers.containsKey(info)){
+            return managers.get(info);
         }
-
+        else{
+            StandardGameModeManager m = new StandardGameModeManager(info);
+            managers.put(info, m);
+            return m;
+        }
+    }
+    private StandardGameModeManager(GameInfo info){
+        super(info);
+    }
+    public void resetWorld(){
+        if(getInfo().getNumPlayers() > 1){
+            setWorld(new MultiStage(getInfo().getNumPlayers(), getInfo()));
+        }
+        else{
+            setWorld(new peachStage(getInfo()));
+        }
     }
     @Override
     public void process(Action action) {
@@ -44,6 +59,11 @@ public class StandardGameModeManager extends AbstractGameModeManager {
         }
         else if(action == Action.DIE){
             snek.die();
+            getSnakes().remove(snek);
+            if(getSnakes().size() == 1){
+                //TODO: WIN CONDITION HERE
+                getSnakes().remove(0);
+            }
         }
         else if(action == Action.GROW){
             snek.grow();

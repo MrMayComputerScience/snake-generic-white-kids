@@ -11,10 +11,7 @@ public class PortalSelectScreen extends World {
         yes = new Button("yes.jpg"){
             public void OnClick(){
                 info.setHasPortals(true);
-                if(toContinue instanceof MultiStage)
-                    Mayflower.setWorld(new TronScreen(info, toContinue));
-                else
-                    Mayflower.setWorld(toContinue);
+
             }
         };
         no = new Button("no.jpg") {
@@ -31,6 +28,7 @@ public class PortalSelectScreen extends World {
         addObject(yes, 300, 350);
         addObject(no, 500, 350);
     }
+    private 
     @Override
     public void act() {
 

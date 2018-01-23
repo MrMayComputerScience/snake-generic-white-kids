@@ -24,7 +24,8 @@ public enum Action {
     TICK("TIC"),
     DIE("DIE"),
     COLLECT("COL"),
-    GROW("GRO");
+    GROW("GRO"),
+    GAME_OVER("GMO");
     String name;
     Action(String name){
         this.name = name;

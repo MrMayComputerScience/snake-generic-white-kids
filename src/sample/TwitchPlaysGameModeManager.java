@@ -7,6 +7,7 @@ public class TwitchPlaysGameModeManager extends AbstractGameModeManager {
     private int players;
     private SnakeActor tSnake;
     private World tWorld;
+    private List<Action> playerPresses;
     public TwitchPlaysGameModeManager(int numPlayers, GameInfo info){
         players = numPlayers;
         addSnake(new TwitchSnakeActor(players, 1 , info));

@@ -5,15 +5,17 @@ import java.util.List;
 
 public class TwitchPlaysGameModeManager extends AbstractGameModeManager {
     private int players;
+
     private SnakeActor tSnake;
     private World tWorld;
     private List<Action> playerPresses;
+
     public TwitchPlaysGameModeManager(int numPlayers, GameInfo info){
+        super(info);
         players = numPlayers;
         addSnake(new TwitchSnakeActor(players, 1 , info));
         setWorld(new peachStage(info));
-        tSnake = getSnake(0);
-        tWorld = getWorld();
+
     }
     public void process(Action action){
         //Strings are temporary, may change once mason creates them officially
@@ -41,6 +43,11 @@ public class TwitchPlaysGameModeManager extends AbstractGameModeManager {
         if(action == Action.TICK){
             tSnake.tick();
         }
+
+
+    }
+    public void process(Action action, SnakeActor s){
+
 
     }
 }

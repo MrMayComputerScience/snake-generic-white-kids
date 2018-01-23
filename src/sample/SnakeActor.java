@@ -212,18 +212,10 @@ public class SnakeActor extends Actor{
 
     public void tick()
     {
-        int trueTime = (int)(System.currentTimeMillis() - timeLastUpdate);
-        int diff = trueTime - tickLen;
-        tickLen = TICK_TIME - diff;
-        sumTimes += trueTime;
-        numTicks++;
-        t.set(TICK_TIME - diff);
-        timeLastUpdate = System.currentTimeMillis();
         int headX = getX();
         int headY = getY();
         int headRot = getRotation();
         bigify();
-        t.reset();
         moveSnake();
         if(Math.abs(getRotation()-headRot) % 180 == 0 && tailLength >= 2)
             setRotation(headRot);
@@ -250,9 +242,8 @@ public class SnakeActor extends Actor{
 
     public void collect()
     {
-        getWorld().removeObject(getWorld().getObjects(Peach.class).get(0));
-        tailLength += lengthToAdd;
-        Peach.addRandomPeach((peachStage)getWorld()); //Should never throw invalid cast errors
+        eatPeach(getWorld().getObjects(Peach.class).get(0));
+
     }
 
     public void increaseScore()

@@ -148,7 +148,6 @@ public class peachStage extends World{
         while(scoreFile.hasNext())
         {
             score = scoreFile.next();
-            System.out.println(score);
             scoreList.add(score);
         }
 

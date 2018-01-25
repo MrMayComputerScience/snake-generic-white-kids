@@ -52,7 +52,7 @@ public class SnakeServer extends Server {
         super.send((count++)+" "+message); //count++ because we are starting at MIN_VALUE so this will use minval before incrementing
     }
     public synchronized void send(int i, String message){
-        super.send(i, (count++)+message);
+        super.send(i, message);
     }
     public static SnakeServer getLocalServer(){
         SnakeServer ss = new SnakeServer(2112);

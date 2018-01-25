@@ -10,6 +10,10 @@ public class SnakeClient extends Client{
     @Override
     public void process(String s) {
         System.out.println("SERVER: "+s);
+        String cmd = s.split(" ")[1];
+        if(info.getGameModeManager() != null){
+            info.getGameModeManager().process(Action.getAction(cmd));
+        }
     }
 
     @Override

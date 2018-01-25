@@ -32,10 +32,12 @@ public class GameInfo {
     }
 
     public GameInfo(){
+        SnakeServer server = new SnakeServer(SnakeServer.DEFAULT_PORT);
         setGameTheme(1);
         input = new InputManager();
         client = new SnakeClient(this);
         input.setClient(client);
+        client.connect(SnakeServer.DEFAULT_PORT);
     }
 
     public int setGameTheme(int theme){

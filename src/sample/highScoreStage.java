@@ -79,7 +79,6 @@ public class highScoreStage extends World{
         {
 
             score = scoreFile.next();
-            System.out.println(score);
             scoreList.add(Integer.parseInt(score));
         }
         if(scoreList.size() == 0)
@@ -103,7 +102,6 @@ public class highScoreStage extends World{
             String t2 = o2.getText();
             int i1 = Integer.parseInt(t1.substring(t1.indexOf(' ')+1, t1.length()));
             int i2 = Integer.parseInt(t2.substring(t2.indexOf(' ')+1, t2.length()));
-            System.out.println(i1+", "+i2);
             return i2-i1;
         }
     };

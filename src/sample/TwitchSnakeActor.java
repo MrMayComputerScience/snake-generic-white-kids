@@ -17,21 +17,21 @@ public class TwitchSnakeActor extends SnakeActor {
         wasRunning = false;
         num = numPlayers;
     }
-    public void moveSnake(String direction){
+    public void moveSnake(Action action){
         if(num == 3){
-            if(direction.equals("p1up")){
+            if(action == Action.P1_UP){
                 setRotation(Direction.NORTH);
                 isRunning = true;
             }
-            else if(direction.equals("p1Down")){
+            else if(action == Action.P1_DOWN){
                 setRotation(Direction.SOUTH);
                 isRunning = true;
             }
-            else if(direction.equals("p1left")){
+            else if(action == Action.P1_LEFT){
                 setRotation(Direction.WEST);
                 isRunning = true;
             }
-            else if(direction.equals("p1right")){
+            else if(action == Action.P1_RIGHT){
                 setRotation(Direction.EAST);
                 isRunning = true;
             }

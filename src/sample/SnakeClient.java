@@ -3,9 +3,9 @@ package sample;
 import mayflower.net.Client;
 
 public class SnakeClient extends Client{
-    private AbstractGameModeManager gm;
-    public SnakeClient(){
-
+    private GameInfo info;
+    public SnakeClient(GameInfo info){
+        this.info = info;
     }
     @Override
     public void process(String s) {

@@ -14,7 +14,7 @@ public class InputManager extends Actor{
     private Map<Integer, Action> actionMap;
     private Map<Integer, Action> releaseMap;
     private Set<Integer> keysPressed;
-    private AbstractGameModeManager gm;
+    private SnakeClient sc;
     public InputManager(){
         actionMap = getActionMap();
         releaseMap = new HashMap<>();
@@ -56,24 +56,28 @@ public class InputManager extends Actor{
         map.put(Keyboard.KEY_RIGHT, Action.P4_RIGHT);
         return map;
     }
-    public void setGameModeManager(AbstractGameModeManager gm){
+    public void setClient(SnakeClient sc){
 
-        this.gm = gm;
+        this.sc = sc;
 
 
 }
     @Override
     public void act() {
+        //REMOVE THIS//
+
+        ///////////////
         for(Integer key : actionMap.keySet()){
             if(Mayflower.isKeyDown(key)){
                 if(!keysPressed.contains(key)){
                     keysPressed.add(key);
-                    gm.process(actionMap.get(key));
+                    sc.send(actionMap.get(key).toString());
+
                 }
             }
             else{
                 keysPressed.remove(key);
-                gm.process(releaseMap.get(key));
+               // sc.process();
             }
 
         }

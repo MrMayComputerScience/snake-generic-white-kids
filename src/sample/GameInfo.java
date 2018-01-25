@@ -17,7 +17,6 @@ public class GameInfo {
 
     public void setGameModeManager(AbstractGameModeManager gm) {
         this.gm = gm;
-        input.setGameModeManager(gm);
     }
 
     public InputManager getInputManager() {
@@ -35,7 +34,8 @@ public class GameInfo {
     public GameInfo(){
         setGameTheme(1);
         input = new InputManager();
-        client = new SnakeClient();
+        client = new SnakeClient(this);
+        input.setClient(client);
     }
 
     public int setGameTheme(int theme){

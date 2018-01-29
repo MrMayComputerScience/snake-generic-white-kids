@@ -233,6 +233,7 @@ public class SnakeActor extends Actor{
     public void die()
     {
         myWorld.removeObject(this);
+        removeTail();
     }
 
     public void grow()

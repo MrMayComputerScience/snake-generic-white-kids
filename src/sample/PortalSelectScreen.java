@@ -43,7 +43,10 @@ public class PortalSelectScreen extends World {
         addObject(yes, 300, 350);
         addObject(no, 500, 350);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> CP
     @Override
     public void act() {
 

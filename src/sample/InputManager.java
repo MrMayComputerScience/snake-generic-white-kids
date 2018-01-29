@@ -17,24 +17,11 @@ public class InputManager extends Actor{
     private SnakeClient sc;
     public InputManager(){
         actionMap = getActionMap();
+
+        releaseMap = getReleaseMap();
+
         releaseMap = new HashMap<>();
         keysPressed = new HashSet<>();
-        releaseMap.put(Keyboard.KEY_W, Action.P1_RELEASE);
-        releaseMap.put(Keyboard.KEY_A, Action.P1_RELEASE);
-        releaseMap.put(Keyboard.KEY_S, Action.P1_RELEASE);
-        releaseMap.put(Keyboard.KEY_D, Action.P1_RELEASE);
-        releaseMap.put(Keyboard.KEY_Y, Action.P2_RELEASE);
-        releaseMap.put(Keyboard.KEY_G, Action.P2_RELEASE);
-        releaseMap.put(Keyboard.KEY_H, Action.P2_RELEASE);
-        releaseMap.put(Keyboard.KEY_J, Action.P2_RELEASE);
-        releaseMap.put(Keyboard.KEY_P, Action.P3_RELEASE);
-        releaseMap.put(Keyboard.KEY_L, Action.P3_RELEASE);
-        releaseMap.put(Keyboard.KEY_SEMICOLON, Action.P3_RELEASE);
-        releaseMap.put(Keyboard.KEY_APOSTROPHE, Action.P3_RELEASE);
-        releaseMap.put(Keyboard.KEY_UP, Action.P4_RELEASE);
-        releaseMap.put(Keyboard.KEY_LEFT, Action.P4_RELEASE);
-        releaseMap.put(Keyboard.KEY_DOWN, Action.P4_RELEASE);
-        releaseMap.put(Keyboard.KEY_RIGHT, Action.P4_RELEASE);
     }
     public static Map<Integer, Action> getActionMap(){
         Map<Integer, Action> map = new HashMap<>();
@@ -56,12 +43,34 @@ public class InputManager extends Actor{
         map.put(Keyboard.KEY_RIGHT, Action.P4_RIGHT);
         return map;
     }
+
+    public static Map<Integer, Action> getReleaseMap(){
+        Map<Integer, Action> releaseMap = new HashMap<>();
+        releaseMap.put(Keyboard.KEY_W, Action.P1_RELEASE);
+        releaseMap.put(Keyboard.KEY_A, Action.P1_RELEASE);
+        releaseMap.put(Keyboard.KEY_S, Action.P1_RELEASE);
+        releaseMap.put(Keyboard.KEY_D, Action.P1_RELEASE);
+        releaseMap.put(Keyboard.KEY_Y, Action.P2_RELEASE);
+        releaseMap.put(Keyboard.KEY_G, Action.P2_RELEASE);
+        releaseMap.put(Keyboard.KEY_H, Action.P2_RELEASE);
+        releaseMap.put(Keyboard.KEY_J, Action.P2_RELEASE);
+        releaseMap.put(Keyboard.KEY_P, Action.P3_RELEASE);
+        releaseMap.put(Keyboard.KEY_L, Action.P3_RELEASE);
+        releaseMap.put(Keyboard.KEY_SEMICOLON, Action.P3_RELEASE);
+        releaseMap.put(Keyboard.KEY_APOSTROPHE, Action.P3_RELEASE);
+        releaseMap.put(Keyboard.KEY_UP, Action.P4_RELEASE);
+        releaseMap.put(Keyboard.KEY_LEFT, Action.P4_RELEASE);
+        releaseMap.put(Keyboard.KEY_DOWN, Action.P4_RELEASE);
+        releaseMap.put(Keyboard.KEY_RIGHT, Action.P4_RELEASE);
+        return releaseMap;
+    }
     public void setClient(SnakeClient sc){
 
         this.sc = sc;
 
 
 }
+
     @Override
     public void act() {
         //REMOVE THIS//

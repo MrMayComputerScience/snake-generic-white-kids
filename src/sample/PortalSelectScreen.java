@@ -16,13 +16,12 @@ public class PortalSelectScreen extends World {
                 if(info.isTwitchPlays()){
                     TwitchPlaysGameModeManager gm = new TwitchPlaysGameModeManager(info.getNumPlayers(), info);
                     gm.setWorldAndStart(toContinue);
+
                 }
                 else{
                     StandardGameModeManager gm = StandardGameModeManager.getInstance(info);
                     gm.setWorldAndStart(toContinue);
                 }
-
-
             }
         };
         no = new Button("no.jpg") {
@@ -44,7 +43,6 @@ public class PortalSelectScreen extends World {
         addObject(yes, 300, 350);
         addObject(no, 500, 350);
     }
-
     @Override
     public void act() {
 

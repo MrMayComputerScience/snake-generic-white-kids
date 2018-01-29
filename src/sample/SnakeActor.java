@@ -163,15 +163,10 @@ public class SnakeActor extends Actor{
     public void act(){
         if(getWorld() != null)
             myWorld = getWorld();
-        //Check to see if we should start counting realtime yet
-        //If we dont do this, it causes a mad dash at the beginning of the game based on how long you wait to press a button
-        if(timeLastUpdate == -1){
-            timeLastUpdate = System.currentTimeMillis();
-            t.reset();
-        }
         checkForPointChange();
         if(isTouching(Peach.class)){
             //TODO send to server
+            info.getClient().send(Action.COLLECT.toString());
         }
         if (isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)) {
             myWorld = getWorld();
@@ -183,9 +178,11 @@ public class SnakeActor extends Actor{
                 }
                 myWorld.removeObject(this);
                 removeTail();
+                info.getClient().send(Action.DIE.toString());
             } else {
                 myWorld.removeObject(this);
                 removeTail();
+                info.getClient().send(Action.DIE.toString());
             }
         }
 

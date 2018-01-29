@@ -225,7 +225,9 @@ public class SnakeActor extends Actor{
         //System.out.println(t.toString());
         move(20);
         handleTail(headX, headY, headRot);
-        eatPeach(detectPeach());
+        if(detectPeach() != null){
+            info.getClient().send(Action.COLLECT.toString());
+        }
     }
 
     public void die()

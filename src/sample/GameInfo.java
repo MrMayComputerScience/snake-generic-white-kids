@@ -11,6 +11,10 @@ public class GameInfo {
     private InputManager input;
     private SnakeClient client;
 
+    public SnakeClient getClient() {
+        return client;
+    }
+
     public AbstractGameModeManager getGameModeManager() {
         return gm;
     }
@@ -32,7 +36,7 @@ public class GameInfo {
     }
 
     public GameInfo(){
-        SnakeServer server = new SnakeServer(SnakeServer.DEFAULT_PORT);
+        SnakeServer server = SnakeServer.getLocalServer();
         setGameTheme(1);
         input = new InputManager();
         client = new SnakeClient(this);

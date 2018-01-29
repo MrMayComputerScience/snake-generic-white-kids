@@ -166,7 +166,7 @@ public class SnakeActor extends Actor{
         checkForPointChange();
         if(isTouching(Peach.class)){
             //TODO send to server
-            
+            info.getClient().send(Action.COLLECT.toString());
         }
         if (isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)) {
             myWorld = getWorld();
@@ -178,9 +178,11 @@ public class SnakeActor extends Actor{
                 }
                 myWorld.removeObject(this);
                 removeTail();
+                info.getClient().send(Action.DIE.toString());
             } else {
                 myWorld.removeObject(this);
                 removeTail();
+                info.getClient().send(Action.DIE.toString());
             }
         }
 
@@ -228,6 +230,7 @@ public class SnakeActor extends Actor{
     public void die()
     {
         myWorld.removeObject(this);
+        removeTail();
     }
 
     public void grow()

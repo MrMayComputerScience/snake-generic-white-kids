@@ -263,6 +263,10 @@ public class SnakeActor extends Actor{
     public void collect()
     {
         eatPeach(getWorld().getObjects(Peach.class).get(0));
+<<<<<<< HEAD
+=======
+
+>>>>>>> CP
     }
 
     public void increaseScore()

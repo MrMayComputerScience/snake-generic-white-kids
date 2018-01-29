@@ -21,10 +21,18 @@ public class TwitchPlaysButton extends Actor{
         }
     }
     public void onClick(){
+<<<<<<< HEAD
 
+=======
+>>>>>>> CP
         peachStage ps = new peachStage(info);
         ps.setSnek(sa);
         info.setTwitchPlays(true);
         Mayflower.setWorld(new PortalSelectScreen(info, ps));
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> CP
     }
 }

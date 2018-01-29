@@ -5,15 +5,47 @@ public class GameInfo {
     private int numPlayers;
     private boolean hasPortals;
     private boolean tronMode;
-    public GameInfo(){
-        setGameTheme(1);
+    private boolean isSvM;
+    private boolean isTwitchPlays;
+    private AbstractGameModeManager gm;
+    private InputManager input;
+    private SnakeClient client;
 
+    public AbstractGameModeManager getGameModeManager() {
+        return gm;
     }
+
+    public void setGameModeManager(AbstractGameModeManager gm) {
+        this.gm = gm;
+    }
+
+    public InputManager getInputManager() {
+        return input;
+    }
+
+    public boolean isTwitchPlays() {
+        return isTwitchPlays;
+    }
+
+    public void setTwitchPlays(boolean twitchPlays) {
+        isTwitchPlays = twitchPlays;
+    }
+
+    public GameInfo(){
+        SnakeServer server = new SnakeServer(SnakeServer.DEFAULT_PORT);
+        setGameTheme(1);
+        input = new InputManager();
+        client = new SnakeClient(this);
+        input.setClient(client);
+        client.connect(SnakeServer.DEFAULT_PORT);
+    }
+
     public int setGameTheme(int theme){
         int temp = gameTheme;
         gameTheme = theme;
         return temp;
     }
+
     public int getGameTheme(){
         return gameTheme;
     }
@@ -28,6 +60,13 @@ public class GameInfo {
         return temp;
     }
 
+    public boolean isSvM() {
+        return isSvM;
+    }
+
+    public void setSvM(boolean svM) {
+        isSvM = svM;
+    }
 
     public boolean hasPortals() {
         return hasPortals;
@@ -38,7 +77,6 @@ public class GameInfo {
         this.hasPortals = hasPortals;
         return temp;
     }
-
 
     public boolean isTron() {
         return tronMode;

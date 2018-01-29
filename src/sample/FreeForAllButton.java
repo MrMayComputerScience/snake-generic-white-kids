@@ -19,7 +19,7 @@ public class FreeForAllButton extends Actor{
     }
     public void onClick(){
         MultiStage stage = new MultiStage(players, info);
-
+        System.out.println("/////////////////////////////////////////////////////////////////");
         Mayflower.setWorld(new PortalSelectScreen(info, stage));
     }
 

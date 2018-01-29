@@ -25,7 +25,6 @@ public class MultiStage extends peachStage{
         pos3 = new Label("3", 24);
         pos4 = new Label("4", 24);
         addObject(pos1, 20, 40);
-        System.out.println("MultiStage Constructor");
         this.info = info;
         info.setNumPlayers(numnum);
         hasWon = false;
@@ -94,7 +93,6 @@ public class MultiStage extends peachStage{
     }
     @Override
     public void act() {
-        System.out.println("Stage: "+this);
         if(!hasWon){
             super.act();
             activateTron();
@@ -160,11 +158,6 @@ public class MultiStage extends peachStage{
 
 
     }
-
-
-
-
-
     public int getNumPlayers(){
         return numPlay;
     }

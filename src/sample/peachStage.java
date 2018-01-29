@@ -148,7 +148,6 @@ public class peachStage extends World{
         while(scoreFile.hasNext())
         {
             score = scoreFile.next();
-            System.out.println(score);
             scoreList.add(score);
         }
 
@@ -224,7 +223,11 @@ public class peachStage extends World{
     public StageObject[][] getGrid() {
         return peachGrid;
     }
-
+    public void addObject(Actor a, int x, int y){
+        super.addObject(a,x,y);
+        if(a instanceof SnakeActor && info.getGameModeManager() != null)
+            info.getGameModeManager().addSnake((SnakeActor) a);
+    }
     public boolean addRandomPeach(){
         playerScore.setText("Your Score: "+snek.getTailLength());
         for(Actor a : getObjects()){

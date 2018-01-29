@@ -7,11 +7,21 @@ public class TwitchPlaysGameModeManager extends AbstractGameModeManager {
     private int players;
     private SnakeActor tSnake;
     private World tWorld;
+<<<<<<< HEAD
     public TwitchPlaysGameModeManager(GameInfo info){
         super(info);
         players = info.getNumPlayers();
+=======
+    private List<Action> playerPresses;
+    public TwitchPlaysGameModeManager(int numPlayers, GameInfo info){
+        super(info);
+        players = numPlayers;
+>>>>>>> origin/mason
         addSnake(new TwitchSnakeActor(players, 1 , info));
         setWorld(new peachStage(info));
+
+    }
+    public void process(Action action, SnakeActor snake){
         tSnake = getSnake(0);
         tWorld = getWorld();
     }
@@ -29,18 +39,5 @@ public class TwitchPlaysGameModeManager extends AbstractGameModeManager {
         if(action == Action.P1_RIGHT){
             tSnake.turnRight();
         }
-        if(action == Action.COLLECT){
-            tSnake.collect();
-        }
-        if(action == Action.DIE){
-            tSnake.die();
-        }
-        if(action == Action.GROW){
-            tSnake.grow();
-        }
-        if(action == Action.TICK){
-            tSnake.tick();
-        }
-
     }
 }

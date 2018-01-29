@@ -21,9 +21,10 @@ public class TwitchPlaysButton extends Actor{
         }
     }
     public void onClick(){
-        AbstractGameModeManager gmm = new TwitchPlaysGameModeManager(players,info);
-        gmm.addSnake(sa);
-        Mayflower.setWorld(new PortalSelectScreen(info, gmm.getWorld()));
 
+        peachStage ps = new peachStage(info);
+        ps.setSnek(sa);
+        info.setTwitchPlays(true);
+        Mayflower.setWorld(new PortalSelectScreen(info, ps));
     }
 }

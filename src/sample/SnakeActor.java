@@ -115,9 +115,9 @@ public class SnakeActor extends Actor{
     }
 
     /**
-        Method: checkForPointChange
-        Checks to see if any buttons are being pressed that would change how many points
-        the snake gets on eating a peach
+     Method: checkForPointChange
+     Checks to see if any buttons are being pressed that would change how many points
+     the snake gets on eating a peach
      */
     protected void checkForPointChange() {
         if (Mayflower.isKeyPressed(Keyboard.KEY_ADD)) {
@@ -169,6 +169,7 @@ public class SnakeActor extends Actor{
             timeLastUpdate = System.currentTimeMillis();
             t.reset();
         }
+<<<<<<< HEAD
         checkForPointChange();     
 
             if (isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)) {
@@ -184,8 +185,27 @@ public class SnakeActor extends Actor{
                 } else {
                     myWorld.removeObject(this);
                     removeTail();
+=======
+        checkForPointChange();
+        if(isTouching(Peach.class)){
+            //TODO send to server
+        }
+        if (isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)) {
+            myWorld = getWorld();
+            if (isTouching(SnakeActor.class)) {
+                List<SnakeActor> others = getIntersectingObjects(SnakeActor.class);
+                for (SnakeActor a : others) {
+                    myWorld.removeObject(a);
+                    a.removeTail();
+>>>>>>> origin/mason
                 }
+                myWorld.removeObject(this);
+                removeTail();
+            } else {
+                myWorld.removeObject(this);
+                removeTail();
             }
+        }
 
 
     }
@@ -212,18 +232,10 @@ public class SnakeActor extends Actor{
 
     public void tick()
     {
-        int trueTime = (int)(System.currentTimeMillis() - timeLastUpdate);
-        int diff = trueTime - tickLen;
-        tickLen = TICK_TIME - diff;
-        sumTimes += trueTime;
-        numTicks++;
-        t.set(TICK_TIME - diff);
-        timeLastUpdate = System.currentTimeMillis();
         int headX = getX();
         int headY = getY();
         int headRot = getRotation();
         bigify();
-        t.reset();
         moveSnake();
         if(Math.abs(getRotation()-headRot) % 180 == 0 && tailLength >= 2)
             setRotation(headRot);
@@ -250,9 +262,7 @@ public class SnakeActor extends Actor{
 
     public void collect()
     {
-        getWorld().removeObject(getWorld().getObjects(Peach.class).get(0));
-        tailLength += lengthToAdd;
-        Peach.addRandomPeach((peachStage)getWorld()); //Should never throw invalid cast errors
+        eatPeach(getWorld().getObjects(Peach.class).get(0));
     }
 
     public void increaseScore()
@@ -320,7 +330,6 @@ public class SnakeActor extends Actor{
     public String getRatio(){
 
         double d = (double)(getTailLength()/getTime());
-        System.out.println("Ratio: "+d+"Length: "+getTailLength()+" Time: "+getTime());
         return String.format("%.3f", d);
 
     }
@@ -338,7 +347,7 @@ public class SnakeActor extends Actor{
             prevY = tempY;
             prevRot = tempRot;
         }
-        
+
 
     }
     public Peach detectPeach(){
@@ -349,7 +358,7 @@ public class SnakeActor extends Actor{
     }
     public void eatPeach(@Nullable Peach peach){
         if(peach == null){
-        //    System.out.println("Peach is null");
+            //    System.out.println("Peach is null");
             return;
         }
         getWorld().removeObject(peach);

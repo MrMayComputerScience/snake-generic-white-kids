@@ -17,10 +17,15 @@ public enum Action {
     P4_LEFT("P4L"),
     P4_DOWN("P4D"),
     P4_RIGHT("P4R"),
+    P1_RELEASE("P1REL"),
+    P2_RELEASE("P2REL"),
+    P3_RELEASE("P3REL"),
+    P4_RELEASE("P4REL"),
     TICK("TIC"),
     DIE("DIE"),
     COLLECT("COL"),
-    GROW("GRO");
+    GROW("GRO"),
+    GAME_OVER("GMO");
     String name;
     Action(String name){
         this.name = name;
@@ -28,5 +33,12 @@ public enum Action {
     @Override
     public String toString(){
         return name;
+    }
+    public static Action getAction(String name){
+        for(Action a : Action.values()){
+            if(a.toString().equals(name))
+                return a;
+        }
+        return null;
     }
 }

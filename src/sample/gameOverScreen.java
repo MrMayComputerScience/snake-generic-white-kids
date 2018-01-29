@@ -8,7 +8,6 @@ public class gameOverScreen extends World{
     public gameOverScreen(SnakeActor s, int numPlayers, GameInfo info)
     {
         mainButton = new MainScreenButton("MainButton.png", info);
-        System.out.println(s.getMyWorld());
         paButton = new PlayAgainButton("PlayAgain.png", s.getMyWorld(), info);
         if(numPlayers == 1){
             if(s.getTailLength() < 10){

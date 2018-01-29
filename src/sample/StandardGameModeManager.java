@@ -1,13 +1,7 @@
 package sample;
-<<<<<<< HEAD
-
 import java.util.HashMap;
 import java.util.Map;
-=======
->>>>>>> CP
-
 import mayflower.Mayflower;
-
 import java.util.Map;
 import java.util.TreeMap;
 

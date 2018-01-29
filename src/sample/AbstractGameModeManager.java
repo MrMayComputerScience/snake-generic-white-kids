@@ -1,36 +1,21 @@
 package sample;
 import mayflower.*;
 
-<<<<<<< HEAD
-import java.io.File;
-import java.io.FileNotFoundException;
-=======
->>>>>>> origin/mason
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 public abstract class AbstractGameModeManager {
-    GameInfo info;
     private Map<String, String> themeMap;
     private List<SnakeActor> sneks;
     private World snakeWorld;
-<<<<<<< HEAD
-    public AbstractGameModeManager(GameInfo info)
-    {
-        this.info = info;
-        sneks = new ArrayList<SnakeActor>();
-    }
-
-=======
     private GameInfo info;
     public AbstractGameModeManager(GameInfo info){
         this.info = info;
         info.setGameModeManager(this);
         sneks = new ArrayList<>(8);
     }
->>>>>>> origin/mason
+
     public List<SnakeActor> getSnakes(){
         return sneks;
     }
@@ -61,11 +46,7 @@ public abstract class AbstractGameModeManager {
         else
             System.err.println("Trying to start a GameModeManager where the world has not been set");
     }
-<<<<<<< HEAD
-    protected GameInfo getInfo(){return info;}
-=======
 
->>>>>>> CP
     public abstract void process(Action action);
 
     protected GameInfo getInfo(){return info;}

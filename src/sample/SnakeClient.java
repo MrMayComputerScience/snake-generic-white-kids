@@ -24,8 +24,21 @@ public class SnakeClient extends Client {
         String cmd = split[1];
         if (split.length == 3) {
             int id = Integer.parseInt(split[2]);
-            SnakeActor actor = info.getGameModeManager().getSnake(id);
-            info.getGameModeManager().process(Action.getAction(cmd), actor);
+            AbstractGameModeManager gm = info.getGameModeManager();
+            SnakeActor actor = null;
+            //Find the affected snake
+            for(SnakeActor a : gm.getSnakes()){
+                if(a.getId() == id)
+                    actor = a;
+            }
+
+            synchronized (info){
+                if(actor != null)
+                    info.getGameModeManager().process(Action.getAction(cmd), actor);
+                else
+                    System.err.println("ACTOR IS NULL IN CLIENT.PROCESS");
+            }
+
         }
         if (info.getGameModeManager() != null) {
             synchronized (info) {
@@ -41,6 +54,6 @@ public class SnakeClient extends Client {
 
     @Override
     public void onConnect() {
-        send("Howdy pardner!");
+
     }
 }

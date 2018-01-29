@@ -3,7 +3,6 @@
     <output-path>$PROJECT_DIR$/out/artifacts/snake_generic_white_kids_jar</output-path>
     <root id="archive" name="snake-generic-white-kids.jar">
       <element id="module-output" name="snake-generic-white-kids" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/mayflower2.12.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

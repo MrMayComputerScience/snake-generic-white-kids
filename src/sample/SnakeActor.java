@@ -166,7 +166,7 @@ public class SnakeActor extends Actor{
         checkForPointChange();
         if(isTouching(Peach.class)){
             //TODO send to server
-            info.getClient().send(Action.COLLECT.toString());
+            info.getClient().send(Action.COLLECT.toString() + " "+ id);
         }
         if (isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)) {
             myWorld = getWorld();
@@ -222,9 +222,6 @@ public class SnakeActor extends Actor{
         //System.out.println(t.toString());
         move(20);
         handleTail(headX, headY, headRot);
-        if(detectPeach() != null){
-            info.getClient().send(Action.COLLECT.toString());
-        }
     }
 
     public void die()
@@ -244,6 +241,10 @@ public class SnakeActor extends Actor{
 
     public void collect()
     {
+        World w = getWorld();
+        System.out.println("w = " + w);
+        List<Peach> p = w.getObjects(Peach.class);
+        System.out.println("p = " + p);
         eatPeach(getWorld().getObjects(Peach.class).get(0));
     }
 

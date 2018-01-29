@@ -169,7 +169,7 @@ public class SnakeActor extends Actor{
             timeLastUpdate = System.currentTimeMillis();
             t.reset();
         }
-        checkForPointChange();
+        checkForPointChange();     
 
             if (isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)) {
                 myWorld = getWorld();

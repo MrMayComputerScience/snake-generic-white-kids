@@ -12,7 +12,11 @@ public class SnakeClient extends Client{
         System.out.println("SERVER: "+s);
         String cmd = s.split(" ")[1];
         if(info.getGameModeManager() != null){
-            info.getGameModeManager().process(Action.getAction(cmd));
+            synchronized (info){
+                // STOPSHIP: 1/29/2018  
+                info.getGameModeManager().process(Action.getAction(cmd));
+            }
+
         }
     }
 

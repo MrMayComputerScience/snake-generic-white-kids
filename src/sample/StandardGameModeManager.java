@@ -1,11 +1,18 @@
 package sample;
 
+
+import java.util.HashMap;
+import java.util.Map;
+
+
 import mayflower.Mayflower;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 public class StandardGameModeManager extends AbstractGameModeManager {
-    private static Map<GameInfo, StandardGameModeManager> managers;
+    private static final Map<GameInfo, StandardGameModeManager> managers = new HashMap<>();
+
     public static StandardGameModeManager getInstance(GameInfo info) {
         if(managers.containsKey(info)){
             return managers.get(info);
@@ -16,9 +23,11 @@ public class StandardGameModeManager extends AbstractGameModeManager {
             return m;
         }
     }
+
     private StandardGameModeManager(GameInfo info){
         super(info);
     }
+
     public void resetWorld(){
         if(getInfo().getNumPlayers() > 1){
             setWorld(new MultiStage(getInfo().getNumPlayers(), getInfo()));
@@ -32,16 +41,16 @@ public class StandardGameModeManager extends AbstractGameModeManager {
         for(int i = 0; i < getSnakes().size(); i++){
             SnakeActor snek = getSnake(i);
             int id = snek.getId();
-            if(Action.valueOf("P"+id+"U") == action){
+            if(Action.valueOf("P"+id+"_UP") == action){
                 snek.turnUp();
             }
-            else if(Action.valueOf("P"+id+"D") == action){
+            else if(Action.valueOf("P"+id+"_DOWN") == action){
                 snek.turnDown();
             }
-            else if(Action.valueOf("P"+id+"L") == action){
+            else if(Action.valueOf("P"+id+"_LEFT") == action){
                 snek.turnLeft();
             }
-            else if(Action.valueOf("P"+id+"R") == action){
+            else if(Action.valueOf("P"+id+"_RIGHT") == action){
                 snek.turnRight();
             }
             else if(action == Action.TICK){

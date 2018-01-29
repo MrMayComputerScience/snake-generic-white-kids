@@ -34,4 +34,11 @@ public enum Action {
     public String toString(){
         return name;
     }
+    public static Action getAction(String name){
+        for(Action a : Action.values()){
+            if(a.toString().equals(name))
+                return a;
+        }
+        return null;
+    }
 }

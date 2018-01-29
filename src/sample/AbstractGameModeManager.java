@@ -28,6 +28,7 @@ public abstract class AbstractGameModeManager {
     }
     public void setWorld(World wd){
         snakeWorld = wd;
+        wd.addObject(info.getInputManager(), 42, 42);
         for(SnakeActor a : wd.getObjects(SnakeActor.class))
             addSnake(a);
     }
@@ -43,9 +44,9 @@ public abstract class AbstractGameModeManager {
             System.err.println("Trying to start a GameModeManager where the world has not been set");
     }
 
-    public abstract void process(Action action);
-
     protected GameInfo getInfo(){return info;}
+
+    public abstract void process(Action action);
 
     public abstract void process(Action action, SnakeActor a);
 

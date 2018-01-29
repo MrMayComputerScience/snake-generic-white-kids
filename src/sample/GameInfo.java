@@ -9,6 +9,7 @@ public class GameInfo {
     private boolean isTwitchPlays;
     private AbstractGameModeManager gm;
     private InputManager input;
+    private SnakeClient client;
 
     public AbstractGameModeManager getGameModeManager() {
         return gm;
@@ -16,7 +17,6 @@ public class GameInfo {
 
     public void setGameModeManager(AbstractGameModeManager gm) {
         this.gm = gm;
-        input.setGameModeManager(gm);
     }
 
     public InputManager getInputManager() {
@@ -32,8 +32,12 @@ public class GameInfo {
     }
 
     public GameInfo(){
+        SnakeServer server = new SnakeServer(SnakeServer.DEFAULT_PORT);
         setGameTheme(1);
-
+        input = new InputManager();
+        client = new SnakeClient(this);
+        input.setClient(client);
+        client.connect(SnakeServer.DEFAULT_PORT);
     }
 
     public int setGameTheme(int theme){

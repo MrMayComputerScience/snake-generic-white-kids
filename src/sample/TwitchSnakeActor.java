@@ -56,7 +56,7 @@ public class TwitchSnakeActor extends SnakeActor {
         }
         if(wasRunning != isRunning){
             startTimer();
-            System.out.println("DIFF");
+
         }
         wasRunning = isRunning;
 

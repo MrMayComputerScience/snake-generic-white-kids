@@ -6,9 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SnakeServer extends Server {
-    private Map<Integer, Integer> map;
+    private Map<Integer, Integer> playerMap;
     public static final int DEFAULT_PORT = 6969;
-    private long count;
+    private long msgId;
+    private int snakeId;
     private Thread updateThread;
     public SnakeServer(int port){
         super(port);
@@ -28,19 +29,19 @@ public class SnakeServer extends Server {
                 }
             }
         });
-
-        map = new HashMap<>();
-        count = Long.MIN_VALUE;
+        snakeId = 0;
+        playerMap = new HashMap<>();
+        msgId = Long.MIN_VALUE;
         updateThread.start();
     }
     @Override
     public void process(int i, String s) {
         System.out.println(s);
-        send(s);
+        send(s + " "+i);
     }
 
     @Override
-    public void onJoin(int i) {
+    public void onJoin(int i){
 
     }
 
@@ -49,14 +50,13 @@ public class SnakeServer extends Server {
 
     }
     public synchronized void send(String message){
-        super.send((count++)+" "+message); //count++ because we are starting at MIN_VALUE so this will use minval before incrementing
+        super.send((msgId++)+" "+message); //count++ because we are starting at MIN_VALUE so this will use minval before incrementing
     }
     public synchronized void send(int i, String message){
         super.send(i, message);
     }
     public static SnakeServer getLocalServer(){
-        SnakeServer ss = new SnakeServer(2112);
-
+        SnakeServer ss = new SnakeServer(DEFAULT_PORT);
         return ss;
     }
 }

@@ -46,7 +46,7 @@ public class peachStage extends World{
     private GameInfo info;
     public peachStage(GameInfo info)
     {
-    //    setBackground("background.png");
+        setBackground("background.png");
         this.info = info;
         snek = new SnakeActor(1, info);
         Label scoreLabel = new Label("Highscore: " + getHS());

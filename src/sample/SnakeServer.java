@@ -1,5 +1,6 @@
 package sample;
 
+import mayflower.Mayflower;
 import mayflower.net.Server;
 
 import java.util.HashMap;
@@ -37,7 +38,7 @@ public class SnakeServer extends Server {
     @Override
     public void process(int i, String s) {
         System.out.println(s);
-        send(s + " "+i);
+        send(s);
     }
 
     @Override

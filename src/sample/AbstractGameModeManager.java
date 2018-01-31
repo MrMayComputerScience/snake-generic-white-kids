@@ -3,8 +3,10 @@ import mayflower.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public abstract class AbstractGameModeManager {
+    private Map<String, String> themeMap;
     private List<SnakeActor> sneks;
     private World snakeWorld;
     private GameInfo info;
@@ -13,6 +15,7 @@ public abstract class AbstractGameModeManager {
         info.setGameModeManager(this);
         sneks = new ArrayList<>(8);
     }
+
     public List<SnakeActor> getSnakes(){
         return sneks;
     }
@@ -44,9 +47,10 @@ public abstract class AbstractGameModeManager {
             System.err.println("Trying to start a GameModeManager where the world has not been set");
     }
 
-    protected GameInfo getInfo(){return info;}
 
     public abstract void process(Action action);
+
+    protected GameInfo getInfo(){return info;}
 
     public abstract void process(Action action, SnakeActor a);
 

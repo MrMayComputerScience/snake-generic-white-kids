@@ -160,13 +160,13 @@ public class SnakeActor extends Actor{
             t.set(TICK_TIME - diff);
         }
     }
-    public void act(){
-        if(getWorld() != null)
+    public void act() {
+        if (getWorld() != null)
             myWorld = getWorld();
         checkForPointChange();
         if(isTouching(Peach.class)){
             //TODO send to server
-            info.getClient().send(Action.COLLECT.toString());
+            info.getClient().send(Action.COLLECT.toString() + " "+ id);
         }
         if (isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)) {
             myWorld = getWorld();
@@ -188,6 +188,8 @@ public class SnakeActor extends Actor{
 
 
     }
+
+
 
     public void turnLeft()
     {
@@ -222,9 +224,6 @@ public class SnakeActor extends Actor{
         //System.out.println(t.toString());
         move(20);
         handleTail(headX, headY, headRot);
-        if(detectPeach() != null){
-            info.getClient().send(Action.COLLECT.toString());
-        }
     }
 
     public void die()
@@ -244,6 +243,10 @@ public class SnakeActor extends Actor{
 
     public void collect()
     {
+        World w = getWorld();
+        System.out.println("w = " + w);
+        List<Peach> p = w.getObjects(Peach.class);
+        System.out.println("p = " + p);
         eatPeach(getWorld().getObjects(Peach.class).get(0));
     }
 
@@ -259,8 +262,7 @@ public class SnakeActor extends Actor{
 
     public void teleport(int x, int y)
     {
-        this.x = x;
-        this.y = y;
+        setLocation(x,y);
     }
 
     public void removeTail(){
@@ -312,7 +314,7 @@ public class SnakeActor extends Actor{
     }
     public String getRatio(){
 
-        double d = (double)(getTailLength()/getTime());
+        double d = (getTailLength()/getTime());
         return String.format("%.3f", d);
 
     }
@@ -341,12 +343,12 @@ public class SnakeActor extends Actor{
     }
     public void eatPeach(@Nullable Peach peach){
         if(peach == null){
-            //    System.out.println("Peach is null");
+            //System.out.println("Peach is null");
             return;
         }
         getWorld().removeObject(peach);
         tailLength += lengthToAdd;
-        Peach.addRandomPeach((peachStage)getWorld()); //Should never throw invalid cast errors
+        ((peachStage)getWorld()).addRandomPeach(); //Should never throw invalid cast errors
     }
     public void bigify(){
         if(tailLength > tail.size()){

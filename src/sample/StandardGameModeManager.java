@@ -1,18 +1,7 @@
 package sample;
-<<<<<<< HEAD
-import java.util.HashMap;
-import java.util.Map;
-=======
-
-
 import java.util.HashMap;
 import java.util.Map;
 
-
->>>>>>> CP
-import mayflower.Mayflower;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class StandardGameModeManager extends AbstractGameModeManager {
     private static final Map<GameInfo, StandardGameModeManager> managers = new HashMap<>();

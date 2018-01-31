@@ -47,13 +47,10 @@ public abstract class AbstractGameModeManager {
             System.err.println("Trying to start a GameModeManager where the world has not been set");
     }
 
-<<<<<<< HEAD
-    public abstract void process(Action action);
-=======
-    protected GameInfo getInfo(){return info;}
->>>>>>> CP
 
     public abstract void process(Action action);
+
+    protected GameInfo getInfo(){return info;}
 
     public abstract void process(Action action, SnakeActor a);
 

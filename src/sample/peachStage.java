@@ -51,7 +51,8 @@ public class peachStage extends World{
         snek = new SnakeActor(1, info);
         Label scoreLabel = new Label("Highscore: " + getHS());
 
-        playerScore = new Label("Your Score: "+ snek.getTailLength());
+        //playerScore = new Label("Your Score: "+ snek.getTailLength());
+        showText("Your Score: ", 550, 0);
         wd = new WDisplay("W.png",Keyboard.KEY_W);
         ad = new ADisplay("A.png", Keyboard.KEY_A);
         sd = new SDisplay("S.png", Keyboard.KEY_S);
@@ -109,7 +110,7 @@ public class peachStage extends World{
 
         addObject(snek, 40, 40);
         addObject(scoreLabel, 0,0);
-        addObject(playerScore, 550,0);
+        //addObject(playerScore, 550,0);
 
         t = new Timer(75);
 
@@ -229,7 +230,9 @@ public class peachStage extends World{
             info.getGameModeManager().addSnake((SnakeActor) a);
     }
     public boolean addRandomPeach(){
-        playerScore.setText("Your Score: "+snek.getTailLength());
+        //playerScore.setText("Your Score: "+snek.getTailLength());
+        showText("Your Score: " + (snek.getTailLength()+1), 550, 0);
+        System.out.println("Score text changed");
         for(Actor a : getObjects()){
             if(a instanceof Peach){
                 return false;

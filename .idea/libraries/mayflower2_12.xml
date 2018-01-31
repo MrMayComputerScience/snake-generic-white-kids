@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="mayflower2.12">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/snake_generic_white_kids_jar/mayflower2.12.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

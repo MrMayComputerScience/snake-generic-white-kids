@@ -17,17 +17,10 @@ public class InputManager extends Actor{
     private SnakeClient sc;
     public InputManager(){
         actionMap = getActionMap();
-<<<<<<< HEAD
-        releaseMap = new HashMap<>();
-        keysPressed = new HashSet<>();
-        releaseMap = getReleaseMap();
-=======
 
         releaseMap = getReleaseMap();
-
         releaseMap = new HashMap<>();
         keysPressed = new HashSet<>();
->>>>>>> CP
     }
     public static Map<Integer, Action> getActionMap(){
         Map<Integer, Action> map = new HashMap<>();
@@ -50,15 +43,14 @@ public class InputManager extends Actor{
         return map;
     }
 
-<<<<<<< HEAD
+
     public void setClient(SnakeClient sc){
 
         this.sc = sc;
 
 
-}
-=======
->>>>>>> CP
+    }
+
     public static Map<Integer, Action> getReleaseMap(){
         Map<Integer, Action> releaseMap = new HashMap<>();
         releaseMap.put(Keyboard.KEY_W, Action.P1_RELEASE);
@@ -79,16 +71,6 @@ public class InputManager extends Actor{
         releaseMap.put(Keyboard.KEY_RIGHT, Action.P4_RELEASE);
         return releaseMap;
     }
-<<<<<<< HEAD
-=======
-    public void setClient(SnakeClient sc){
-
-        this.sc = sc;
-
-
-}
->>>>>>> CP
-
     @Override
     public void act() {
         //REMOVE THIS//
@@ -104,7 +86,7 @@ public class InputManager extends Actor{
             }
             else{
                 keysPressed.remove(key);
-               // sc.process();
+                // sc.process();
             }
 
         }

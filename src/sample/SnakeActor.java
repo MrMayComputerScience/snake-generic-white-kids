@@ -160,14 +160,25 @@ public class SnakeActor extends Actor{
             t.set(TICK_TIME - diff);
         }
     }
-    public void act(){
-        if(getWorld() != null)
+    public void act() {
+        if (getWorld() != null)
             myWorld = getWorld();
+<<<<<<< HEAD
+        //Check to see if we should start counting realtime yet
+        //If we dont do this, it causes a mad dash at the beginning of the game based on how long you wait to press a button
+        if (timeLastUpdate == -1) {
+            timeLastUpdate = System.currentTimeMillis();
+            t.reset();
+        }
+        checkForPointChange();
+
+=======
         checkForPointChange();
         if(isTouching(Peach.class)){
             //TODO send to server
             info.getClient().send(Action.COLLECT.toString() + " "+ id);
         }
+>>>>>>> CP
         if (isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)) {
             myWorld = getWorld();
             if (isTouching(SnakeActor.class)) {
@@ -182,11 +193,35 @@ public class SnakeActor extends Actor{
             } else {
                 myWorld.removeObject(this);
                 removeTail();
+<<<<<<< HEAD
+                checkForPointChange();
+                if (isTouching(Peach.class)) {
+                    //TODO send to server
+                }
+                if (isTouching(wall.class) || isTouching(SnakeTail.class) || isTouching(SnakeActor.class)) {
+                    myWorld = getWorld();
+                    if (isTouching(SnakeActor.class)) {
+                        List<SnakeActor> others = getIntersectingObjects(SnakeActor.class);
+                        for (SnakeActor a : others) {
+                            myWorld.removeObject(a);
+                            a.removeTail();
+                        }
+                        myWorld.removeObject(this);
+                        removeTail();
+                    } else {
+                        myWorld.removeObject(this);
+                        removeTail();
+                    }
+                }
+=======
                 info.getClient().send(Action.DIE.toString());
             }
         }
+>>>>>>> CP
 
 
+            }
+        }
     }
 
     public void turnLeft()
@@ -260,8 +295,7 @@ public class SnakeActor extends Actor{
 
     public void teleport(int x, int y)
     {
-        this.x = x;
-        this.y = y;
+        setLocation(x,y);
     }
 
     public void removeTail(){

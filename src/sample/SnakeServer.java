@@ -53,7 +53,7 @@ public class SnakeServer extends Server {
 
     @Override
     public void onExit(int i) {
-        
+
     }
     public synchronized void send(String message){
         super.send((msgId++)+" "+message); //count++ because we are starting at MIN_VALUE so this will use minval before incrementing

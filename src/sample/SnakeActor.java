@@ -313,7 +313,7 @@ public class SnakeActor extends Actor{
     }
     public String getRatio(){
 
-        double d = (double)(getTailLength()/getTime());
+        double d = (getTailLength()/getTime());
         return String.format("%.3f", d);
 
     }
@@ -342,7 +342,7 @@ public class SnakeActor extends Actor{
     }
     public void eatPeach(@Nullable Peach peach){
         if(peach == null){
-            //    System.out.println("Peach is null");
+            //System.out.println("Peach is null");
             return;
         }
         getWorld().removeObject(peach);

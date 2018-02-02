@@ -17,20 +17,7 @@ public class SnakeServer extends Server {
         super(port);
 
         final SnakeServer s = this;
-        updateThread = new Thread(() -> {
-            long timeLastUpdate = System.currentTimeMillis();
-            long target = 75;
-            SnakeServer server = s;
-            for(;;){
-                long elapsed = System.currentTimeMillis() - timeLastUpdate;
-                if(elapsed >= target){
-                    long over = elapsed - target;
-                    target = 75-over;
-                    timeLastUpdate = System.currentTimeMillis();
-                    s.send(Action.TICK.toString());
-                }
-            }
-        });
+        updateThread = new UpdateThread(this);
         snakeId = 0;
         playerMap = new HashMap<>();
         msgId = Long.MIN_VALUE;
@@ -53,6 +40,11 @@ public class SnakeServer extends Server {
     @Override
     public void onJoin(int i){
         playerMap.put(i, (++snakeId % 4) +1); //Increment snakeId, mod by four then add one to match snakeId
+        if(playerMap.size() % 4 == 0){
+            for(int iter = i; iter > i-4; --iter){
+                send(iter, Action.START_GAME.toString());
+            }
+        }
     }
 
     @Override

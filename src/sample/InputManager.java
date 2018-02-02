@@ -19,7 +19,6 @@ public class InputManager extends Actor{
         actionMap = getActionMap();
 
         releaseMap = getReleaseMap();
-        releaseMap = new HashMap<>();
         keysPressed = new HashSet<>();
     }
     public static Map<Integer, Action> getActionMap(){
@@ -85,8 +84,11 @@ public class InputManager extends Actor{
                 }
             }
             else{
-                if(keysPressed.contains(key))
+                if(keysPressed.contains(key)){
                     sc.send(releaseMap.get(key).toString());
+                    keysPressed.remove(key);
+                }
+
             }
 
         }

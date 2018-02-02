@@ -1,5 +1,6 @@
 package sample;
 
+import mayflower.Mayflower;
 import mayflower.net.Client;
 
 /*
@@ -54,6 +55,18 @@ public class SnakeClient extends Client {
 
     @Override
     public void onConnect() {
-
+        //TODO fix this
+        if(info.isTwitchPlays())
+            send("twitch " + info.getNumPlayers());
+        else if(info.isSvM())
+            send("svm "+info.getNumPlayers());
+        else if(info.isTron())
+            send("tron "+info.getNumPlayers());
+        else
+            send("standard "+info.getNumPlayers());
+        if(info.hasPortals())
+            send("yesPortals");
+        else
+            send("noPortals");
     }
 }

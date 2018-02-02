@@ -1,9 +1,13 @@
 package sample;
 
+import java.util.List;
+
 public class UpdateThread extends Thread {
     private SnakeServer server;
-    public UpdateThread(SnakeServer ss){
+    private List<Integer> players;
+    public UpdateThread(SnakeServer ss, List<Integer> players){
         server = ss;
+        this.players = players;
     }
 
     public void run(){
@@ -15,7 +19,8 @@ public class UpdateThread extends Thread {
                 long over = elapsed - target;
                 target = 75-over;
                 timeLastUpdate = System.currentTimeMillis();
-                server.send(Action.TICK.toString());
+                for(int i : players)
+                    server.send(i, Action.TICK.toString());
             }
         }
     }

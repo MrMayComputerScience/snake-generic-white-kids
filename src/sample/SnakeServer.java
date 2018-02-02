@@ -4,32 +4,35 @@ import mayflower.Mayflower;
 import mayflower.net.Server;
 import org.jetbrains.annotations.Contract;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class SnakeServer extends Server {
     private Map<Integer, Integer> playerMap;
     public static final int DEFAULT_PORT = 6969;
     private long msgId;
     private int snakeId;
-    private Thread updateThread;
+    private Queue<Integer> standardLobby;   //This is all broken
+    private Queue<Integer> twitchLobby;     //None of this will work
+    private Queue<Integer> svmLobby;
+    private Queue<Integer> tronLobby;
     public SnakeServer(int port){
         super(port);
-
-        final SnakeServer s = this;
-        updateThread = new UpdateThread(this);
         snakeId = 0;
+
+        standardLobby = new LinkedList<>();
+        twitchLobby = new LinkedList<>();
+        svmLobby = new LinkedList<>();
+        tronLobby = new LinkedList<>();
+
         playerMap = new HashMap<>();
         msgId = Long.MIN_VALUE;
-        updateThread.start();
     }
     @Override
     public void process(int i, String s) {
         String id = playerMap.get(i).toString();
         System.out.printf("MESSAGE FROM CLIENT %d:\n%s\n",i, s);
-        if(s.contains(id)){
+        if(s.contains(id)){ //TODO Fix this condition so it is less exploitable
             send(s);
-            //TODO Fix this so it is less exploitable
         }
         else{
             System.err.println("INVALID CONTROL ATTEMPT");
@@ -40,6 +43,7 @@ public class SnakeServer extends Server {
     @Override
     public void onJoin(int i){
         playerMap.put(i, (++snakeId % 4) +1); //Increment snakeId, mod by four then add one to match snakeId
+        snakeId %= 4;
         if(playerMap.size() % 4 == 0){
             for(int iter = i; iter > i-4; --iter){
                 send(iter, Action.START_GAME.toString());
@@ -59,7 +63,7 @@ public class SnakeServer extends Server {
     }
 
     /**
-     * This method changes the behavior of the process method to work on single-computer applications
+     * This method changes the behavior of the process method to work on single-computer games
      * @return A SnakeServer instance modified for use on a single computer, as opposed to an area network
      */
     public static SnakeServer getLocalServer(){

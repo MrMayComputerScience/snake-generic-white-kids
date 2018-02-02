@@ -85,8 +85,8 @@ public class InputManager extends Actor{
                 }
             }
             else{
-                keysPressed.remove(key);
-                // sc.process();
+                if(keysPressed.contains(key))
+                    sc.send(releaseMap.get(key).toString());
             }
 
         }

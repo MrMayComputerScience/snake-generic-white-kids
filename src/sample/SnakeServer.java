@@ -39,9 +39,13 @@ public class SnakeServer extends Server {
     @Override
     public void process(int i, String s) {
         String id = playerMap.get(i).toString();
+        System.out.printf("MESSAGE FROM CLIENT %d:\n%s\n",i, s);
         if(s.contains(id)){
-            System.out.printf("MESSAGE FROM CLIENT %d:\n%s\n",i, s);
             send(s);
+            //TODO Fix this so it is less exploitable
+        }
+        else{
+            System.err.println("INVALID CONTROL ATTEMPT");
         }
 
     }

@@ -63,7 +63,6 @@ public class StandardGameModeManager extends AbstractGameModeManager {
             snek.die();
             getSnakes().remove(snek);
             if(getSnakes().size() == 1){
-                //TODO: WIN CONDITION HERE
                 getSnakes().remove(0);
             }
         }

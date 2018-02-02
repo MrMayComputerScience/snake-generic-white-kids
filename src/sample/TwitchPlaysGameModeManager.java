@@ -1,5 +1,6 @@
 package sample;
-import mayflower.*;
+
+import mayflower.World;
 
 import java.util.List;
 
@@ -9,21 +10,12 @@ public class TwitchPlaysGameModeManager extends AbstractGameModeManager {
     private World tWorld;
     private List<Action> playerPresses;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> CP
     public TwitchPlaysGameModeManager(int numPlayers, GameInfo info){
         super(info);
         players = numPlayers;
 
         addSnake(new TwitchSnakeActor(players, 1 , info));
         setWorld(new peachStage(info));
-<<<<<<< HEAD
-=======
-
-
->>>>>>> CP
     }
 
     public void process(Action action){
@@ -92,10 +84,6 @@ public class TwitchPlaysGameModeManager extends AbstractGameModeManager {
             }
         }
 
-<<<<<<< HEAD
     }
-=======
->>>>>>> CP
 
-    }
 }

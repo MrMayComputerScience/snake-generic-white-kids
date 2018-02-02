@@ -40,7 +40,6 @@ public class GameInfo {
         setGameTheme(1);
         input = new InputManager();
         client = new SnakeClient(this);
-        input.setClient(client);
         client.connect(SnakeServer.DEFAULT_PORT);
     }
 
